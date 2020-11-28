@@ -17,7 +17,8 @@ Output::Output()
 	pWind = CreateWind(UI.width, UI.height, UI.wx, UI.wy);	
 	ChangeTitle("Programming Techniques Project");
 
-	CreateDesignToolBar();	//Create the desgin toolbar
+	CreateDesignToolBar();
+	CreateDesignToolBar2();	//Create the desgin toolbar
 	CreateStatusBar();		//Create Status bar
 
 }
@@ -92,19 +93,19 @@ void Output::CreateDesignToolBar() const
 	//You can draw the tool bar icons in any way you want.
 
 	//First prepare List of images for each menu item
-	string MenuItemImages[ITM_DSN_CNT];
-	MenuItemImages[ITM_AND2] = "images\\Menu\\Menu_AND2.jpg";
-	MenuItemImages[ITM_OR2]  = "images\\Menu\\Menu_OR2.jpg";
+	string MenuItemImages[ITM_DSN_CNT]; // Array of Strings (Adress of images)
+	MenuItemImages[ITM_AND2] = "images\\Menu\\And_Gate2.jpg";
+	MenuItemImages[ITM_OR2]  = "images\\Menu\\Or_Gate2.jpg";
 
 	//TODO: Prepare image for each menu item and add it to the list
 
 	//Draw menu item one image at a time
 	for(int i=0; i<ITM_DSN_CNT; i++)
-		pWind->DrawImage(MenuItemImages[i],i*UI.ToolItemWidth,0,UI.ToolItemWidth, UI.ToolBarHeight);
+		pWind->DrawImage(MenuItemImages[i],i*UI.ToolItemWidth, UI.ToolBarHeight2,UI.ToolItemWidth, UI.ToolItemHeight);
 
 
 	//Draw a line under the toolbar
-	pWind->SetPen(RED,3);
+	pWind->SetPen(BLACK,3);
 	pWind->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);	
 
 }
@@ -116,19 +117,19 @@ void Output::CreateDesignToolBar2() const
 	//You can draw the tool bar icons in any way you want.
 
 	//First prepare List of images for each menu item
-	string MenuItemImages[ITM_DSN_CNT];
+	string MenuItemImages[ITM_DSN_CNT2]; // Array of Strings (Adress of images)
 	MenuItemImages[ITM_EXIT] = "images\\Menu\\Menu_Exit.jpg";
 
 	//TODO: Prepare image for each menu item and add it to the list
 
 	//Draw menu item one image at a time
-	for (int i = 0; i < ITM_DSN_CNT; i++)
+	for (int i = 0; i < ITM_DSN_CNT2; i++)
 		pWind->DrawImage(MenuItemImages[i], i * UI.ToolItemWidth, 0, UI.ToolItemWidth, UI.ToolBarHeight2);
 
 
 	//Draw a line under the toolbar
 	pWind->SetPen(RED, 3);
-	pWind->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);
+	pWind->DrawLine(0, UI.ToolBarHeight2, UI.width, UI.ToolBarHeight2);
 
 }
 //////////////////////////////////////////////////////////////////////////////////////////

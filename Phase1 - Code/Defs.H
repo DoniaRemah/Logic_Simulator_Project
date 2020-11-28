@@ -69,14 +69,21 @@ enum DsgnMenuItem //The items of the design menu (you should add more items)
 	ITM_AND2,		//AND gate item in menu
 	ITM_OR2,		//OR gate item in menu
 	
-	ITM_EXIT,		//Exit item
 	//TODO: Add more items names here
 	
 	ITM_DSN_CNT		//no. of design menu items ==> This should be the last line in this enum
 	
 };
 
+enum DsgnMenuItem2 //The items of the design menu (you should add more items)
+{
+	//Note: Items are ordered here as they appear in menu
+	//If you want to change the menu items order, change the order here
+	ITM_EXIT,		//Exit item
+	//TODO: Add more items names here
+	ITM_DSN_CNT2		//no. of design menu items ==> This should be the last line in this enum
 
+};
 enum SimMenuItem //The items of the simulation menu (you should add more items)
 {
 	//Note: Items are ordered here as they appear in menu
