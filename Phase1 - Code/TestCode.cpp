@@ -8,7 +8,7 @@ int main()
 	int x,y;
 
 	//Create Input and Output objects to test
-	Output *pOut = new Output();;
+	Output* pOut = new Output();;
 	Input *pIn = pOut->CreateInput();
 
 	//Starting the test

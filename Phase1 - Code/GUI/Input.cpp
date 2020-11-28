@@ -22,7 +22,7 @@ string Input::GetSrting(Output *pOut)
 	return NULL;
 }
 
-//This function reads the position where the user clicks to determine the desired action
+//This function reads the position where the user clicks to determine the desired action.
 ActionType Input::GetUserAction() const
 {	
 	int x,y;
