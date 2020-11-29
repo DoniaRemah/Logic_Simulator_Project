@@ -29,7 +29,7 @@ public:
 	void DrawConnection(GraphicsInfo r_GfxInfo, bool selected = false) const;
 	
 	void PrintMsg(string msg) const;	//Print a message on Status bar
-
+        void Output::DrawString(const int iX, const int iY, const string strText)const;
 
 	~Output();
 };
