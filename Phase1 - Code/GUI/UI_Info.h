@@ -19,7 +19,7 @@ struct UI_Info	//User Interface Info.
 						StatusBarHeight = 50,	//Status Bar Height
 						ToolBarHeight = 95,	ToolBarHeight2 = 40, ToolItemHeight = 50 , // creating second toolbar
 		//Tool Bar Height (distance from top of window to bottom line of toolbar)
-						ToolItemWidth = 80;		//Width of each item in toolbar menu
+						ToolItemWidth = 70;		//Width of each item in toolbar menu
 
 	color DrawColor;		//Drawing color
 	color SelectColor;		//Highlighting color

@@ -47,7 +47,7 @@ void Output::ChangeTitle(string Title) const
 //////////////////////////////////////////////////////////////////////////////////
 void Output::CreateStatusBar() const
 {
-	pWind->SetPen(RED,3);
+	pWind->SetPen(BLACK,3);
 	pWind->DrawLine(0, UI.height-UI.StatusBarHeight, UI.width, UI.height-UI.StatusBarHeight);
 }
 //////////////////////////////////////////////////////////////////////////////////
@@ -94,8 +94,21 @@ void Output::CreateDesignToolBar() const
 
 	//First prepare List of images for each menu item
 	string MenuItemImages[ITM_DSN_CNT]; // Array of Strings (Adress of images)
-	MenuItemImages[ITM_AND2] = "images\\Menu\\And_Gate2.jpg";
-	MenuItemImages[ITM_OR2]  = "images\\Menu\\Or_Gate2.jpg";
+	MenuItemImages[ITM_BUFFER] = "images\\Menu\\BUFFER.jpg";
+	MenuItemImages[ITM_NOT]  = "images\\Menu\\NOT.jpg";
+	MenuItemImages[ITM_AND2] = "images\\Menu\\2AND.jpg";
+	MenuItemImages[ITM_AND3] = "images\\Menu\\3AND.jpg";
+	MenuItemImages[ITM_OR2] = "images\\Menu\\2OR.jpg";
+	MenuItemImages[ITM_NAND2] = "images\\Menu\\2NAND.jpg";
+	MenuItemImages[ITM_NOR2] = "images\\Menu\\2NOR.jpg";
+	MenuItemImages[ITM_NOR3] = "images\\Menu\\3NOR.jpg";
+	MenuItemImages[ITM_XOR2] = "images\\Menu\\2XOR.jpg";
+	MenuItemImages[ITM_XOR3] = "images\\Menu\\3XOR.jpg";
+	MenuItemImages[ITM_XNOR2] = "images\\Menu\\2XNOR.jpg";
+	MenuItemImages[ITM_SWITCH] = "images\\Menu\\SWITCH_OFF.jpg";
+	MenuItemImages[ITM_BULB] = "images\\Menu\\BULB_OFF.jpg";
+	MenuItemImages[ITM_WIRE] = "images\\Menu\\WIRE.jpg";
+
 
 	//TODO: Prepare image for each menu item and add it to the list
 
@@ -118,7 +131,9 @@ void Output::CreateDesignToolBar2() const
 
 	//First prepare List of images for each menu item
 	string MenuItemImages[ITM_DSN_CNT2]; // Array of Strings (Adress of images)
-	MenuItemImages[ITM_EXIT] = "images\\Menu\\Menu_Exit.jpg";
+	MenuItemImages[ITM_LABEL] = "images\\Menu\\LABEL.jpg";
+	MenuItemImages[ITM_EDIT] = "images\\Menu\\EDIT.jpg";
+	MenuItemImages[ITM_EXIT] = "images\\Menu\\EXIT.jpg";
 
 	//TODO: Prepare image for each menu item and add it to the list
 
@@ -128,7 +143,7 @@ void Output::CreateDesignToolBar2() const
 
 
 	//Draw a line under the toolbar
-	pWind->SetPen(RED, 3);
+	pWind->SetPen(BLACK, 3);
 	pWind->DrawLine(0, UI.ToolBarHeight2, UI.width, UI.ToolBarHeight2);
 
 }

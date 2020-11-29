@@ -66,8 +66,24 @@ enum DsgnMenuItem //The items of the design menu (you should add more items)
 {
 	//Note: Items are ordered here as they appear in menu
 	//If you want to change the menu items order, change the order here
-	ITM_AND2,		//AND gate item in menu
-	ITM_OR2,		//OR gate item in menu
+	ITM_BUFFER,
+	ITM_NOT,
+	ITM_AND2,   //AND gate item in menu
+	ITM_AND3,
+	ITM_OR2,        //OR gate item in menu
+	ITM_NAND2,
+	ITM_NOR2,
+	ITM_NOR3,
+	ITM_XOR2,
+	ITM_XOR3,
+	ITM_XNOR2,
+	ITM_SWITCH,
+	ITM_BULB,
+	ITM_WIRE,
+
+
+
+
 	
 	//TODO: Add more items names here
 	
@@ -79,7 +95,10 @@ enum DsgnMenuItem2 //The items of the design menu (you should add more items)
 {
 	//Note: Items are ordered here as they appear in menu
 	//If you want to change the menu items order, change the order here
+	ITM_LABEL,
+	ITM_EDIT,
 	ITM_EXIT,		//Exit item
+
 	//TODO: Add more items names here
 	ITM_DSN_CNT2		//no. of design menu items ==> This should be the last line in this enum
 
