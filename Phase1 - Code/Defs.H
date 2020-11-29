@@ -23,6 +23,10 @@ enum ActionType
 
 	ADD_Label,			//Add Label to a Component, a Connection
 	EDIT_Label,			//Edit Label of a Component, a Connection
+	CUT,
+	COPY,
+	PASTE,
+	
 
 	Create_TruthTable,	//Create Truth Table of the Circuit
 
@@ -40,7 +44,7 @@ enum ActionType
 
 	DSN_MODE,	//Switch to Design mode
 	SIM_MODE,	//Switch to Simulatiom mode
-
+	MULTI_SELECT,
 	EXIT,		//Exit the application
 
 	STATUS_BAR,		//A click on the status bar
