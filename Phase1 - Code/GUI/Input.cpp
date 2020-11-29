@@ -13,15 +13,36 @@ void Input::GetPointClicked(int &x, int &y)
 
 string Input::GetSrting(Output *pOut)
 {
-	///TODO: Implement this Function
-	//Read a complete string from the user until the user presses "ENTER".
-	//If the user presses "ESCAPE". This function should return an empty string.
-	//"BACKSPACE" should be also supported
-	//User should see what he is typing at the status bar
-
-	return NULL;
+	//backspace=8,enter=13,escape=27
+	string message;
+	char key;
+	pWind->FlushMouseQueue();
+	pWind->FlushKeyQueue();
+	while (true)
+	{
+		pOut->PrintMsg("Set Commponent label: " + message);
+		pWind->WaitKeyPress(key);
+		//check the type of key  
+		if (key == 8)//if the key is backspace
+		{
+			if (!message.empty())//check if the string is empty or not 
+				message.pop_back();//if the string is not empty ,delete the element in string
+			else
+				break;
+		}
+		else if (key == 27)//if the key is escape
+		{
+			message.clear();//delete all the element of string
+			break;
+		}
+		else if (key == 13)//if the key is enter
+			break;
+		else
+			message.push_back(key);
+	}
+	pOut->ClearStatusBar();
+	return message;
 }
-
 //This function reads the position where the user clicks to determine the desired action.
 ActionType Input::GetUserAction() const
 {	
