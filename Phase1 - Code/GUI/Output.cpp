@@ -133,13 +133,40 @@ void Output::CreateDesignToolBar2() const
 	string MenuItemImages[ITM_DSN_CNT2]; // Array of Strings (Adress of images)
 	MenuItemImages[ITM_LABEL] = "images\\Menu\\LABEL.jpg";
 	MenuItemImages[ITM_EDIT] = "images\\Menu\\EDIT.jpg";
+	MenuItemImages[ITM_CUT] = "images\\Menu\\CUT.jpg";
+	MenuItemImages[ITM_COPY] = "images\\Menu\\COPY.jpg";
+	MenuItemImages[ITM_PASTE] = "images\\Menu\\PASTE.jpg";
+	MenuItemImages[ITM_LOAD] = "images\\Menu\\LOAD.jpg";
+	MenuItemImages[ITM_SAVE] = "images\\Menu\\SAVE.jpg";
+	MenuItemImages[ITM_MULTI_SELECT] = "images\\Menu\\MULTI_SELECT.jpg";
+	MenuItemImages[ITM_SWITCH_TO_SIM] = "images\\Menu\\SWITCH_TO_SIM.jpg";
 	MenuItemImages[ITM_EXIT] = "images\\Menu\\EXIT.jpg";
 
 	//TODO: Prepare image for each menu item and add it to the list
 
 	//Draw menu item one image at a time
 	for (int i = 0; i < ITM_DSN_CNT2; i++)
-		pWind->DrawImage(MenuItemImages[i], i * UI.ToolItemWidth, 0, UI.ToolItemWidth, UI.ToolBarHeight2);
+	{
+		if (MenuItemImages[i] == "images\\Menu\\SWITCH_TO_SIM.jpg" || MenuItemImages[i] == "images\\Menu\\MULTI_SELECT.jpg")
+		{
+			if (MenuItemImages[i] == "images\\Menu\\MULTI_SELECT.jpg")
+				pWind->DrawImage(MenuItemImages[i], i * UI.ToolItemWidth, 0, UI.ToolItemWidth3, UI.ToolBarHeight2);
+			else if (MenuItemImages[i] == "images\\Menu\\SWITCH_TO_SIM.jpg")
+			{
+				pWind->DrawImage(MenuItemImages[i], i * UI.ToolItemWidth + UI.ToolItemWidth3, 0, UI.ToolItemWidth3, UI.ToolBarHeight2);
+			}
+		}
+		else
+		{
+				if (MenuItemImages[i] == "images\\Menu\\EXIT.jpg")
+					pWind->DrawImage(MenuItemImages[i], i * UI.ToolItemWidth + (2*UI.ToolItemWidth3), 0, UI.ToolItemWidth2, UI.ToolBarHeight2);
+				else
+				{
+					pWind->DrawImage(MenuItemImages[i], i * UI.ToolItemWidth, 0, UI.ToolItemWidth2, UI.ToolBarHeight2);
+				}
+		}
+		
+	}
 
 
 	//Draw a line under the toolbar

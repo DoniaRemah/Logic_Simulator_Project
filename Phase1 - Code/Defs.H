@@ -97,6 +97,13 @@ enum DsgnMenuItem2 //The items of the design menu (you should add more items)
 	//If you want to change the menu items order, change the order here
 	ITM_LABEL,
 	ITM_EDIT,
+	ITM_CUT,
+	ITM_COPY,
+	ITM_PASTE,
+	ITM_LOAD,
+	ITM_SAVE,
+	ITM_MULTI_SELECT,
+	ITM_SWITCH_TO_SIM,
 	ITM_EXIT,		//Exit item
 
 	//TODO: Add more items names here
