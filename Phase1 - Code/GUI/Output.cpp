@@ -84,6 +84,12 @@ void Output::ClearDrawingArea() const
 	pWind->DrawRectangle(0, UI.ToolBarHeight, UI.width, UI.height - UI.StatusBarHeight);
 	
 }
+void Output::DrawString(const int iX, const int iY, const string strText)const {
+	pWind->SetPen(BLACK, 1);
+	pWind->SetBrush(WHITE);
+	pWind->DrawString(iX, iY, (char*)strText.c_str());
+
+}
 //////////////////////////////////////////////////////////////////////////////////////////
 //Draws the menu (toolbar1) in the Design mode
 void Output::CreateDesignToolBar() const
