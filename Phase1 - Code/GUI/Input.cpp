@@ -91,7 +91,7 @@ ActionType Input::GetUserAction() const
 						}
 						else if (ClickedItemOrder > (2 * UI.ToolItemWidth3) && ClickedItemOrder < UI.width)
 						{
-							EXIT;
+						return	EXIT;
 						}
 					}
 			//Divide x coord of the point clicked by the menu item width (int division)
