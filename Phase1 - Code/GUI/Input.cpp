@@ -72,8 +72,6 @@ ActionType Input::GetUserAction() const
 							case ITM_PASTE: return PASTE;
 							case ITM_LOAD: return LOAD;
 							case ITM_SAVE: return SAVE;
-							
-
 
 							default: return DSN_TOOL;
 
@@ -94,13 +92,8 @@ ActionType Input::GetUserAction() const
 							EXIT;
 						}
 					}
-			//Divide x coord of the point clicked by the menu item width (int division)
-			//if division result is 0 ==> first item is clicked, if 1 ==> 2nd item and so on
-
 			
 		}
-	
-	
 
 		//[2] User clicks on the drawing area
 		if ( y >= UI.ToolBarHeight && y < UI.height - UI.StatusBarHeight)
