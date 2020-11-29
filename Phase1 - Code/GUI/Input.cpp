@@ -89,7 +89,7 @@ ActionType Input::GetUserAction() const
 						}
 						else if (ClickedItemOrder > (2 * UI.ToolItemWidth3) && ClickedItemOrder < UI.width)
 						{
-							EXIT;
+						return	EXIT;
 						}
 					}
 			
