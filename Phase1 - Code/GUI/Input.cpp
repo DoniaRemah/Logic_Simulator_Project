@@ -1,6 +1,5 @@
 //#include "Input.h"
 #include "Output.h"
-#include <iostream>
 Input::Input(window* pW)
 {
 	pWind = pW; //point to the passed window
@@ -115,7 +114,6 @@ ActionType Input::GetUserAction() const
 							}
 							else
 							{
-								cout << x << endl;
 								return DSN_TOOL;
 							}
 						}
