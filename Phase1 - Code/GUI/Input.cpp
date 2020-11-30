@@ -1,6 +1,6 @@
 //#include "Input.h"
 #include "Output.h"
-
+#include <iostream>
 Input::Input(window* pW)
 {
 	pWind = pW; //point to the passed window
@@ -53,9 +53,11 @@ ActionType Input::GetUserAction() const
 	{
 		//[1] If user clicks on the Toolbar1(GATES)
 		
-			//Check whick Menu item was clicked
+			//Check which Menu item was clicked
 			//==> This assumes that menu items are lined up horizontally <==
-			int ClickedItemOrder = (x / UI.ToolItemWidth);
+			if (y < UI.ToolBarHeight && y > UI.ToolBarHeight2)
+			{
+				int ClickedItemOrder = (x / UI.ToolItemWidth);
 				switch (ClickedItemOrder)
 				{
 				case ITM_BUFFER: return ADD_Buff;
@@ -74,56 +76,82 @@ ActionType Input::GetUserAction() const
 				case ITM_WIRE: return ADD_CONNECTION;
 				default: return DSN_TOOL;	//A click on empty place in desgin toolbar
 				}
+			}
+			
 			// IF THE USER CLICKS ON TOOLBAR2
-				if (y >= 0 && y < UI.ToolBarHeight)
+			
+			if (y >= 0 && y < UI.ToolBarHeight2)
 				{
-					if (y >= UI.ToolBarHeight && y < UI.ToolBarHeight2)
-					{
-
-						int ClickedItemOrder = (x / UI.ToolItemWidth);
-						if (0 <= ClickedItemOrder && ClickedItemOrder < (7 * UI.ToolItemWidth2))
+						if (0 <= x && x < 465)
 
 						{
-							switch (ClickedItemOrder)
+							if (x > 420 && x < 460)
 							{
-							case ITM_LABEL: return ADD_Label;
-							case ITM_EDIT: return EDIT_Label;
-							case ITM_CUT: return CUT;
-							case ITM_COPY: return COPY;
-							case ITM_PASTE: return PASTE;
-							case ITM_LOAD: return LOAD;
-							case ITM_SAVE: return SAVE;
-
-							default: return DSN_TOOL;
-
+								return SAVE;
+							}
+							else if (x > 350 && x < 390)
+							{
+								return LOAD;
+							}
+							else if (x > 280 && x < 320)
+							{
+								return PASTE;
+							}
+							else if (x > 210 && x < 250)
+							{
+								return COPY;
+							}
+							else if (x > 140 && x < 180)
+							{
+								return CUT;
+							}
+							else if (x > 70 && x < 110)
+							{
+								return EDIT_Label;
+							}
+							else if (x > 0 && x < 40 )
+							{
+								return ADD_Label;
+							}
+							else
+							{
+								cout << x << endl;
+								return DSN_TOOL;
 							}
 						}
-						else if (ClickedItemOrder > (7 * UI.ToolItemWidth2) && ClickedItemOrder < (2 * UI.ToolItemWidth3))
+						else if (x > 490 && x < 590  )
 						{
-							switch (ClickedItemOrder)
-							{
-							case ITM_MULTI_SELECT: return MULTI_SELECT;
-							case ITM_SWITCH_TO_SIM: return SIM_MODE;
-							default: return DSN_TOOL;
+							return MULTI_SELECT;
 
-							}
 						}
-						else if (ClickedItemOrder > (2 * UI.ToolItemWidth3) && ClickedItemOrder < UI.width)
+						else if (x > 660 && x < 760)
 						{
-						return	EXIT;
+							return SIM_MODE;
+						}
+						
+						else if (x > 830 && x <870)
+						{
+							return	EXIT;
+						}
+						else
+						{
+							return DSN_TOOL;
 						}
 					}
 			
-		}
+		
 
 		//[2] User clicks on the drawing area
 		if ( y >= UI.ToolBarHeight && y < UI.height - UI.StatusBarHeight)
 		{
 			return SELECT;	//user want to select/unselect a component
 		}
-		
+		if (y <= UI.height && y > (UI.height - UI.StatusBarHeight)) 
+		{
+			return STATUS_BAR;
+		}
 		//[3] User clicks on the status bar
-		return STATUS_BAR;
+		
 	}
 	else	//Application is in Simulation mode
 	{

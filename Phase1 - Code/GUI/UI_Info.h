@@ -17,7 +17,7 @@ struct UI_Info	//User Interface Info.
 	 const int	width = 1000, height = 650,	//Window width and height 
 						wx = 15 , wy = 15,			//Window starting coordinates
 						StatusBarHeight = 50,	//Status Bar Height
-						ToolBarHeight = 95,	ToolBarHeight2 = 40, ToolItemHeight = 50 , // creating second toolbar
+						ToolBarHeight = 95,	ToolBarHeight2 = 40, ToolItemHeight= 50,ToolItemHeight2 = 38 , // creating second toolbar
 		//Tool Bar Height (distance from top of window to bottom line of toolbar)
 						ToolItemWidth = 70,  //Width of each item in toolbar menu
 	                    ToolItemWidth2 = 40,
