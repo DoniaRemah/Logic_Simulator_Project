@@ -215,14 +215,14 @@ void Output::CreateSimulationToolBar() const
 //======================================================================================//
 //								Components Drawing Functions							//
 //======================================================================================//
-
-void Output::DrawAND2(GraphicsInfo r_GfxInfo, bool selected) const
+//2AND
+void Output::DrawAND2(GraphicsInfo r_GfxInfo, bool selected)const
 {
 	string GateImage;
 	if(selected)	//use image in the highlighted case
-		GateImage="Images\\Gates\\Gate_AND2_Hi.jpg";
+		GateImage= "Images\\Menu\\H_2AND.jpg";
 	else  
-		GateImage = "Images\\Gates\\Gate_AND2.jpg";
+		GateImage = "Images\\Menu\\2AND.jpg";
 
 	//Draw AND2 Gate at Gfx_Info (1st corner)
 	//Set the Image Width & Height by AND2 Image Parameter in UI_Info
@@ -231,13 +231,197 @@ void Output::DrawAND2(GraphicsInfo r_GfxInfo, bool selected) const
 
 //TODO: Add similar functions to draw all components
 
-
-void Output::DrawConnection(GraphicsInfo r_GfxInfo, bool selected) const
+//2NAND
+void Output::DrawNAND2(GraphicsInfo r_GfxInfo, bool selected)const
 {
-	//TODO: Add code to draw connection
+	string GateImage;
+	if (selected)	//use image in the highlighted case
+		GateImage = "Images\\Menu\\H_2NAND.jpg";
+	else
+		GateImage = "Images\\Menu\\2NAND.jpg";
+
+	//Draw NAND2 Gate at Gfx_Info (1st corner)
+	//Set the Image Width & Height by NAND2 Image Parameter in UI_Info
+	pWind->DrawImage(GateImage, r_GfxInfo.x1, r_GfxInfo.y1, UI.NAND2_Width, UI.NAND2_Height);
+
 }
 
+//2OR
+void Output::DrawOR2(GraphicsInfo r_GfxInfo, bool selected)const
+{
+	string GateImage;
+	if (selected)	//use image in the highlighted case
+		GateImage = "Images\\Menu\\H_2OR.jpg";
+	else
+		GateImage = "Images\\Menu\\2OR.jpg";
 
+
+	pWind->DrawImage(GateImage, r_GfxInfo.x1, r_GfxInfo.y1, UI.OR2_Width, UI.OR2_Height);
+
+}
+
+//2NOR
+void Output::DrawNOR2(GraphicsInfo r_GfxInfo, bool selected)const
+{
+	string GateImage;
+	if (selected)	//use image in the highlighted case
+		GateImage = "Images\\Menu\\H_2NOR.jpg";
+	else
+		GateImage = "Images\\Menu\\2NOR.jpg";
+
+
+	pWind->DrawImage(GateImage, r_GfxInfo.x1, r_GfxInfo.y1, UI.NOR2_Width, UI.NOR2_Height);
+
+}
+
+//2XOR
+void Output::DrawXOR2(GraphicsInfo r_GfxInfo, bool selected)const
+{
+	string GateImage;
+	if (selected)	//use image in the highlighted case
+		GateImage = "Images\\Menu\\H_2XOR.jpg";
+	else
+		GateImage = "Images\\Menu\\2XOR.jpg";
+
+
+	pWind->DrawImage(GateImage, r_GfxInfo.x1, r_GfxInfo.y1, UI.XOR2_Width, UI.XOR2_Height);
+
+}
+//2XNOR
+void Output::DrawXNOR2(GraphicsInfo r_GfxInfo, bool selected)const
+{
+	string GateImage;
+	if (selected)	//use image in the highlighted case
+		GateImage = "Images\\Menu\\H_2XNOR.jpg";
+	else
+		GateImage = "Images\\Menu\\2XNOR.jpg";
+
+
+	pWind->DrawImage(GateImage, r_GfxInfo.x1, r_GfxInfo.y1, UI.XNOR2_Width, UI.XNOR2_Height);
+
+}
+//BUFFER
+void Output::DrawBUFFER(GraphicsInfo r_GfxInfo, bool selected)const
+{
+	string GateImage;
+	if (selected)	//use image in the highlighted case
+		GateImage = "Images\\Menu\\H_BUFFER.jpg";
+	else
+		GateImage = "Images\\Menu\\BUFFER.jpg";
+
+
+	pWind->DrawImage(GateImage, r_GfxInfo.x1, r_GfxInfo.y1, UI.BUFFER_Width, UI.BUFFER_Height);
+
+}
+//NOT
+void Output::DrawNOT(GraphicsInfo r_GfxInfo, bool selected)const
+{
+	string GateImage;
+	if (selected)	//use image in the highlighted case
+		GateImage = "Images\\Menu\\H_NOT.jpg";
+	else
+		GateImage = "Images\\Menu\\NOT.jpg";
+
+
+	pWind->DrawImage(GateImage, r_GfxInfo.x1, r_GfxInfo.y1, UI.NOT_Width, UI.NOT_Height);
+
+}
+//3AND
+void Output::DrawAND3(GraphicsInfo r_GfxInfo, bool selected)const
+{
+	string GateImage;
+	if (selected)	//use image in the highlighted case
+		GateImage = "Images\\Menu\\H_3AND.jpg";
+	else
+		GateImage = "Images\\Menu\\3AND.jpg";
+
+
+	pWind->DrawImage(GateImage, r_GfxInfo.x1, r_GfxInfo.y1, UI.AND3_Width, UI.AND3_Height);
+
+}
+//3NOR
+void Output::DrawNOR3(GraphicsInfo r_GfxInfo, bool selected)const
+{
+	string GateImage;
+	if (selected)	//use image in the highlighted case
+		GateImage = "Images\\Menu\\H_3NOR.jpg";
+	else
+		GateImage = "Images\\Menu\\3NOR.jpg";
+
+
+	pWind->DrawImage(GateImage, r_GfxInfo.x1, r_GfxInfo.y1, UI.NOR3_Width, UI.NOR3_Height);
+
+}
+//3XOR
+void Output::DrawXOR3(GraphicsInfo r_GfxInfo, bool selected)const
+{
+	string GateImage;
+	if (selected)	//use image in the highlighted case
+		GateImage = "Images\\Menu\\H_3XOR.jpg";
+	else
+		GateImage = "Images\\Menu\\3XOR.jpg";
+
+
+	pWind->DrawImage(GateImage, r_GfxInfo.x1, r_GfxInfo.y1, UI.XOR3_Width, UI.XOR3_Height);
+
+}
+//SWITCH
+void Output::DrawSWITCH(GraphicsInfo r_GfxInfo, bool selected)const
+{
+	string GateImage;
+	if (selected)	//use image in the highlighted case
+		GateImage = "Images\\Menu\\H_SWITCH_OFF.jpg";
+	else
+		GateImage = "Images\\Menu\\SWITCH_OFF.jpg";
+
+
+	pWind->DrawImage(GateImage, r_GfxInfo.x1, r_GfxInfo.y1, UI.SWITCH_Width, UI.SWITCH_Height);
+
+}
+//BULB
+void Output::DrawBULB(GraphicsInfo r_GfxInfo, bool selected)const
+{
+	string GateImage;
+	if (selected)	//use image in the highlighted case
+		GateImage = "Images\\Menu\\H_BULB_OFF.jpg";
+	else
+		GateImage = "Images\\Menu\\BULB_OFF.jpg";
+
+
+	pWind->DrawImage(GateImage, r_GfxInfo.x1, r_GfxInfo.y1, UI.BULB_Width, UI.BULB_Height);
+
+}
+// STRAIGHT CONNECTION
+void Output::DrawConnection_STRAIGHT(GraphicsInfo r_GfxInfo, bool selected) const
+{
+	//TODO: Add code to draw connection
+	
+		string GateImage;
+		if (selected)	//use image in the highlighted case
+			GateImage = "Images\\Menu\\HIGHLIGHTED&STRAIGHT.jpg";
+		else
+			GateImage = "Images\\Menu\\NORMAL&STRAIGHT.jpg";
+
+
+		pWind->DrawImage(GateImage, r_GfxInfo.x1, r_GfxInfo.y1, UI.WIRE_Width, UI.WIRE_Height);
+
+	}
+//BROKEN CONNECTION
+
+void Output::DrawConnection_BROKEN(GraphicsInfo r_GfxInfo, bool selected) const
+{
+	//TODO: Add code to draw connection
+
+	string GateImage;
+	if (selected)	//use image in the highlighted case
+		GateImage = "Images\\Menu\\HIGHLIGHTED&BROKEN.jpg";
+	else
+		GateImage = "Images\\Menu\\NORMAL&BROKEN.jpg";
+
+
+	pWind->DrawImage(GateImage, r_GfxInfo.x1, r_GfxInfo.y1, UI.WIRE_Width, UI.WIRE_Height);
+
+}
 Output::~Output()
 {
 	delete pWind;
