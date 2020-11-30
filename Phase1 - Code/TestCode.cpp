@@ -53,7 +53,13 @@ int main()
 	pOut->PrintMsg("Drawing 2-input NAND gate, Normal and Highlighted,  Click to continue");
 
 	///TODO: Add code to draw 2-input NAND gate, Normal and Highlighted
-
+	/// NORMAL
+	GfxInfo.x1 = 100;	GfxInfo.y1 = 100;
+	pOut->DrawNAND2(GfxInfo);
+	//Highlighted
+	GfxInfo.x1 = 100;	GfxInfo.y1 = 200;
+	pOut->DrawNAND2(GfxInfo,true);
+	
 	pIn->GetPointClicked(x,y);	//Wait for any click
 	pOut->ClearDrawingArea();
 
@@ -61,51 +67,163 @@ int main()
 	pOut->PrintMsg("Drawing 2-input OR and NOR gates, Normal and Highlighted,  Click to continue");
 	
 	///TODO: Add code to draw 2-input OR and NOR gates, Normal and Highlighted for each
+	//1-2OR
+	//NORMAL
+	GfxInfo.x1 = 100;	GfxInfo.y1 = 100;
+	pOut->DrawOR2(GfxInfo);
+	//Highlighted
+	GfxInfo.x1 = 100;	GfxInfo.y1 = 200;
+	pOut->DrawOR2(GfxInfo, true);
 
-	pIn->GetPointClicked(x,y);	//Wait for any click
+
+	//2-2NOR
+	//NORMAL
+	GfxInfo.x1 = 200;	GfxInfo.y1 = 100;
+	pOut->DrawNOR2(GfxInfo);
+	//Highlighted
+	GfxInfo.x1 = 200;	GfxInfo.y1 = 200;
+	pOut->DrawNOR2(GfxInfo, true);
+
+	pIn->GetPointClicked(x, y);	//Wait for any click
 	pOut->ClearDrawingArea();
+
 
 	/// 2.4- XOR2 and XNOR2 Gates test
 	pOut->PrintMsg("Drawing 2-input XOR and XNOR gates, Normal and Highlighted,  Click to continue");
 	
 	///TODO: Add code to draw 2-input XOR and XNOR gates, Normal and Highlighted for each
+	//1-2XOR
+	//NORMAL
+	GfxInfo.x1 = 100;	GfxInfo.y1 = 100;
+	pOut->DrawXOR2(GfxInfo);
+	//Highlighted
+	GfxInfo.x1 = 100;	GfxInfo.y1 = 200;
+	pOut->DrawXOR2(GfxInfo, true);
 
-	pIn->GetPointClicked(x,y);	//Wait for any click
+
+	//2-2XNOR
+	//NORMAL
+	GfxInfo.x1 = 200;	GfxInfo.y1 = 100;
+	pOut->DrawXNOR2(GfxInfo);
+	//Highlighted
+	GfxInfo.x1 = 200;	GfxInfo.y1 = 200;
+	pOut->DrawXNOR2(GfxInfo, true);
+
+	pIn->GetPointClicked(x, y);	//Wait for any click
 	pOut->ClearDrawingArea();
+	
 
 	/// 2.5- Buffer and Inverter Gates test
 	pOut->PrintMsg("Drawing Buffer and Inverter Gates, Normal and Highlighted,  Click to continue");
 	
 	///TODO: Add code to draw Buffer and Inverter Gates, Normal and Highlighted for each
+	//1-BUFFER
+	//NORMAL
+	GfxInfo.x1 = 100;	GfxInfo.y1 = 100;
+	pOut->DrawBUFFER(GfxInfo);
+	//Highlighted
+	GfxInfo.x1 = 100;	GfxInfo.y1 = 200;
+	pOut->DrawBUFFER(GfxInfo, true);
 
-	pIn->GetPointClicked(x,y);	//Wait for any click
+
+	//2-NOT
+	//NORMAL
+	GfxInfo.x1 = 200;	GfxInfo.y1 = 100;
+	pOut->DrawNOT(GfxInfo);
+	//Highlighted
+	GfxInfo.x1 = 200;	GfxInfo.y1 = 200;
+	pOut->DrawNOT(GfxInfo, true);
+
+	pIn->GetPointClicked(x, y);	//Wait for any click
 	pOut->ClearDrawingArea();
+
+
+	
 
 
 	/// 2.6- AND3, NOR3, and XOR3 Gates test
 	pOut->PrintMsg("Drawing 3-input AND, NOR, XOR Gates, Normal and Highlighted,  Click to continue");
 	
 	///TODO: Add code to draw 3-input AND, NOR, and XOR Gates, Normal and Highlighted for each
+	//1-3AND
+	//NORMAL
+	GfxInfo.x1 = 100;	GfxInfo.y1 = 100;
+	pOut->DrawAND3(GfxInfo);
+	//Highlighted
+	GfxInfo.x1 = 100;	GfxInfo.y1 = 200;
+	pOut->DrawAND3(GfxInfo, true);
 
-	pIn->GetPointClicked(x,y);	//Wait for any click
+
+	//2-3NOR
+	//NORMAL
+	GfxInfo.x1 = 200;	GfxInfo.y1 = 100;
+	pOut->DrawNOR3(GfxInfo);
+	//Highlighted
+	GfxInfo.x1 = 200;	GfxInfo.y1 = 200;
+	pOut->DrawNOR3(GfxInfo, true);
+
+	//3-3XOR
+	GfxInfo.x1 = 300;	GfxInfo.y1 = 100;
+	pOut->DrawNOR3(GfxInfo);
+	//Highlighted
+	GfxInfo.x1 = 300;	GfxInfo.y1 = 200;
+	pOut->DrawNOR3(GfxInfo, true);
+	pIn->GetPointClicked(x, y);	//Wait for any click
 	pOut->ClearDrawingArea();
+
+
+	
 
 	/// 2.7- Switch and LED test
 	pOut->PrintMsg("Drawing Switch and LED, Normal and Highlighted,  Click to continue");
 	
 	///TODO: Add code to draw Switch and LED, Normal and Highlighted for each
+		//1-SWITCH
+	//NORMAL
+	GfxInfo.x1 = 100;	GfxInfo.y1 = 100;
+	pOut->DrawSWITCH(GfxInfo);
+	//Highlighted
+	GfxInfo.x1 = 100;	GfxInfo.y1 = 200;
+	pOut->DrawSWITCH(GfxInfo, true);
 
-	pIn->GetPointClicked(x,y);	//Wait for any click
+
+	//2-NOT
+	//NORMAL
+	GfxInfo.x1 = 200;	GfxInfo.y1 = 100;
+	pOut->DrawBULB(GfxInfo);
+	//Highlighted
+	GfxInfo.x1 = 200;	GfxInfo.y1 = 200;
+	pOut->DrawBULB(GfxInfo, true);
+
+	pIn->GetPointClicked(x, y);	//Wait for any click
 	pOut->ClearDrawingArea();
+	
 
 
 	/// 2.8- Connections
 	pOut->PrintMsg("Drawing connections, Normal, Highlighted, straight, and broken,  Click to continue");
 	
 	///TODO: Add code to draw connections, Normal, Highlighted, straight, and broken (all combinations) 
+		//1-STRAIGHT
+	//NORMAL
+	GfxInfo.x1 = 100;	GfxInfo.y1 = 100;
+	pOut->DrawConnection_STRAIGHT(GfxInfo);
+	//Highlighted
+	GfxInfo.x1 = 100;	GfxInfo.y1 = 200;
+	pOut->DrawConnection_STRAIGHT(GfxInfo, true);
 
-	pIn->GetPointClicked(x,y);	//Wait for any click
+
+	//2-BROKEN
+	//NORMAL
+	GfxInfo.x1 = 200;	GfxInfo.y1 = 100;
+	pOut->DrawConnection_BROKEN(GfxInfo);
+	//Highlighted
+	GfxInfo.x1 = 200;	GfxInfo.y1 = 200;
+	pOut->DrawConnection_BROKEN(GfxInfo, true);
+
+	pIn->GetPointClicked(x, y);	//Wait for any click
 	pOut->ClearDrawingArea();
+	
 
 
 
