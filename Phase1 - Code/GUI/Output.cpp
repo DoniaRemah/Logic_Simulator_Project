@@ -195,13 +195,13 @@ void Output::CreateSimulationToolBar() const
 //								Components Drawing Functions							//
 //======================================================================================//
 
-void Output::DrawAND2(GraphicsInfo r_GfxInfo, bool selected) const
+void Output::DrawAND2(GraphicsInfo r_GfxInfo, bool selected) 
 {
 	string GateImage;
 	if(selected)	//use image in the highlighted case
-		GateImage="Images\\Gates\\Gate_AND2_Hi.jpg";
+		GateImage= "Images\\Menu\\H_2AND.jpg";
 	else  
-		GateImage = "Images\\Gates\\Gate_AND2.jpg";
+		GateImage = "Images\\Menu\\2AND.jpg";
 
 	//Draw AND2 Gate at Gfx_Info (1st corner)
 	//Set the Image Width & Height by AND2 Image Parameter in UI_Info
