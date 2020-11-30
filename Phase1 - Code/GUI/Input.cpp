@@ -155,7 +155,15 @@ ActionType Input::GetUserAction() const
 	}
 	else	//Application is in Simulation mode
 	{
-		return SIM_MODE;	//This should be changed after creating the compelete simulation bar 
+		int ClickedItemOrder = x / UI.ToolItemWidth3;	//This should be changed after creating the compelete simulation bar 
+		switch (ClickedItemOrder)
+		{
+		case ITM_PROB: return PROB;
+		case ITM_TRUTH: return Create_TruthTable;
+		case ITM_SWDSGN: return DSN_MODE;
+		case ITM_VALID: return VALIDATE;
+		case ITM_SIM: return  SIMULATE;
+		}
 	}
 
 }

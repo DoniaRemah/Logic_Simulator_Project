@@ -29,7 +29,9 @@ enum ActionType
 	
 
 	Create_TruthTable,	//Create Truth Table of the Circuit
-
+	PROB,
+	VALIDATE,
+	SIMULATE,
 	Change_Switch,		//Change Switch Status in Simulation Mode
 
 	SELECT,		//Select a Component, a Connection
@@ -106,8 +108,10 @@ enum SimMenuItem //The items of the simulation menu (you should add more items)
 {
 	//Note: Items are ordered here as they appear in menu
 	ITM_SIM,	//Simulate menu item
+	ITM_VALID,
 	ITM_TRUTH,	//Truth table menu item
-	
+	ITM_PROB,
+	ITM_SWDSGN,
 	//TODO:Add more items names here
 	
 	ITM_SIM_CNT		//no. of simulation menu items ==> This should be the last line in this enum

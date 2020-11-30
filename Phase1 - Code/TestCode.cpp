@@ -131,115 +131,112 @@ int main()
 	pOut->PrintMsg("TEST4: Testing Input ability to detect User Action, click anywhere");
 
 	ActionType ActType;
-	
-	///TODO:  You must add a case for each action
-	//Add cases for the missing actions below
-	do
-	{
 
-		ActType = pIn->GetUserAction();
-	
-			switch (ActType)
+			do
 			{
-			case ADD_Buff:
-				pOut->PrintMsg("Action: add a buffer gate , Click anywhere");
-				break;
 
-			case ADD_INV:
-				pOut->PrintMsg("Action: add an inverter gate , Click anywhere");
-				break;
+				ActType = pIn->GetUserAction();
 
-			case ADD_AND_GATE_2:
-				pOut->PrintMsg("Action: add 2-input AND gate , Click anywhere");
-				break;
-			case ADD_AND_GATE_3:
-				pOut->PrintMsg("Action: add 3-input AND gate , Click anywhere");
-				break;
-			case ADD_NAND_GATE_2:
-				pOut->PrintMsg("Action: add 2-input NAND gate , Click anywhere");
-				break;
+				switch (ActType)
+				{
+				case ADD_Buff:
+					pOut->PrintMsg("Action: add a buffer gate , Click anywhere");
+					break;
 
-			case ADD_OR_GATE_2:
-				pOut->PrintMsg("Action: add 2-input OR gate , Click anywhere");
-				break;
+				case ADD_INV:
+					pOut->PrintMsg("Action: add an inverter gate , Click anywhere");
+					break;
 
-			case ADD_NOR_GATE_2:
-				pOut->PrintMsg("Action: add 2-input NOR gate , Click anywhere");
-				break;
-			case ADD_NOR_GATE_3:
-				pOut->PrintMsg("Action: add 3-input NOR gate , Click anywhere");
-				break;
-			case ADD_XOR_GATE_2:
-				pOut->PrintMsg("Action: add 2-input XOR gate , Click anywhere");
-				break;
-			case ADD_XOR_GATE_3:
-				pOut->PrintMsg("Action: add 3-input XOR gate , Click anywhere");
-				break;
-			case ADD_XNOR_GATE_2:
-				pOut->PrintMsg("Action: add 2-input XNOR gate , Click anywhere");
-				break;
-			case SAVE: 				
-				pOut->PrintMsg("Action: Saving File, Click Anywhere");
-				break;
-			case COPY: 
-				pOut->PrintMsg("Action: Copying , Click Anywhere");
-				break;
-			case EDIT_Label:
-				pOut->PrintMsg("Action: Editing Label , Click Anywhere");
-				break;
-			case LOAD:
-				pOut->PrintMsg("Action: Loading File , Click Anywhere");
-				break;
-			case PASTE:
-				pOut->PrintMsg("Action: Paste , Click Anywhere");
-				break;
-			case CUT:
-				pOut->PrintMsg("Action: Cut , Click Anywhere");
-				break;
-			case ADD_Label:
-				pOut->PrintMsg("Action: Add Label , Click Anywhere");
-				break;
-			case SELECT:
-				pOut->PrintMsg("Action: a click on the Drawing area, Click anywhere");
-				break;
-			case MULTI_SELECT:
-				pOut->PrintMsg("Action: Multi-select , Click Anywhere");
-				break;
-			case ADD_Switch:
-				pOut->PrintMsg("Action: Adding Switch , Click Anywhere");
-				break;
-			case ADD_CONNECTION:
-				pOut->PrintMsg("Action: Adding Wire , Click Anywhere");
-				break;
-			case ADD_LED:
-				pOut->PrintMsg("Action: Adding Led , Click Anywhere");
-				break;
-			case STATUS_BAR:
-				pOut->PrintMsg("Action: a click on the Status Bar, Click anywhere");
-				break;
+				case ADD_AND_GATE_2:
+					pOut->PrintMsg("Action: add 2-input AND gate , Click anywhere");
+					break;
+				case ADD_AND_GATE_3:
+					pOut->PrintMsg("Action: add 3-input AND gate , Click anywhere");
+					break;
+				case ADD_NAND_GATE_2:
+					pOut->PrintMsg("Action: add 2-input NAND gate , Click anywhere");
+					break;
 
-			case DSN_TOOL:
-				pOut->PrintMsg("Action: a click on empty area in the Design Tool Bar, Click anywhere");
-				break;
+				case ADD_OR_GATE_2:
+					pOut->PrintMsg("Action: add 2-input OR gate , Click anywhere");
+					break;
 
-			case SIM_MODE:
-				pOut->PrintMsg("Action: Switch to Simulation Mode, creating simualtion tool bar");
-				pOut->CreateSimulationToolBar();
-				break;
-		
-			case DSN_MODE:
-				pOut->PrintMsg("Action: Switch to Design Mode, creating Design tool bar");
-				pOut->CreateDesignToolBar();
-				break;
+				case ADD_NOR_GATE_2:
+					pOut->PrintMsg("Action: add 2-input NOR gate , Click anywhere");
+					break;
+				case ADD_NOR_GATE_3:
+					pOut->PrintMsg("Action: add 3-input NOR gate , Click anywhere");
+					break;
+				case ADD_XOR_GATE_2:
+					pOut->PrintMsg("Action: add 2-input XOR gate , Click anywhere");
+					break;
+				case ADD_XOR_GATE_3:
+					pOut->PrintMsg("Action: add 3-input XOR gate , Click anywhere");
+					break;
+				case ADD_XNOR_GATE_2:
+					pOut->PrintMsg("Action: add 2-input XNOR gate , Click anywhere");
+					break;
+				case SAVE:
+					pOut->PrintMsg("Action: Saving File, Click Anywhere");
+					break;
+				case COPY:
+					pOut->PrintMsg("Action: Copying , Click Anywhere");
+					break;
+				case EDIT_Label:
+					pOut->PrintMsg("Action: Editing Label , Click Anywhere");
+					break;
+				case LOAD:
+					pOut->PrintMsg("Action: Loading File , Click Anywhere");
+					break;
+				case PASTE:
+					pOut->PrintMsg("Action: Paste , Click Anywhere");
+					break;
+				case CUT:
+					pOut->PrintMsg("Action: Cut , Click Anywhere");
+					break;
+				case ADD_Label:
+					pOut->PrintMsg("Action: Add Label , Click Anywhere");
+					break;
+				case SELECT:
+					pOut->PrintMsg("Action: a click on the Drawing area, Click anywhere");
+					break;
+				case MULTI_SELECT:
+					pOut->PrintMsg("Action: Multi-select , Click Anywhere");
+					break;
+				case ADD_Switch:
+					pOut->PrintMsg("Action: Adding Switch , Click Anywhere");
+					break;
+				case ADD_CONNECTION:
+					pOut->PrintMsg("Action: Adding Wire , Click Anywhere");
+					break;
+				case ADD_LED:
+					pOut->PrintMsg("Action: Adding Led , Click Anywhere");
+					break;
+				case STATUS_BAR:
+					pOut->PrintMsg("Action: a click on the Status Bar, Click anywhere");
+					break;
 
+				case DSN_TOOL:
+					pOut->PrintMsg("Action: a click on empty area in the Design Tool Bar, Click anywhere");
+					break;
 
-			case EXIT:
-				
-				break;
-			}
-		
-		
-	}while(ActType != EXIT);
+				case SIM_MODE:
+					pOut->PrintMsg("Action: Switch to Simulation Mode, creating simualtion tool bar");
+					pOut->CreateSimulationToolBar();
+					break;
+
+				case DSN_MODE:
+					pOut->PrintMsg("Action: Switch to Design Mode, creating Design tool bar");
+					pOut->CreateDesignToolBar();
+					break;
+				case EXIT:
+					break;
+				}
+
+			} while (ActType != EXIT);
+
+	
+	
 
 
 	/// Exiting

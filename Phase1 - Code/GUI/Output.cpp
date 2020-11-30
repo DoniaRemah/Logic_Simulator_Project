@@ -185,7 +185,28 @@ void Output::CreateDesignToolBar2() const
 void Output::CreateSimulationToolBar() const
 {
 	UI.AppMode = SIMULATION;	//Simulation Mode
+	// Deleting Design Menu Bar
+	pWind->SetPen(WHITE, 1);
+	pWind->SetBrush(WHITE);
+	pWind->DrawRectangle(0, 0, UI.width, UI.height - UI.StatusBarHeight);
+	// Getting Adress of each icon.
+	string SimItemImages[ITM_SIM_CNT];
 
+	SimItemImages[ITM_SIM] = "images\\Menu\\Simulate_Circuit.jpg";
+	SimItemImages[ITM_TRUTH] = "images\\Menu\\Truth_Table.jpg";
+	SimItemImages[ITM_SWDSGN] = "images\\Menu\\Switch_To_Design.jpg";
+	SimItemImages[ITM_PROB] = "images\\Menu\\Prob.jpg";
+	SimItemImages[ITM_VALID] = "images\\Menu\\Valid_Circuit.jpg";
+	// Drawing Icons of Sim Bar.
+	for (int i = 0; i < ITM_SIM_CNT;i++)
+	{
+		pWind->DrawImage(SimItemImages[i], (i * UI.ToolItemWidth3), 0, UI.ToolItemWidth3, UI.ToolBarHeight2 + 10);
+
+	}
+
+	//Draw a line under the toolbar
+	pWind->SetPen(BLACK, 3);
+	pWind->DrawLine(0, UI.ToolBarHeight2+12, UI.width, UI.ToolBarHeight2+12);
 	//TODO: Write code to draw the simualtion toolbar (similar to that of design toolbar drawing)
 
 
