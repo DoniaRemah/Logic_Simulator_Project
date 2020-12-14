@@ -95,7 +95,9 @@ void Output::DrawString(const int iX, const int iY, const string strText)const {
 void Output::CreateDesignToolBar() const
 {
 	UI.AppMode = DESIGN;	//Design Mode
-
+	pWind->SetPen(WHITE, 1);
+	pWind->SetBrush(WHITE);
+	pWind->DrawRectangle(0, 0, UI.width, UI.ToolBarHeight2 + 12);
 	//You can draw the tool bar icons in any way you want.
 
 	//First prepare List of images for each menu item

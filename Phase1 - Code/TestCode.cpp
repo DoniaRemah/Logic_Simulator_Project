@@ -1,6 +1,7 @@
 #include "GUI\Input.h"
 #include "GUI\Output.h"
 
+
 //This is a test code to test the Input and Output classes
 
 int main()
@@ -341,12 +342,35 @@ int main()
 				case SIM_MODE:
 					pOut->PrintMsg("Action: Switch to Simulation Mode, creating simualtion tool bar");
 					pOut->CreateSimulationToolBar();
+					do
+					{
+						ActionType	ActTypeSim = pIn->GetUserAction();
+						switch (ActTypeSim)
+						{
+						case PROB:
+							pOut->PrintMsg("Action: Probing, Click anywhere");
+							break;
+						case VALIDATE:
+							pOut->PrintMsg("Action: Validating, Click anywhere");
+							break;
+						case SIMULATE:
+							pOut->PrintMsg("Action: Simulating, Click anywhere");
+							break;
+						case DSN_MODE:
+							pOut->PrintMsg("Action: switching to Design Mode, Click anywhere");
+							pOut->CreateDesignToolBar();
+							pOut->CreateDesignToolBar2();
+							UI.AppMode = DESIGN;
+							break;
+						case Create_TruthTable:
+							pOut->PrintMsg("Action: Creating Truth Table, Click anywhere");
+							break;
+						}
+
+					} while (UI.AppMode == SIMULATION);
+
 					break;
 
-				case DSN_MODE:
-					pOut->PrintMsg("Action: Switch to Design Mode, creating Design tool bar");
-					pOut->CreateDesignToolBar();
-					break;
 				case EXIT:
 					break;
 				}
