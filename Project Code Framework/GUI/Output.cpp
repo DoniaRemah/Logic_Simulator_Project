@@ -394,36 +394,12 @@ void Output::DrawBULB(GraphicsInfo r_GfxInfo, bool selected)const
 
 }
 // STRAIGHT CONNECTION
-void Output::DrawConnection_STRAIGHT(GraphicsInfo r_GfxInfo, bool selected) const
+void Output::DrawConnection(GraphicsInfo r_GfxInfo, bool selected) const
 {
 	//TODO: Add code to draw connection
-
-	string GateImage;
-	if (selected)	//use image in the highlighted case
-		GateImage = "Images\\Menu\\HIGHLIGHTED&STRAIGHT.jpg";
-	else
-		GateImage = "Images\\Menu\\NORMAL&STRAIGHT.jpg";
-
-
-	pWind->DrawImage(GateImage, r_GfxInfo.x1, r_GfxInfo.y1, UI.WIRE_Width, UI.WIRE_Height);
-
 }
 //BROKEN CONNECTION
 
-void Output::DrawConnection_BROKEN(GraphicsInfo r_GfxInfo, bool selected) const
-{
-	//TODO: Add code to draw connection
-
-	string GateImage;
-	if (selected)	//use image in the highlighted case
-		GateImage = "Images\\Menu\\HIGHLIGHTED&BROKEN.jpg";
-	else
-		GateImage = "Images\\Menu\\NORMAL&BROKEN.jpg";
-
-
-	pWind->DrawImage(GateImage, r_GfxInfo.x1, r_GfxInfo.y1, UI.WIRE_Width, UI.WIRE_Height);
-
-}
 Output::~Output()
 {
 	delete pWind;

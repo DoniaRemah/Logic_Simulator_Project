@@ -38,8 +38,8 @@ public:
 	void DrawBULB(GraphicsInfo r_GfxInfo, bool selected = false)const;
 
 	// Draws Connection
-	void DrawConnection_STRAIGHT(GraphicsInfo r_GfxInfo, bool selected = false) const;
-	void DrawConnection_BROKEN(GraphicsInfo r_GfxInfo, bool selected = false) const;
+	void DrawConnection(GraphicsInfo r_GfxInfo, bool selected = false) const;
+	
 
 	void PrintMsg(string msg) const;	//Print a message on Status bar
 	void Output::DrawString(const int iX, const int iY, const string strText)const;
