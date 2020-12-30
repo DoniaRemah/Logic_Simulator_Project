@@ -11,7 +11,7 @@ LED::LED(const GraphicsInfo& r_GfxInfo)
 
 void LED::Operate()
 {
-	int inpstatus = GetInputPinStatus();
+	int inpstatus = GetInputPinStatus(1);
 
 
 }
@@ -28,19 +28,25 @@ void LED::Draw(Output* pOut)
 
 
 //returns status of Inputpin #n
-int LED::GetInputPinStatus()
+int LED::GetInputPinStatus(int n)
 {
-	return m_InputPins[0].getStatus();	//n starts from 1 but array index starts from 0.
+	n = 1;
+	return m_InputPins[n - 1].getStatus();	//n starts from 1 but array index starts from 0.
 }
 
 int  LED::GetOutPinStatus()
 {
-
+	return -1;
 }
 
 //Set status of an input pin ot HIGH or LOW
 void LED::setInputPinStatus(int n, STATUS s)
 {
 	
+}
+
+LED :: ~LED()
+{
+
 }
 

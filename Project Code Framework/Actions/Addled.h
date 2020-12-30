@@ -18,7 +18,7 @@ public:
 	virtual void ReadActionParameters();
 	//Execute action (code depends on action type)
 	virtual void Execute();
-
+	virtual int GetInputPinStatus();
 	virtual void Undo();
 	virtual void Redo();
 };
