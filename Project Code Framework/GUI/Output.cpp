@@ -368,11 +368,11 @@ void Output::DrawXOR3(GraphicsInfo r_GfxInfo, bool selected)const
 
 }
 //SWITCH
-void Output::DrawSWITCH(GraphicsInfo r_GfxInfo, bool selected)const
+void Output::DrawSWITCH(GraphicsInfo r_GfxInfo, bool selected=0)const
 {
 	string GateImage;
-	if (selected)	//use image in the highlighted case
-		GateImage = "Images\\Menu\\H_SWITCH_OFF.jpg";
+	if (selected == 1)	//use image in the highlighted case
+		GateImage = "Images\\Menu\\H_SWITCH_ON.jpg";
 	else
 		GateImage = "Images\\Menu\\SWITCH_OFF.jpg";
 

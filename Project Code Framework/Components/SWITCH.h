@@ -7,13 +7,15 @@
   represent the 2-input AND gate
 */
 
-#include "Gate.h"
-
-class SWITCH :public Gate
+#include "Component.h"
+#include "OutputPin.h"
+class SWITCH :public Component
 {
+protected:
+	OutputPin m_OutputPin;
 public:
 	SWITCH(const GraphicsInfo& r_GfxInfo, int r_FanOut);
-	virtual void Operate();	//Calculates output of switch
+	virtual void Operate(Input * pIn);	//Calculates output of switch
 	virtual void Draw(Output* pOut);	//Draws SWITCH
 
 	virtual int GetOutPinStatus();	//returns status of outputpin if LED, return -1
