@@ -393,12 +393,12 @@ void Output::DrawBULB(GraphicsInfo r_GfxInfo, bool selected)const
 	pWind->DrawImage(GateImage, r_GfxInfo.x1, r_GfxInfo.y1, UI.BULB_Width, UI.BULB_Height);
 
 }
-// STRAIGHT CONNECTION
+
 void Output::DrawConnection(GraphicsInfo r_GfxInfo, bool selected) const
 {
 	//TODO: Add code to draw connection
 }
-//BROKEN CONNECTION
+
 
 Output::~Output()
 {
