@@ -9,10 +9,9 @@ SWITCH::SWITCH(const GraphicsInfo& r_GfxInfo, int r_FanOut): m_OutputPin(r_FanOu
 }
 
 
-void SWITCH::Operate(Input* pIn)
+void SWITCH::Operate()
 {
-	int x, int y;
-	pIn->GetPointClicked(x, y);
+	int x; int y;
 
 	if (m_GfxInfo.x2 >= x >= m_GfxInfo.x1 && m_GfxInfo.y2 >= y >= m_GfxInfo.y1)
 		m_OutputPin.setStatus(HIGH);
@@ -40,7 +39,7 @@ int SWITCH::GetOutPinStatus()
 //returns status of Inputpin #n
 int SWITCH::GetInputPinStatus(int n)
 {
-	
+	return -1;
 }
 
 //Set status of an input pin ot HIGH or LOW
