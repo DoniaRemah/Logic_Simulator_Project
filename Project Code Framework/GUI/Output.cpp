@@ -396,7 +396,27 @@ void Output::DrawBULB(GraphicsInfo r_GfxInfo, bool selected)const
 
 void Output::DrawConnection(GraphicsInfo r_GfxInfo, bool selected) const
 {
-	//TODO: Add code to draw connection
+	if (selected == false)
+	{
+		pWind->SetPen(BLACK, 3);
+
+	}
+	else
+	{
+		pWind->SetPen(YELLOW, 3);
+	}
+
+	if (r_GfxInfo.x1 == r_GfxInfo.x2)
+	{
+		pWind->DrawLine(r_GfxInfo.x1, r_GfxInfo.y1, r_GfxInfo.x2, r_GfxInfo.y2);
+	}
+	else
+	{
+		int x3 = r_GfxInfo.x1 + ((r_GfxInfo.x2 - r_GfxInfo.x1) / 2);
+		pWind->DrawLine(r_GfxInfo.x1, r_GfxInfo.y1, x3, r_GfxInfo.y1);
+		pWind->DrawLine(x3, r_GfxInfo.y1, x3, r_GfxInfo.y2);
+		pWind->DrawLine(x3, r_GfxInfo.y2, r_GfxInfo.x2, r_GfxInfo.y2);
+	}
 }
 
 

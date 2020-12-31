@@ -12,8 +12,8 @@
 #include "Actions\AddXORgate3.h"
 #include "Actions\Addled.h"
 #include "Actions\AddSWITCH.h"
-
-
+#include "Actions/AddConnection.h"
+#include "iostream"
 ApplicationManager::ApplicationManager()
 {
 	CompCount = 0;
@@ -29,6 +29,7 @@ ApplicationManager::ApplicationManager()
 void ApplicationManager::AddComponent(Component* pComp)
 {
 	CompList[CompCount++] = pComp;		
+	cout << "Added Component number:" << CompCount << endl;
 }
 ////////////////////////////////////////////////////////////////////
 
@@ -82,13 +83,13 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 			break;			            //Add Switch
 		case ADD_LED:
 			pAct = new Addled(this);
-			break;                        //Add LED
-		//case ADD_CONNECTION:
-			//pAct = new AddANDgate2(this);
-			//break;
-               //TODO: Create AddConection Action here
-			
-	
+			break;    
+                    //Add LED
+
+
+		case ADD_CONNECTION:
+			pAct = new AddConnection(this);
+			break;
 
 		case EXIT:
 			//pAct = new AddANDgate2(this);
@@ -128,9 +129,15 @@ Output* ApplicationManager::GetOutput()
 
 ApplicationManager::~ApplicationManager()
 {
-	for(int i=0; i<CompCount; i++)
+	for (int i = 0; i < CompCount; i++)
 		delete CompList[i];
 	delete OutputInterface;
 	delete InputInterface;
-	
+
+}
+
+Component** ApplicationManager::GetCompList(int& N)
+{
+	N = CompCount;
+	return CompList;
 }

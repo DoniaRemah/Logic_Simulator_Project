@@ -129,6 +129,7 @@
     <ClCompile Include="Actions\AddANDgate2.cpp" />
     <ClCompile Include="Actions\AddANDgate3.cpp" />
     <ClCompile Include="Actions\AddBUFFgate.cpp" />
+    <ClCompile Include="Actions\AddConnection.cpp" />
     <ClCompile Include="Actions\Addled.cpp" />
     <ClCompile Include="Actions\AddNANDgate2.cpp" />
     <ClCompile Include="Actions\AddNORgate2.cpp" />
@@ -203,6 +204,7 @@
     <ClInclude Include="Actions\AddANDgate2.h" />
     <ClInclude Include="Actions\AddANDgate3.h" />
     <ClInclude Include="Actions\AddBUFFgate.h" />
+    <ClInclude Include="Actions\AddConnection.h" />
     <ClInclude Include="Actions\Addled.h" />
     <ClInclude Include="Actions\AddNANDgate2.h" />
     <ClInclude Include="Actions\AddNORgate2.h" />
