@@ -17,37 +17,10 @@ void AddANDgate2::ReadActionParameters()
 
 	//Print Action Message
 	pOut->PrintMsg("2-Input AND Gate: Click to add the gate");
-	// Setting Potential Parameters.
-	int Len = UI.AND2_Width;
-	int Wdth = UI.AND2_Height;
-	int validBar = 0;
-	int validComp = 0;
-	int potx1;
-	int potx2;
-	int poty1;
-	int poty2;
-	//Validating Point Clicked.
-	while (validBar == 0 && validComp == 0)
-	{
-		pIn->GetPointClicked(Cx, Cy);
-		potx1 = Cx - Len / 2;
-		potx2 = Cx + Len / 2;
-		poty1 = Cy - Wdth / 2;
-		poty2 = Cy + Wdth / 2;
-		// checking if point within drawing area range.
-		if (poty1 > 95)
-		{
-			validBar = 1;
-			break;
-		}
-		else
-		{
-			pOut->PrintMsg("INVALID POINT. 2-Input AND Gate: Click to add the gate");
-		}
-		
-	}
-	
-	//Clear Status Bar
+
+	//Wait for User Input
+	pIn->GetPointClicked(Cx, Cy);
+
 	pOut->ClearStatusBar();
 	
 }

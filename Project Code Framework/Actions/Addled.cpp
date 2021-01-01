@@ -18,37 +18,10 @@ void Addled::ReadActionParameters()
 	//Print Action Message
 	pOut->PrintMsg(" Click to add the LED");
 
-	//Wait for User Input
-	int Len = UI.AND2_Width;
-	int Wdth = UI.AND2_Height;
-	int valid = 0;
-	int potx1;
-	int potx2;
-	int poty1;
-	int poty2;
-	//Wait for User Input
-	while (valid == 0)
-	{
-		pIn->GetPointClicked(Cx, Cy);
-		potx1 = Cx - Len / 2;
-		potx2 = Cx + Len / 2;
-		poty1 = Cy - Wdth / 2;
-		poty2 = Cy + Wdth / 2;
-		// checking if point within drawing area range.
-		if (poty1 > 95)
-		{
-			valid = 1;
-			break;
-		}
-		else
-		{
-			pOut->PrintMsg("INVALID POINT. Click to add the LED");
-		}
+	pIn->GetPointClicked(Cx, Cy);
 
-	}
-
-	//Clear Status Bar
 	pOut->ClearStatusBar();
+
 
 }
 
