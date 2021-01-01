@@ -1,7 +1,7 @@
 #pragma once
 #ifndef _ADD_CONNECTION_H
 #define _ADD_CONNECTION_H
-#endif
+
 
 #include "Action.h"
 #include "..\Components\Connection.h"
@@ -23,3 +23,5 @@ public:
 	virtual void Undo();
 	virtual void Redo();
 };
+
+#endif
