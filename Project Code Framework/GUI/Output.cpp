@@ -391,12 +391,17 @@ void Output::DrawBULB(GraphicsInfo r_GfxInfo, bool selected)const
 
 
 	pWind->DrawImage(GateImage, r_GfxInfo.x1, r_GfxInfo.y1, UI.BULB_Width, UI.BULB_Height);
-
+	 
 }
 // STRAIGHT CONNECTION
 void Output::DrawConnection(GraphicsInfo r_GfxInfo, bool selected) const
 {
 	//TODO: Add code to draw connection
+}
+bool Output::IsDrawingArea(int x, int y) {//CHECK IF CLICK IN DRAWING AREA OR NOT 
+	int Z = UI.height - UI.ToolBarHeight - UI.StatusBarHeight - UI.ToolBarHeight2;//height of drawing area
+	if (y<Z && y> (UI.ToolBarHeight+UI.ToolBarHeight2)) return true;
+	return false;
 }
 //BROKEN CONNECTION
 

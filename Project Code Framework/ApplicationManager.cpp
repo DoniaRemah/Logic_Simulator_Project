@@ -12,6 +12,8 @@
 #include "Actions\AddXORgate3.h"
 #include "Actions\Addled.h"
 #include "Actions\AddSWITCH.h"
+#include "Actions\EDIT.h"
+#include "Actions\Label.h"
 
 
 ApplicationManager::ApplicationManager()
@@ -81,8 +83,14 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 			pAct = new AddSWITCH(this);
 			break;			            //Add Switch
 		case ADD_LED:
-			pAct = new Addled(this);
-			break;                        //Add LED
+			pAct = new Addled(this);    //Add LED
+			break;                      
+		case EDIT_Label:
+			pAct = new EDIT(this);
+			break;
+		case ADD_Label:
+			pAct = new Label(this);
+			break;                        //EDIT
 		//case ADD_CONNECTION:
 			//pAct = new AddANDgate2(this);
 			//break;

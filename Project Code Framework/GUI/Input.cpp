@@ -10,7 +10,7 @@ void Input::GetPointClicked(int& x, int& y)
 	pWind->WaitMouseClick(x, y);	//Wait for mouse click
 }
 
-string Input::GetSrting(Output* pOut)
+string Input::GetSrting(Output* pOut, string msg)
 {
 	//backspace=8,enter=13,escape=27
 	string message;
@@ -19,7 +19,7 @@ string Input::GetSrting(Output* pOut)
 	pWind->FlushKeyQueue();
 	while (true)
 	{
-		pOut->PrintMsg("Set Commponent label: " + message);
+		pOut->PrintMsg(msg + " " + message);
 		pWind->WaitKeyPress(key);
 		//check the type of key  
 		if (key == 8)//if the key is backspace

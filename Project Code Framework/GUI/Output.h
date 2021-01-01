@@ -5,7 +5,8 @@
 class Output	//The application manager should have a pointer to this class
 {
 private:
-	window* pWind;	//Pointer to the Graphics Window
+	window* pWind;   //Pointer to the Graphics Window
+	Input* pIn; 	
 public:
 	Output(); // Performs the Window Initialization (Creates Window)
 	Input* CreateInput() const; //creates a pointer to the Input object
@@ -39,6 +40,7 @@ public:
 
 	// Draws Connection
 	void DrawConnection(GraphicsInfo r_GfxInfo, bool selected = false) const;
+	bool IsDrawingArea(int x, int y);
 	
 
 	void PrintMsg(string msg) const;	//Print a message on Status bar
