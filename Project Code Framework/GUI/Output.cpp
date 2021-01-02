@@ -419,8 +419,8 @@ void Output::DrawConnection(GraphicsInfo r_GfxInfo, bool selected) const
 	}
 }
 bool Output::IsDrawingArea(int x, int y) {
-	int z = UI.height - UI.ToolBarHeight - UI.ToolBarHeight2 - UI.StatusBarHeight;
-	if (y < z && y > (UI.ToolBarHeight + UI.ToolBarHeight2)) return true;
+	
+	if ((y-25) < 575 && (y+25) >150) return true;//575 means status bar top edge starts from it and 150 means bottom edge of two tools bar 
 	return false;
 }
 //BROKEN CONNECTION
