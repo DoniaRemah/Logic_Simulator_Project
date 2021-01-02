@@ -11,7 +11,7 @@ AddConnection ::~AddConnection(void)
 
 }
 
-void AddConnection::ReadActionParameters()
+bool AddConnection::ReadActionParameters()
 {
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
@@ -66,19 +66,22 @@ void AddConnection::ReadActionParameters()
 		}
 	}
 	pOut->ClearStatusBar();
+	return true;
 }
 
 void  AddConnection::Execute()
 {
-	ReadActionParameters();
-	GraphicsInfo GInfo;
-	GInfo.x1 = m_SrcComp->GetGfxInfo().x2;
-	GInfo.x2 = m_DstComp->GetGfxInfo().x1;
-	GInfo.y1 = m_SrcComp->GetGfxInfo().y1+(m_SrcComp->GetGfxInfo().y2 - m_SrcComp->GetGfxInfo().y1)/2;
-	GInfo.y2 = m_DstComp->GetGfxInfo().y1+((m_DstComp->GetGfxInfo().y2 - m_DstComp->GetGfxInfo().y1) / 3);
+	if (ReadActionParameters())
+	{
+		GraphicsInfo GInfo;
+		GInfo.x1 = m_SrcComp->GetGfxInfo().x2;
+		GInfo.x2 = m_DstComp->GetGfxInfo().x1;
+		GInfo.y1 = m_SrcComp->GetGfxInfo().y1 + (m_SrcComp->GetGfxInfo().y2 - m_SrcComp->GetGfxInfo().y1) / 2;
+		GInfo.y2 = m_DstComp->GetGfxInfo().y1 + ((m_DstComp->GetGfxInfo().y2 - m_DstComp->GetGfxInfo().y1) / 3);
 
-	Connection* pA = new Connection(GInfo, NULL ,NULL);
-	pManager->AddComponent(pA);
+		Connection* pA = new Connection(GInfo, NULL, NULL);
+		pManager->AddComponent(pA);
+	}
 
 }
 

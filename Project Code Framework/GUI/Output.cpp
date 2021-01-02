@@ -418,6 +418,11 @@ void Output::DrawConnection(GraphicsInfo r_GfxInfo, bool selected) const
 		pWind->DrawLine(x3, r_GfxInfo.y2, r_GfxInfo.x2, r_GfxInfo.y2);
 	}
 }
+bool Output::IsDrawingArea(int x, int y) {
+	int z = UI.height - UI.ToolBarHeight - UI.ToolBarHeight2 - UI.StatusBarHeight;
+	if (y < z && y > (UI.ToolBarHeight + UI.ToolBarHeight2)) return true;
+	return false;
+}
 //BROKEN CONNECTION
 
 Output::~Output()
