@@ -16,6 +16,8 @@
 #include "Actions\Label.h"
 
 
+#include "Actions/AddConnection.h"
+#include "iostream"
 ApplicationManager::ApplicationManager()
 {
 	CompCount = 0;
@@ -31,6 +33,7 @@ ApplicationManager::ApplicationManager()
 void ApplicationManager::AddComponent(Component* pComp)
 {
 	CompList[CompCount++] = pComp;		
+	cout << "Added Component number:" << CompCount << endl;
 }
 ////////////////////////////////////////////////////////////////////
 
@@ -97,6 +100,14 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
                //TODO: Create AddConection Action here
 			
 	
+			pAct = new Addled(this);
+			break;    
+                    //Add LED
+
+
+		case ADD_CONNECTION:
+			pAct = new AddConnection(this);
+			break;
 
 		case EXIT:
 			//pAct = new AddANDgate2(this);
@@ -136,9 +147,15 @@ Output* ApplicationManager::GetOutput()
 
 ApplicationManager::~ApplicationManager()
 {
-	for(int i=0; i<CompCount; i++)
+	for (int i = 0; i < CompCount; i++)
 		delete CompList[i];
 	delete OutputInterface;
 	delete InputInterface;
-	
+
+}
+
+Component** ApplicationManager::GetCompList(int& N)
+{
+	N = CompCount;
+	return CompList;
 }

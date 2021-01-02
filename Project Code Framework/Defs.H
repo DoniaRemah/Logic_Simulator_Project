@@ -93,7 +93,7 @@ enum DsgnMenuItem //The items of the design menu (you should add more items)
 	ITM_PASTE,
 	ITM_LOAD,
 	ITM_SAVE,
-	ITM_MULTI_SELECT,
+	ITM_SELECT,
 	ITM_SWITCH_TO_SIM,
 	ITM_EXIT,
 

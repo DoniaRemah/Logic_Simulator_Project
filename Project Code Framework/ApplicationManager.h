@@ -32,7 +32,7 @@ public:
 	
 	//Creates an action and executes it
 	void ExecuteAction(ActionType);
-	
+	Component ** GetCompList(int& N);
 	void UpdateInterface();	//Redraws all the drawing window
 
 	//Gets a pointer to Input / Output Object
@@ -41,7 +41,6 @@ public:
 
 	//Adds a new component to the list of components
 	void AddComponent(Component* pComp);
-
 	//destructor
 	~ApplicationManager();
 };

@@ -19,6 +19,7 @@ bool AddANDgate3::ReadActionParameters()
 	pOut->PrintMsg("3-Input AND Gate: Click to add the gate");
 
 	//Wait for User Input
+	//Wait for User Input
 	pIn->GetPointClicked(Cx, Cy);
 	if (!pOut->IsDrawingArea(Cx, Cy)) {
 		pOut->PrintMsg("Invalid position. Operation was cancelled");

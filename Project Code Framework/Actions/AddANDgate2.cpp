@@ -25,7 +25,6 @@ bool AddANDgate2::ReadActionParameters()
 		return false;
 	}
 
-	//Clear Status Bar
 	pOut->ClearStatusBar();
 	return true;
 	

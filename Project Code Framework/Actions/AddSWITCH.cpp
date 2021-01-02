@@ -17,6 +17,7 @@ bool AddSWITCH::ReadActionParameters()
 
 	//Print Action Message
 	pOut->PrintMsg(" Click to add the SWITCH");
+	pIn->GetPointClicked(Cx, Cy);
 
 	//Wait for User Input
 	pIn->GetPointClicked(Cx, Cy);

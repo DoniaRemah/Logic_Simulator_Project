@@ -17,8 +17,6 @@ bool AddORgate2::ReadActionParameters()
 
 	//Print Action Message
 	pOut->PrintMsg("2-Input OR Gate: Click to add the gate");
-
-	//Wait for User Input
 	pIn->GetPointClicked(Cx, Cy);
 	if (!pOut->IsDrawingArea(Cx, Cy)) {
 		pOut->PrintMsg("Invalid position. Operation was cancelled");

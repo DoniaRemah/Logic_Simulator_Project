@@ -18,7 +18,6 @@ bool Addled::ReadActionParameters()
 	//Print Action Message
 	pOut->PrintMsg(" Click to add the LED");
 
-	//Wait for User Input
 	pIn->GetPointClicked(Cx, Cy);
 	if (!pOut->IsDrawingArea(Cx, Cy)) {
 		pOut->PrintMsg("Invalid position. Operation was cancelled");
@@ -55,3 +54,8 @@ void Addled::Undo()
 
 void Addled::Redo()
 {}
+
+int Addled::GetInputPinStatus()
+{
+	return -1;
+}

@@ -146,7 +146,7 @@ void Output::CreateDesignToolBar2() const
 	MenuItemImages[ITM_PASTE] = "images\\Menu\\PASTE.jpg";
 	MenuItemImages[ITM_LOAD] = "images\\Menu\\LOAD.jpg";
 	MenuItemImages[ITM_SAVE] = "images\\Menu\\SAVE.jpg";
-	MenuItemImages[ITM_MULTI_SELECT] = "images\\Menu\\MULTI_SELECT.jpg";
+	MenuItemImages[ITM_SELECT] = "images\\Menu\\SELECT.jpg";
 	MenuItemImages[ITM_SWITCH_TO_SIM] = "images\\Menu\\SWITCH_TO_SIM.jpg";
 	MenuItemImages[ITM_EXIT] = "images\\Menu\\EXIT.jpg";
 
@@ -155,9 +155,9 @@ void Output::CreateDesignToolBar2() const
 	//Draw menu item one image at a time
 	for (int i = 14; i < ITM_DSN_CNT; i++)
 	{
-		if (MenuItemImages[i] == "images\\Menu\\SWITCH_TO_SIM.jpg" || MenuItemImages[i] == "images\\Menu\\MULTI_SELECT.jpg")
+		if (MenuItemImages[i] == "images\\Menu\\SWITCH_TO_SIM.jpg" || MenuItemImages[i] == "images\\Menu\\SELECT.jpg")
 		{
-			if (MenuItemImages[i] == "images\\Menu\\MULTI_SELECT.jpg")
+			if (MenuItemImages[i] == "images\\Menu\\SELECT.jpg")
 				pWind->DrawImage(MenuItemImages[i], (i - 14) * UI.ToolItemWidth, 0, UI.ToolItemWidth3, UI.ToolItemHeight2);
 			else if (MenuItemImages[i] == "images\\Menu\\SWITCH_TO_SIM.jpg")
 			{
@@ -371,8 +371,8 @@ void Output::DrawXOR3(GraphicsInfo r_GfxInfo, bool selected)const
 void Output::DrawSWITCH(GraphicsInfo r_GfxInfo, bool selected)const
 {
 	string GateImage;
-	if (selected)	//use image in the highlighted case
-		GateImage = "Images\\Menu\\H_SWITCH_OFF.jpg";
+	if (selected == 1)	//use image in the highlighted case
+		GateImage = "Images\\Menu\\H_SWITCH_ON.jpg";
 	else
 		GateImage = "Images\\Menu\\SWITCH_OFF.jpg";
 
@@ -393,15 +393,30 @@ void Output::DrawBULB(GraphicsInfo r_GfxInfo, bool selected)const
 	pWind->DrawImage(GateImage, r_GfxInfo.x1, r_GfxInfo.y1, UI.BULB_Width, UI.BULB_Height);
 	 
 }
-// STRAIGHT CONNECTION
+
 void Output::DrawConnection(GraphicsInfo r_GfxInfo, bool selected) const
 {
-	//TODO: Add code to draw connection
-}
-bool Output::IsDrawingArea(int x, int y) {//CHECK IF CLICK IN DRAWING AREA OR NOT 
-	int Z = UI.height - UI.ToolBarHeight - UI.StatusBarHeight - UI.ToolBarHeight2;//height of drawing area
-	if (y<Z && y> (UI.ToolBarHeight+UI.ToolBarHeight2)) return true;
-	return false;
+	if (selected == false)
+	{
+		pWind->SetPen(BLACK, 3);
+
+	}
+	else
+	{
+		pWind->SetPen(YELLOW, 3);
+	}
+
+	if (r_GfxInfo.x1 == r_GfxInfo.x2)
+	{
+		pWind->DrawLine(r_GfxInfo.x1, r_GfxInfo.y1, r_GfxInfo.x2, r_GfxInfo.y2);
+	}
+	else
+	{
+		int x3 = r_GfxInfo.x1 + ((r_GfxInfo.x2 - r_GfxInfo.x1) / 2);
+		pWind->DrawLine(r_GfxInfo.x1, r_GfxInfo.y1, x3, r_GfxInfo.y1);
+		pWind->DrawLine(x3, r_GfxInfo.y1, x3, r_GfxInfo.y2);
+		pWind->DrawLine(x3, r_GfxInfo.y2, r_GfxInfo.x2, r_GfxInfo.y2);
+	}
 }
 //BROKEN CONNECTION
 

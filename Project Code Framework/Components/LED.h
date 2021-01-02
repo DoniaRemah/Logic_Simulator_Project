@@ -6,21 +6,20 @@
   -----------
   represent the LED
 */
-
-#include "Gate.h"
-
-class LED :public Gate
+#include "Component.h"
+#include "InputPin.h"
+class LED :public Component
 {
+protected :
+	InputPin* m_InputPins;
 public:
-	LED(const GraphicsInfo& r_GfxInfo, int r_FanOut);
+	LED(const GraphicsInfo& r_GfxInfo);
 	virtual void Operate();	//Calculates the output of LED 
 	virtual void Draw(Output* pOut);	//Draws LED
-
-	virtual int GetOutPinStatus();	//returns status of outputpin if LED, return -1
 	virtual int GetInputPinStatus(int n);	//returns status of Inputpin # n if SWITCH, return -1
-
+	virtual int GetOutPinStatus();
 	virtual void setInputPinStatus(int n, STATUS s);	//set status of Inputpin # n, to be used by connection class.
-
+	~LED();
 
 };
 
