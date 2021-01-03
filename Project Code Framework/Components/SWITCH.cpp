@@ -6,17 +6,15 @@ SWITCH::SWITCH(const GraphicsInfo& r_GfxInfo, int r_FanOut): m_OutputPin(r_FanOu
 	m_GfxInfo.y1 = r_GfxInfo.y1;
 	m_GfxInfo.x2 = r_GfxInfo.x2;
 	m_GfxInfo.y2 = r_GfxInfo.y2;
+
+	// Associate Output Pin with Swicth
+	m_OutputPin.setComponent(this);
 }
 
 
 void SWITCH::Operate()
 {
-	int x; int y;
 
-	if (m_GfxInfo.x2 >= x >= m_GfxInfo.x1 && m_GfxInfo.y2 >= y >= m_GfxInfo.y1)
-		m_OutputPin.setStatus(HIGH);
-	else 
-		m_OutputPin.setStatus(LOW);
 
 }
 
@@ -46,5 +44,15 @@ int SWITCH::GetInputPinStatus(int n)
 void SWITCH::setInputPinStatus(int n, STATUS s)
 {
 	
+}
+
+OutputPin* SWITCH ::GetOutputPin()
+{
+	return &m_OutputPin;
+}
+
+SWITCH :: ~SWITCH()
+{
+
 }
 

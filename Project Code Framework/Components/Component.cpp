@@ -28,3 +28,4 @@ GraphicsInfo Component::GetGfxInfo()
 {
 	return m_GfxInfo;
 }
+

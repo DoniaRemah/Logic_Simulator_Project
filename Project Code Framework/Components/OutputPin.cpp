@@ -14,9 +14,52 @@ bool OutputPin::ConnectTo(Connection *r_Conn)
 {
 	if(m_Conn < m_FanOut)
 	{
-		m_Connections[m_Conn++] = r_Conn;	//add a new connection the the array of connections
+		m_Connections[m_Conn++] = r_Conn;	//add a new connection the the array of connections.
 		return true;
 	}
 	
 	return false;	//can't connect to any more connections
+}
+
+void OutputPin::setComponent(Component* pCmp)
+{
+	this->pComp = pCmp;
+}
+
+Component* OutputPin::getComponent()
+{
+	return pComp;
+}
+
+void OutputPin::unConnect(Connection * d_Conn)
+{
+	for (int i=0;i< m_Conn;i++)
+	{
+		if (m_Connections[i] == d_Conn)
+		{
+			if (i < m_FanOut-1)
+			{
+				m_Connections[i] = m_Connections[i + 1];
+				m_Connections[i + 1] = NULL;
+			}
+			else
+			{
+				m_Connections[i] = NULL;
+			}
+			
+		}
+	}
+}
+
+bool OutputPin::CanConnect()
+{
+	if (m_Conn < m_FanOut)
+	{
+		return true; // can add connection
+	}
+	else
+	{
+		return false;	//can't connect to any more connections
+	}
+	
 }

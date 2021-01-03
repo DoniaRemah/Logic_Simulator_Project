@@ -13,4 +13,24 @@ Gate::Gate(int r_Inputs, int r_FanOut):m_OutputPin(r_FanOut)
 	//Associate all input pins to this gate
 	for(int i=0; i<m_Inputs; i++)
 		m_InputPins[i].setComponent(this);
+
+	//Associate Output pin to this gate
+	m_OutputPin.setComponent(this);
+}
+
+InputPin* Gate::GetInputPin(int N)
+{
+	return &m_InputPins[N-1];
+}
+
+OutputPin* Gate::GetOutputPin()
+{
+	return &m_OutputPin;
+}
+
+
+
+int Gate::GetNumberofInputPins()
+{
+	return m_Inputs;
 }
