@@ -4,6 +4,7 @@ AddConnection::AddConnection(ApplicationManager* pApp) :Action(pApp)
 {
 	SrcPin = NULL;
 	DstPin = NULL;
+	IsCancelled = false;
 }
 
 AddConnection ::~AddConnection(void)
@@ -25,76 +26,115 @@ void AddConnection::ReadActionParameters()
 	// Checking if user clicked on a valid source Gate.
 	bool validSource = false;
 	bool validOutPin = false;
-	while (validSource == false || validOutPin == false)
-	{
+
 		pIn->GetPointClicked(x1, y1);
 		validSource = CheckValidSrc(CompList,Comp_Count, validOutPin,SrcPin);
 		if (validSource == false)
 		{
-			pOut->PrintMsg("INVALID AREA. click on SOURCE  Component.");
+			pOut->PrintMsg("INVALID AREA. Operation Cancelled.");
+			IsCancelled = true;
 		}
 		else if (validOutPin == false)
 		{
-			pOut->PrintMsg("INVALID OUTPUT PIN. click on another SOURCE  Component or DELETE one of the connections.");
+			pOut->PrintMsg("INVALID OUTPUT PIN. Operation Cancelled.");
+			IsCancelled = true;
 		}
-	}
 
-	// Checking if user clicked on valid DST Gate.
-	bool validDst = 0;
-	bool validInPin = 0;
-	pOut->PrintMsg("ADDING CONNECTION. Click on DESTINATION  Component.");
-	while (validDst == 0 || validInPin == 0)
-	{
+		if (IsCancelled == false)
+		{
+			// Checking if user clicked on valid DST Gate.
+			bool validDst = 0;
+			bool validInPin = 0;
+			pOut->PrintMsg("ADDING CONNECTION. Click on DESTINATION  Component.");
 
-		pIn->GetPointClicked(x2, y2);
-		validDst = CheckValidDst(CompList, Comp_Count, validInPin, DstPin);
-		if (validDst == 0)
-		{
-			pOut->PrintMsg("INVALID AREA. click on Destination GATE.");
+			pIn->GetPointClicked(x2, y2);
+			validDst = CheckValidDst(CompList, Comp_Count, validInPin, DstPin);
+			if (validDst == 0)
+			{
+				pOut->PrintMsg("INVALID AREA. Operation Cancelled.");
+				IsCancelled = true;
+			}
+			else if (validInPin == false)
+			{
+				pOut->PrintMsg("INVALID: PIN/S ALREADY CONNECTED. Operation Cancelled.");
+				IsCancelled = true;
+			}
+			else
+			{
+				pOut->PrintMsg("Connection Added. Click on Next Action");
+			}
+		
 		}
-		else if (validInPin == false)
-		{
-			pOut->PrintMsg("INVALID: PIN/S ALREADY CONNECTED. click on ANOTHER Destination Component or DELETE connection.");
-		}
-	}
-	pOut->ClearStatusBar();
+	
+		
+
 }
 
 void  AddConnection::Execute()
 {
-	ReadActionParameters();
 
-	// Calculating Parameters of Connection
-	GraphicsInfo GInfo;
-	GInfo.x1 = m_SrcComp->GetGfxInfo().x2;
-	GInfo.x2 = m_DstComp->GetGfxInfo().x1;
-	GInfo.y1 = m_SrcComp->GetGfxInfo().y1+(m_SrcComp->GetGfxInfo().y2 - m_SrcComp->GetGfxInfo().y1)/2;
-	GInfo.y2 = m_DstComp->GetGfxInfo().y1+((m_DstComp->GetGfxInfo().y2 - m_DstComp->GetGfxInfo().y1) / 3);
+		ReadActionParameters();
+if (IsCancelled == false)
+	{
+		// Calculating Parameters of Connection
+		GraphicsInfo GInfo;
+		GInfo.x1 = m_SrcComp->GetGfxInfo().x2;
+		GInfo.x2 = m_DstComp->GetGfxInfo().x1;
+		GInfo.y1 = m_SrcComp->GetGfxInfo().y1 + (m_SrcComp->GetGfxInfo().y2 - m_SrcComp->GetGfxInfo().y1) / 2;
+		
+		if (m_DstComp->GetNoInputPins() == 2) // If Number of Pins is 2
+		{
+			if (AvailablePinNumber == 1) 
+			{
+				GInfo.y2 = m_DstComp->GetGfxInfo().y1 + ((m_DstComp->GetGfxInfo().y2 - m_DstComp->GetGfxInfo().y1) / 3);
+			}
+			else 
+			{
+				GInfo.y2 = m_DstComp->GetGfxInfo().y1 + (((m_DstComp->GetGfxInfo().y2 - m_DstComp->GetGfxInfo().y1) * 3) / 4);
+			}
+		}
+		else if (m_DstComp->GetNoInputPins() == 1) // If Number of Pins is 1.
+		{
+			GInfo.y2 = m_DstComp->GetGfxInfo().y1 + ((m_DstComp->GetGfxInfo().y2 - m_DstComp->GetGfxInfo().y1) / 2);
+		}
+		else if (m_DstComp->GetNoInputPins() == 3) // If Number of Pins is 3
+		{
+			if (AvailablePinNumber == 1)
+			{
+				GInfo.y2 = m_DstComp->GetGfxInfo().y1 + ((m_DstComp->GetGfxInfo().y2 - m_DstComp->GetGfxInfo().y1) / 3);
+			}
+			else if (AvailablePinNumber ==2)
+			{
+				GInfo.y2 = m_DstComp->GetGfxInfo().y1 + ((m_DstComp->GetGfxInfo().y2 - m_DstComp->GetGfxInfo().y1) / 2);
+			}
+			else
+			{
+				GInfo.y2 = m_DstComp->GetGfxInfo().y1 + (((m_DstComp->GetGfxInfo().y2 - m_DstComp->GetGfxInfo().y1) * 3) / 4);
+			}
+		}
 
-	// Creating Connection Pointer
-	Connection* pA = new Connection(GInfo, NULL ,NULL);
+		// Creating Connection Pointer
+		Connection* pA = new Connection(GInfo, NULL, NULL);
 
-	// Linking output pin of src component with src pin of connection.
+		// Linking output pin of src component with src pin of connection.
+
 		SrcPin->ConnectTo(pA);
 		pA->setSourcePin(SrcPin);
-		
 
-	// Linking Input pin of Dst component with dst component of connection.
+
+		// Linking Input pin of Dst component with dst component of connection.
 
 		pA->setDestPin(DstPin);
 		DstPin->connect();
-		
 
-	// Adding Connection to Component List.
-	pManager->AddComponent(pA);
+
+		// Adding Connection to Component List.
+		pManager->AddComponent(pA);
+	}
 
 }
 
-void AddConnection ::Undo()
-{}
 
-void AddConnection ::Redo()
-{}
 
 bool AddConnection::CheckValidSrc(Component** CompList,int Comp_Count, bool &validOutPin, OutputPin*& SrcPin)
 {
@@ -161,9 +201,9 @@ bool AddConnection::CheckValidDst(Component** CompList, int Comp_Count, bool& va
 			}
 			else
 			{
-				for (int i = 0; i < DstGate->GetNumberofInputPins() ; i++)
+				for (int i = 1; i <= DstGate->GetNoInputPins() ; i++)
 				{
-					DstPin = DstGate->GetInputPin(i+1);
+					DstPin = DstGate->GetInputPin(i);
 					isConnected = DstPin->IsConnected();
 
 					if (isConnected)
@@ -173,6 +213,7 @@ bool AddConnection::CheckValidDst(Component** CompList, int Comp_Count, bool& va
 					else
 					{
 						validInPin = true;
+						AvailablePinNumber = i;
 						break;
 					}
 				}
@@ -187,3 +228,11 @@ bool AddConnection::CheckValidDst(Component** CompList, int Comp_Count, bool& va
 	}
 	return validDst;
 }
+
+
+
+void AddConnection::Undo()
+{}
+
+void AddConnection::Redo()
+{}

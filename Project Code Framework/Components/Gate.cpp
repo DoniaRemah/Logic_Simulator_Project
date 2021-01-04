@@ -30,7 +30,7 @@ OutputPin* Gate::GetOutputPin()
 
 
 
-int Gate::GetNumberofInputPins()
+int Gate::GetNoInputPins()
 {
 	return m_Inputs;
 }

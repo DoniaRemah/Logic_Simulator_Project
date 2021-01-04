@@ -149,7 +149,7 @@ void Output::CreateDesignToolBar2() const
 	MenuItemImages[ITM_SELECT] = "images\\Menu\\SELECT.jpg";
 	MenuItemImages[ITM_SWITCH_TO_SIM] = "images\\Menu\\SWITCH_TO_SIM.jpg";
 	MenuItemImages[ITM_EXIT] = "images\\Menu\\EXIT.jpg";
-
+	MenuItemImages[ITM_DELETE] = "images\\Menu\\DELETE.jpg";
 	//TODO: Prepare image for each menu item and add it to the list
 
 	//Draw menu item one image at a time
@@ -168,6 +168,10 @@ void Output::CreateDesignToolBar2() const
 		{
 			if (MenuItemImages[i] == "images\\Menu\\EXIT.jpg")
 				pWind->DrawImage(MenuItemImages[i], (i - 14) * UI.ToolItemWidth + (2 * UI.ToolItemWidth3), 0, UI.ToolItemWidth2, UI.ToolItemHeight2);
+			else if (MenuItemImages[i] == "images\\Menu\\DELETE.jpg")
+			{
+				pWind->DrawImage(MenuItemImages[i], (i - 14) * UI.ToolItemWidth+70, 0, UI.ToolItemWidth2, UI.ToolItemHeight2);
+			}
 			else
 			{
 				pWind->DrawImage(MenuItemImages[i], (i - 14) * UI.ToolItemWidth, 0, UI.ToolItemWidth2, UI.ToolItemHeight2);

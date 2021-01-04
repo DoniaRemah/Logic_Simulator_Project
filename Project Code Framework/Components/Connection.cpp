@@ -47,4 +47,7 @@ void Connection::setInputPinStatus(int n, STATUS s)
 	SrcPin->setStatus(s);
 }
 
-
+int Connection::GetNoInputPins()
+{
+	return 0;
+}

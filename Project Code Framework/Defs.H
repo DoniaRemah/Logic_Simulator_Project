@@ -46,7 +46,8 @@ enum ActionType
 
 	DSN_MODE,	//Switch to Design mode
 	SIM_MODE,	//Switch to Simulatiom mode
-	MULTI_SELECT,
+	Action_SELECT,
+	Action_DELETE,
 	EXIT,		//Exit the application
 
 	STATUS_BAR,		//A click on the status bar
@@ -94,6 +95,7 @@ enum DsgnMenuItem //The items of the design menu (you should add more items)
 	ITM_LOAD,
 	ITM_SAVE,
 	ITM_SELECT,
+	ITM_DELETE,
 	ITM_SWITCH_TO_SIM,
 	ITM_EXIT,
 

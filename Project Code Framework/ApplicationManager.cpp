@@ -13,7 +13,7 @@
 #include "Actions\Addled.h"
 #include "Actions\AddSWITCH.h"
 #include "Actions/AddConnection.h"
-#include "iostream"
+
 ApplicationManager::ApplicationManager()
 {
 	CompCount = 0;
@@ -29,7 +29,7 @@ ApplicationManager::ApplicationManager()
 void ApplicationManager::AddComponent(Component* pComp)
 {
 	CompList[CompCount++] = pComp;		
-	cout << "Added Component number:" << CompCount << endl;
+
 }
 ////////////////////////////////////////////////////////////////////
 
@@ -92,7 +92,6 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 			break;
 
 		case EXIT:
-			//pAct = new AddANDgate2(this);
 			break;
 			///TODO: create ExitAction here
 			

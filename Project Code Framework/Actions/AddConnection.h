@@ -17,6 +17,9 @@ private:
 	OutputPin* SrcPin;
 	InputPin* DstPin;
 	bool ValidParameters;
+	bool IsCancelled;
+	int AvailablePinNumber;
+	
 public:
 	AddConnection(ApplicationManager* pApp);
 	virtual ~AddConnection(void);
@@ -29,6 +32,7 @@ public:
 	bool CheckValidDst(Component** CompList, int Comp_Count, bool &validInPin, InputPin*&pot_InputPin); // Checks if user clicked on component on screen + if input pin availability.
 	virtual void Undo();
 	virtual void Redo();
+	
 };
 
 #endif

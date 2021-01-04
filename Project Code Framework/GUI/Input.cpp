@@ -1,5 +1,6 @@
 //#include "Input.h"
 #include "Output.h"
+
 Input::Input(window* pW)
 {
 	pWind = pW; //point to the passed window
@@ -119,17 +120,20 @@ ActionType Input::GetUserAction() const
 			}
 			else if (x > 490 && x < 590)
 			{
-				return MULTI_SELECT;
-
+				return Action_SELECT;		
 			}
-			else if (x > 660 && x < 760)
+			else if (x>630 && x<670)
 			{
-				return SIM_MODE;
+				return Action_DELETE;	
+			}
+			else if (x >730 && x < 830)
+			{
+				return SIM_MODE;			
 			}
 
-			else if (x > 830 && x < 870)
+			else if (x > 900 && x < 950)
 			{
-				return	EXIT;
+				return	EXIT;			
 			}
 			else
 			{

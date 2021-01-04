@@ -24,7 +24,7 @@ public:
 	InputPin* GetInputPin(int N);
 	OutputPin* GetOutputPin();
 	
-	int GetNumberofInputPins();
+	virtual int GetNoInputPins();
 };
 
 #endif

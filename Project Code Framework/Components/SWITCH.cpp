@@ -56,3 +56,7 @@ SWITCH :: ~SWITCH()
 
 }
 
+int SWITCH::GetNoInputPins()
+{
+	return 0;
+}

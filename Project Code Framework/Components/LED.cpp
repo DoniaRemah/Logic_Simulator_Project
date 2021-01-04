@@ -58,3 +58,7 @@ InputPin* LED ::GetInputPin()
 	return &m_InputPin;
 }
 
+int LED::GetNoInputPins()
+{
+	return 1;
+}
