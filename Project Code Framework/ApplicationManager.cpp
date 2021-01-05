@@ -12,6 +12,10 @@
 #include "Actions\AddXORgate3.h"
 #include "Actions\Addled.h"
 #include "Actions\AddSWITCH.h"
+#include "Actions\EDIT.h"
+#include "Actions\Label.h"
+
+
 #include "Actions/AddConnection.h"
 
 ApplicationManager::ApplicationManager()
@@ -82,6 +86,20 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 			pAct = new AddSWITCH(this);
 			break;			            //Add Switch
 		case ADD_LED:
+			pAct = new Addled(this);    //Add LED
+			break;                      
+		case EDIT_Label:
+			pAct = new EDIT(this);
+			break;
+		case ADD_Label:
+			pAct = new Label(this);
+			break;                        //EDIT
+		//case ADD_CONNECTION:
+			//pAct = new AddANDgate2(this);
+			//break;
+               //TODO: Create AddConection Action here
+			
+	
 			pAct = new Addled(this);
 			break;    
                     //Add LED
@@ -122,6 +140,28 @@ Input* ApplicationManager::GetInput()
 Output* ApplicationManager::GetOutput()
 {
 	return OutputInterface;
+}
+Component*ApplicationManager::GetComponent(int x, int y)
+{
+	for (int i = 0; i < CompCount; i++)
+	{
+		if (CompList[i]->InsideArea(x,y))
+		{
+			return CompList[i];
+		}
+	}
+	return NULL;
+}
+bool ApplicationManager::selectcomponent(int x, int y)
+{
+	for (int i = 0; i < CompCount; i++)
+	{
+		if (CompList[i]->InsideArea(x, y))
+		{
+			return true;
+		}
+	}
+	return false;
 }
 
 ////////////////////////////////////////////////////////////////////

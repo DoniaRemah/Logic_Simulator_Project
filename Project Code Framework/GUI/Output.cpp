@@ -395,7 +395,7 @@ void Output::DrawBULB(GraphicsInfo r_GfxInfo, bool selected)const
 
 
 	pWind->DrawImage(GateImage, r_GfxInfo.x1, r_GfxInfo.y1, UI.BULB_Width, UI.BULB_Height);
-
+	 
 }
 
 void Output::DrawConnection(GraphicsInfo r_GfxInfo, bool selected) const
@@ -422,7 +422,12 @@ void Output::DrawConnection(GraphicsInfo r_GfxInfo, bool selected) const
 		pWind->DrawLine(x3, r_GfxInfo.y2, r_GfxInfo.x2, r_GfxInfo.y2);
 	}
 }
-
+bool Output::IsDrawingArea(int x, int y) {
+	
+	if ((y-25) < 575 && (y+25) >150) return true;//575 means status bar top edge starts from it and 150 means bottom edge of two tools bar 
+	return false;
+}
+//BROKEN CONNECTION
 
 Output::~Output()
 {

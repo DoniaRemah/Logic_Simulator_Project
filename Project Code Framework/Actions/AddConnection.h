@@ -25,7 +25,7 @@ public:
 	virtual ~AddConnection(void);
 
 	//Reads parameters required for action to execute
-	virtual void ReadActionParameters();
+	virtual bool ReadActionParameters();
 	//Execute action (code depends on action type)
 	virtual void Execute();
 	bool CheckValidSrc(Component** CompList, int Comp_Count, bool &validOutPin, OutputPin*& pot_outpin); // Checks if user clicked on component on screen + output pin availabilty. 
