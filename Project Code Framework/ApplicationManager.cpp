@@ -14,8 +14,9 @@
 #include "Actions\AddSWITCH.h"
 #include "Actions\EDIT.h"
 #include "Actions\Label.h"
+#include"Actions/Delete.h"
 
-
+#include <iostream>
 #include "Actions/AddConnection.h"
 
 ApplicationManager::ApplicationManager()
@@ -32,7 +33,8 @@ ApplicationManager::ApplicationManager()
 ////////////////////////////////////////////////////////////////////
 void ApplicationManager::AddComponent(Component* pComp)
 {
-	CompList[CompCount++] = pComp;		
+	CompList[CompCount++] = pComp;	
+	cout << "New Component Added: " << CompCount << endl;
 
 }
 ////////////////////////////////////////////////////////////////////
@@ -112,6 +114,8 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		case EXIT:
 			break;
 			///TODO: create ExitAction here
+		case Action_DELETE:
+			pAct = new Delete(this);
 			
 	}
 	if(pAct)
@@ -163,6 +167,34 @@ bool ApplicationManager::selectcomponent(int x, int y)
 	}
 	return false;
 }
+
+bool ApplicationManager::RemoveComponent(Component* pComp)
+{
+	for (int i = 0; i < CompCount;i++)
+	{
+		if (pComp == CompList[i])
+		{
+			if (i == CompCount - 1) 
+			{ 
+				CompList[i] = NULL; CompCount--; 
+				cout << "Component Deleted, Component count is: " << CompCount << endl;
+				return true;
+			}
+			
+			else 
+			{
+				CompList[i] == CompList[CompCount-1];
+				CompList[CompCount-1] == NULL;
+				CompCount--;
+				cout << "Component Deleted, Component count is: " << CompCount << endl;
+				return true;
+			}
+		}
+		
+	}
+	return false;
+}
+
 
 ////////////////////////////////////////////////////////////////////
 

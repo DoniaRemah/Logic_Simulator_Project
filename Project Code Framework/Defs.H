@@ -34,8 +34,8 @@ enum ActionType
 	SIMULATE,
 	Change_Switch,		//Change Switch Status in Simulation Mode
 
-	SELECT,		//Select a Component, a Connection
-	DEL,		//Delete a Component, a Connection
+			//Select a Component, a Connection
+		//Delete a Component, a Connection
 	MOVE,		//Move a Component, a Connection
 
 	SAVE,		//Save the whole Circuit to a file
@@ -49,7 +49,7 @@ enum ActionType
 	Action_SELECT,
 	Action_DELETE,
 	EXIT,		//Exit the application
-
+	EMPTYAREA,
 	STATUS_BAR,		//A click on the status bar
 	DSN_TOOL,	//A click on an empty place in the design tool bar
 

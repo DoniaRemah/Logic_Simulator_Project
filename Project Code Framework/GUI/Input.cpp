@@ -47,7 +47,6 @@ ActionType Input::GetUserAction() const
 {
 	int x, y;
 	pWind->WaitMouseClick(x, y);	//Get the coordinates of the user click
-
 	if (UI.AppMode == DESIGN)	//application is in design mode
 	{
 		//[1] If user clicks on the Toolbar1(GATES)
@@ -119,8 +118,7 @@ ActionType Input::GetUserAction() const
 			}
 			else if (x > 490 && x < 590)
 			{
-				
-				return Action_SELECT;		
+				return Action_SELECT;	
 			}
 			else if (x>630 && x<670)
 			{
@@ -142,12 +140,10 @@ ActionType Input::GetUserAction() const
 			}
 		}
 
-
-
 		//[2] User clicks on the drawing area
-		if (y >= UI.ToolBarHeight && y < UI.height - UI.StatusBarHeight)
+		if (y >= UI.ToolBarHeight && y< UI.height-UI.StatusBarHeight)
 		{
-			return SELECT;	//user want to select/unselect a component
+			return EMPTYAREA;
 		}
 		if (y <= UI.height && y > (UI.height - UI.StatusBarHeight))
 		{
