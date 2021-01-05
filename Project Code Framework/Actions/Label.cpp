@@ -3,7 +3,6 @@
 
 Label::Label(ApplicationManager* pApp) :Action(pApp)
 {
-	mComp = NULL;
 }
 
 Label::~Label(void)
@@ -17,38 +16,40 @@ bool Label::ReadActionParameters()
 	Input* pIn = pManager->GetInput();
 
 	//Print Action Message
-	pOut->PrintMsg("Please select a component ");
+	pOut->PrintMsg("Please select a component to put label ");
 	pIn->GetPointClicked(Cx, Cy);//Wait for User Input
-	pOut->ClearStatusBar();
 
+	pOut->ClearStatusBar();
 	if (!pOut->IsDrawingArea(Cx, Cy)) {
 		pOut->PrintMsg("Invalid position. Operation was cancelled");
 		return false;
 	}
-	if (mComp == NULL) {
-		pOut->PrintMsg("Invalid position. Operation was cancelled");
+	// check if this area is empty or not 
+	if (pManager->selectcomponent(Cx, Cy))
+	{
+		mComp = pManager->GetComponent(Cx, Cy);
+		newlabel = pIn->GetSrting(pOut, "enter the label of component", newlabel);
+		return true;
+	}
+	else
+	{
+		pOut->PrintMsg("Invalid position,Operation was cancelled");
 		return false;
 	}
-	//Clear Status Bar
-	pOut->ClearStatusBar();
-	return true;
 }
 
 void Label::Execute()
 {
+	Output* pOut = pManager->GetOutput();
+	GraphicsInfo GInfo;
 	//Get Center point of the Gate
 	bool x=ReadActionParameters();
 	if (x)
 	{
-
-
-
+		GInfo=mComp->GetGfxInfo();
+		mComp->SetLabel(newlabel);
+		pOut->DrawString(GInfo.x1, GInfo.y1 - 20, newlabel);
 	}
-	//Calculate the rectangle Corners
-
-
-	GraphicsInfo GInfo; //Gfx info to be used to construct the EDIT
-
 }
 
 void Label::Undo()
