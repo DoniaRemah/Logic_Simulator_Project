@@ -29,3 +29,12 @@ GraphicsInfo Component::GetGfxInfo()
 	return m_GfxInfo;
 }
 
+string Component::GetLabel()
+{
+	return m_Label;
+}
+
+void Component::SetLabel(string NewLabel)
+{
+	m_Label = NewLabel;
+}

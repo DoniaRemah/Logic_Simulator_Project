@@ -17,7 +17,6 @@ private:
 	OutputPin* SrcPin;
 	InputPin* DstPin;
 	bool ValidParameters;
-	bool IsCancelled;
 	int AvailablePinNumber;
 	
 public:

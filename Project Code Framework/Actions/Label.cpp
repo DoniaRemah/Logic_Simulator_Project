@@ -28,7 +28,7 @@ bool Label::ReadActionParameters()
 	if (pManager->selectcomponent(Cx, Cy))
 	{
 		mComp = pManager->GetComponent(Cx, Cy);
-		newlabel = pIn->GetSrting(pOut, "enter the label of component", newlabel);
+		newlabel = pIn->GetSrting(pOut, "enter the label of component");
 		return true;
 	}
 	else

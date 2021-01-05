@@ -1,5 +1,5 @@
 
-ifndef _EDIT_H
+#ifndef _EDIT_H
 #define _EDIT_H
 
 #include "action.h"

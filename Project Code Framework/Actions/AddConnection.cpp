@@ -4,7 +4,7 @@ AddConnection::AddConnection(ApplicationManager* pApp) :Action(pApp)
 {
 	SrcPin = NULL;
 	DstPin = NULL;
-	IsCancelled = false;
+
 }
 
 AddConnection ::~AddConnection(void)
@@ -12,7 +12,7 @@ AddConnection ::~AddConnection(void)
 
 }
 
-void AddConnection::ReadActionParameters()
+bool AddConnection::ReadActionParameters()
 {
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
@@ -32,49 +32,44 @@ void AddConnection::ReadActionParameters()
 		if (validSource == false)
 		{
 			pOut->PrintMsg("INVALID AREA. Operation Cancelled.");
-			IsCancelled = true;
+			return false;
 		}
 		else if (validOutPin == false)
 		{
 			pOut->PrintMsg("INVALID OUTPUT PIN. Operation Cancelled.");
-			IsCancelled = true;
+			return false;
 		}
 
-		if (IsCancelled == false)
+		// Checking if user clicked on valid DST Gate.
+		bool validDst = 0;
+		bool validInPin = 0;
+		pOut->PrintMsg("ADDING CONNECTION. Click on DESTINATION  Component.");
+
+		pIn->GetPointClicked(x2, y2);
+		validDst = CheckValidDst(CompList, Comp_Count, validInPin, DstPin);
+		if (validDst == 0)
 		{
-			// Checking if user clicked on valid DST Gate.
-			bool validDst = 0;
-			bool validInPin = 0;
-			pOut->PrintMsg("ADDING CONNECTION. Click on DESTINATION  Component.");
-
-			pIn->GetPointClicked(x2, y2);
-			validDst = CheckValidDst(CompList, Comp_Count, validInPin, DstPin);
-			if (validDst == 0)
-			{
-				pOut->PrintMsg("INVALID AREA. Operation Cancelled.");
-				IsCancelled = true;
-			}
-			else if (validInPin == false)
-			{
-				pOut->PrintMsg("INVALID: PIN/S ALREADY CONNECTED. Operation Cancelled.");
-				IsCancelled = true;
-			}
-			else
-			{
-				pOut->PrintMsg("Connection Added. Click on Next Action");
-			}
-		
+			pOut->PrintMsg("INVALID AREA. Operation Cancelled.");
+			return false;
 		}
-	
+		else if (validInPin == false)
+		{
+			pOut->PrintMsg("INVALID: PIN/S ALREADY CONNECTED. Operation Cancelled.");
+			return false;
+		}
+		else
+		{
+			pOut->PrintMsg("Connection Added. Click on Next Action");
+		}
 		
-
 }
+	
 
 void  AddConnection::Execute()
 {
 
-		ReadActionParameters();
-if (IsCancelled == false)
+	bool IsValidParameters = ReadActionParameters();
+	if (IsValidParameters)
 	{
 		// Calculating Parameters of Connection
 		GraphicsInfo GInfo;
