@@ -41,6 +41,7 @@ public:
 
 	//Adds a new component to the list of components
 	void AddComponent(Component* pComp);
+	bool RemoveComponent(Component* pComp);
 	Component* GetComponent(int x, int y);
 	bool selectcomponent(int x, int y);
 	//destructor

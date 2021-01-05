@@ -18,7 +18,7 @@ public:
 	void ClearStatusBar() const;		//Clears the status bar
 	void ClearDrawingArea() const;	//Clears the drawing area
 	void Cleartextindrawingarea(int x,int y)const;
-
+	void ClearPartArea(int x1, int y1, int x2, int y2) const;
 	window* CreateWind(int wd, int h, int x, int y) const; //Creates user interface window
 
 
@@ -40,7 +40,7 @@ public:
 	void DrawBULB(GraphicsInfo r_GfxInfo, bool selected = false)const;
 
 	// Draws Connection
-	void DrawConnection(GraphicsInfo r_GfxInfo, bool selected = false) const;
+	void DrawConnection(GraphicsInfo r_GfxInfo, bool selected = false, bool deleted=false) const;
 	bool IsDrawingArea(int x, int y);
 	
 

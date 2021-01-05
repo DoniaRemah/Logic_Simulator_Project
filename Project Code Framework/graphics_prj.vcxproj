@@ -140,6 +140,7 @@
     <ClCompile Include="Actions\AddXORgate2.cpp" />
     <ClCompile Include="Actions\AddXORgate3.cpp" />
     <ClCompile Include="Actions\Add_INV.cpp" />
+    <ClCompile Include="Actions\Delete.cpp" />
     <ClCompile Include="Actions\EDIT.cpp" />
     <ClCompile Include="Actions\Label.cpp" />
     <ClCompile Include="CMUgraphicsLib\auxil.cpp" />
@@ -217,6 +218,7 @@
     <ClInclude Include="Actions\AddXORgate2.h" />
     <ClInclude Include="Actions\AddXORgate3.h" />
     <ClInclude Include="Actions\Add_INV.h" />
+    <ClInclude Include="Actions\Delete.h" />
     <ClInclude Include="Actions\EDIT.h" />
     <ClInclude Include="Actions\Label.h" />
     <ClInclude Include="CMUgraphicsLib\auxil.h" />

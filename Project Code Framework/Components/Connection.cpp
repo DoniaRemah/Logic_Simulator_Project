@@ -53,3 +53,8 @@ int Connection::GetNoInputPins()
 {
 	return 0;
 }
+
+void Connection::DeleteComp(Output * pOut, GraphicsInfo delgfx)
+{
+	pOut->DrawConnection(delgfx,false,true);
+}
