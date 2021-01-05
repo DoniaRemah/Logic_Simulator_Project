@@ -11,37 +11,36 @@ void Input::GetPointClicked(int& x, int& y)
 	pWind->WaitMouseClick(x, y);	//Wait for mouse click
 }
 
-string Input::GetSrting(Output* pOut, string msg)
+string Input::GetSrting(Output* pOut, string msg,string message2)
 {
 	//backspace=8,enter=13,escape=27
-	string message;
 	char key;
 	pWind->FlushMouseQueue();
 	pWind->FlushKeyQueue();
 	while (true)
 	{
-		pOut->PrintMsg(msg + " " + message);
+		pOut->PrintMsg(msg + " " + message2);
 		pWind->WaitKeyPress(key);
 		//check the type of key  
 		if (key == 8)//if the key is backspace
 		{
-			if (!message.empty())//check if the string is empty or not 
-				message.pop_back();//if the string is not empty ,delete the element in string
+			if (!message2.empty())//check if the string is empty or not 
+				message2.pop_back();//if the string is not empty ,delete the element in string
 			else
 				break;
 		}
 		else if (key == 27)//if the key is escape
 		{
-			message.clear();//delete all the element of string
+			message2.clear();//delete all the element of string
 			break;
 		}
 		else if (key == 13)//if the key is enter
 			break;
 		else
-			message.push_back(key);
+			message2.push_back(key);
 	}
 	pOut->ClearStatusBar();
-	return message;
+	return message2;
 }
 //This function reads the position where the user clicks to determine the desired action.
 ActionType Input::GetUserAction() const
