@@ -22,9 +22,16 @@ bool AddXORgate2::ReadActionParameters()
 		pOut->PrintMsg("Invalid position. Operation was cancelled");
 		return false;
 	}
-	//Clear Status Bar
-	pOut->ClearStatusBar();
-	return true;
+		if (pManager->selectcomponent(Cx, Cy))
+	{
+		pOut->PrintMsg("Invalid position. Operation was cancelled");
+		return false;
+	}
+	else
+	{
+		pOut->ClearStatusBar();
+		return true;
+	}
 }
 
 void AddXORgate2::Execute()
