@@ -84,6 +84,13 @@ void Output::ClearDrawingArea() const
 	pWind->DrawRectangle(0, UI.ToolBarHeight, UI.width, UI.height - UI.StatusBarHeight);
 
 }
+void Output::Cleartextindrawingarea(int x,int y)const
+{
+	//Overwrite using bachground color to erase the message
+	pWind->SetPen(UI.BkGrndColor);
+	pWind->SetBrush(UI.BkGrndColor);
+	pWind->DrawRectangle(x, y,x+50,y+20);
+}
 void Output::DrawString(const int iX, const int iY, const string strText)const {
 	pWind->SetPen(BLACK, 1);
 	pWind->SetBrush(WHITE);
