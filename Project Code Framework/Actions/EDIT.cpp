@@ -30,7 +30,7 @@ bool EDIT::ReadActionParameters()
 		privlabel = mComp->GetLabel();
 		if (!privlabel.empty())
 		{
-			Editlabel = pIn->GetSrting(pOut,"edit the component:",privlabel);
+			Editlabel = pIn->GetSrting(pOut,"Edit the component Label:",privlabel);
 			return true;
 		}
 		else
