@@ -142,6 +142,28 @@ Output* ApplicationManager::GetOutput()
 {
 	return OutputInterface;
 }
+Component*ApplicationManager::GetComponent(int x, int y)
+{
+	for (int i = 0; i < CompCount; i++)
+	{
+		if (CompList[i]->InsideArea(x,y))
+		{
+			return CompList[i];
+		}
+	}
+	return NULL;
+}
+bool ApplicationManager::selectcomponent(int x, int y)
+{
+	for (int i = 0; i < CompCount; i++)
+	{
+		if (CompList[i]->InsideArea(x, y))
+		{
+			return true;
+		}
+	}
+	return false;
+}
 
 ////////////////////////////////////////////////////////////////////
 
