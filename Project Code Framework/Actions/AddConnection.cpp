@@ -114,7 +114,7 @@ if (IsCancelled == false)
 		}
 
 		// Creating Connection Pointer
-		Connection* pA = new Connection(GInfo, NULL, NULL);
+		Connection* pA = new Connection(GInfo, NULL, NULL,m_SrcComp,m_DstComp);
 
 		// Linking output pin of src component with src pin of connection.
 

@@ -1,10 +1,12 @@
 #include "Connection.h"
 
-Connection::Connection(const GraphicsInfo &r_GfxInfo, OutputPin *pSrcPin,InputPin *pDstPin):Component(r_GfxInfo)	
+Connection::Connection(const GraphicsInfo &r_GfxInfo, OutputPin *pSrcPin,InputPin *pDstPin,Component* Src, Component* Dst):Component(r_GfxInfo)
 	
 {
 	SrcPin = pSrcPin;
 	DstPin = pDstPin;
+	SrcCmpnt = Src;
+	DstCmpnt = Dst;
 }
 void Connection::setSourcePin(OutputPin *pSrcPin)
 {	SrcPin = pSrcPin;	}

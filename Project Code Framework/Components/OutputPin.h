@@ -27,6 +27,7 @@ public:
 	Component* getComponent();	//returns the component of this Output pin
 	void unConnect(Connection * d_Conn);
 	bool CanConnect();
+	bool IsConnected();
 };
 
 #endif

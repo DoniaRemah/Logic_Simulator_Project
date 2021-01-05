@@ -28,4 +28,5 @@ void InputPin::connect()
 void InputPin::unConnect()
 {
 	connected = false;
+	pComp = NULL;
 }

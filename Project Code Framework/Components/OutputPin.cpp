@@ -33,6 +33,7 @@ Component* OutputPin::getComponent()
 
 void OutputPin::unConnect(Connection * d_Conn)
 {
+	// Shifts the connections in the list.
 	for (int i=0;i< m_Conn;i++)
 	{
 		if (m_Connections[i] == d_Conn)
@@ -41,10 +42,12 @@ void OutputPin::unConnect(Connection * d_Conn)
 			{
 				m_Connections[i] = m_Connections[i + 1];
 				m_Connections[i + 1] = NULL;
+				pComp = NULL;
 			}
 			else
 			{
 				m_Connections[i] = NULL;
+				pComp = NULL;
 			}
 			
 		}
@@ -62,4 +65,16 @@ bool OutputPin::CanConnect()
 		return false;	//can't connect to any more connections
 	}
 	
+}
+
+bool OutputPin::IsConnected()
+{
+	if (m_Conn!=0)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }
