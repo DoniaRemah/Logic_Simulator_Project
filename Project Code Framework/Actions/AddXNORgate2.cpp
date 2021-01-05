@@ -25,7 +25,16 @@ bool AddXNORgate2::ReadActionParameters()
 	}
 	//Clear Status Bar
 	pOut->ClearStatusBar();
-	return true;
+	return true;	if (pManager->selectcomponent(Cx, Cy))
+	{
+		pOut->PrintMsg("Invalid position. Operation was cancelled");
+		return false;
+	}
+	else
+	{
+		pOut->ClearStatusBar();
+		return true;
+	}
 
 }
 
