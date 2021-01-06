@@ -19,6 +19,7 @@ Output::Output()
 
 	CreateDesignToolBar();
 	CreateDesignToolBar2();	//Create the desgin toolbar
+	
 	CreateStatusBar();		//Create Status bar
 
 }
@@ -201,7 +202,7 @@ void Output::CreateSimulationToolBar() const
 	// Deleting Design Menu Bar
 	pWind->SetPen(WHITE, 1);
 	pWind->SetBrush(WHITE);
-	pWind->DrawRectangle(0, 0, UI.width, UI.height - UI.StatusBarHeight);
+	pWind->DrawRectangle(0, 0, UI.width, UI.ToolBarHeight+5);
 	// Getting Adress of each icon.
 	string SimItemImages[ITM_SIM_CNT];
 
