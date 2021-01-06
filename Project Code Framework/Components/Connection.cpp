@@ -7,6 +7,7 @@ Connection::Connection(const GraphicsInfo &r_GfxInfo, OutputPin *pSrcPin,InputPi
 	DstPin = pDstPin;
 	SrcCmpnt = Src;
 	DstCmpnt = Dst;
+	IsSelected = false;
 }
 void Connection::setSourcePin(OutputPin *pSrcPin)
 {	SrcPin = pSrcPin;	}
@@ -30,7 +31,7 @@ void Connection::Operate()
 
 void Connection::Draw(Output* pOut)
 {
-	pOut->DrawConnection(m_GfxInfo);
+	pOut->DrawConnection(m_GfxInfo, IsSelected);
 }
 
 int Connection::GetOutPinStatus()	//returns status of outputpin if LED, return -1
@@ -57,4 +58,12 @@ int Connection::GetNoInputPins()
 void Connection::DeleteComp(Output * pOut, GraphicsInfo delgfx)
 {
 	pOut->DrawConnection(delgfx,false,true);
+}
+
+void Connection::SetIsSelected(bool select) {
+	IsSelected = select;
+}
+
+bool Connection::GetIsSelected() {
+	return IsSelected;
 }

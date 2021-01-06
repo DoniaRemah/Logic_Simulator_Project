@@ -49,7 +49,7 @@ void Delete::Execute()
 			//mConnection->DeleteComp(pManager->GetOutput(), mComp->GetGfxInfo());
 		}
 		
-		pManager->RemoveComponent(mComp);
+		pApp->RemoveComponent(mComp);
 	}
 	
 }

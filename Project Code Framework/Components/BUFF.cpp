@@ -28,7 +28,7 @@ void BUFF::Operate()
 void BUFF::Draw(Output* pOut)
 {
 	//Call output class and pass gate drawing info to it.
-	pOut->DrawBUFFER(m_GfxInfo);
+	pOut->DrawBUFFER(m_GfxInfo, IsSelected);
 }
 
 //returns status of outputpin

@@ -6,6 +6,7 @@ SWITCH::SWITCH(const GraphicsInfo& r_GfxInfo, int r_FanOut): m_OutputPin(r_FanOu
 	m_GfxInfo.y1 = r_GfxInfo.y1;
 	m_GfxInfo.x2 = r_GfxInfo.x2;
 	m_GfxInfo.y2 = r_GfxInfo.y2;
+	IsSelected = false;
 
 	// Associate Output Pin with Swicth
 	m_OutputPin.setComponent(this);
@@ -24,7 +25,7 @@ void SWITCH::Operate()
 void SWITCH::Draw(Output* pOut)
 {
 	//Call output class and pass gate drawing info to it.
-	pOut->DrawSWITCH(m_GfxInfo);
+	pOut->DrawSWITCH(m_GfxInfo, IsSelected);
 }
 
 //returns status of outputpin
@@ -59,4 +60,11 @@ SWITCH :: ~SWITCH()
 int SWITCH::GetNoInputPins()
 {
 	return 0;
+}
+void SWITCH::SetIsSelected(bool select) {
+	IsSelected = select;
+}
+
+bool SWITCH::GetIsSelected() {
+	return IsSelected;
 }

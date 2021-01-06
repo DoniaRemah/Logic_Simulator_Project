@@ -26,6 +26,7 @@ public:
 	Component();	
 	void DeleteComp(Output* pOut, GraphicsInfo delgfx);
 	
+	
 	//Destructor must be virtual
 	virtual ~Component();
 };

@@ -10,6 +10,7 @@ class Connection :	public Component
 	//int		DstPin;		//The Input pin to which this connection is linked
 	OutputPin* SrcPin;	//The Source pin of this connection (an output pin of certain Component)
 	InputPin* DstPin;	//The Destination pin of this connection (an input pin of certain Component)
+	bool IsSelected;
 public:
 	//Connection(const GraphicsInfo &r_GfxInfo, Component *pS=NULL,Component *pD=NULL, int Pin=0);
 	Connection(const GraphicsInfo &r_GfxInfo, OutputPin *pSrcPin,InputPin *pDstPin, Component* Src, Component* Dst);
@@ -25,6 +26,8 @@ public:
 	virtual int GetInputPinStatus(int n);	//returns status of Inputpin # n if SWITCH, return -1
 	void DeleteComp(Output* pOut, GraphicsInfo delgfx);
 	virtual void setInputPinStatus(int n, STATUS s);	//set status of Inputpin # n, to be used by connection class.
+	void SetIsSelected(bool select);
+	bool GetIsSelected();
 
 
 };

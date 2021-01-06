@@ -15,6 +15,7 @@
 #include "Actions\EDIT.h"
 #include "Actions\Label.h"
 #include"Actions/Delete.h"
+#include"Actions/Select.h"
 
 #include <iostream>
 #include "Actions/AddConnection.h"
@@ -96,6 +97,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		case ADD_Label:
 			pAct = new Label(this);
 			break;                        //EDIT
+		case Action_SELECT:
+			pAct = new Select(this);
+			break;
 		//case ADD_CONNECTION:
 			//pAct = new AddANDgate2(this);
 			//break;
