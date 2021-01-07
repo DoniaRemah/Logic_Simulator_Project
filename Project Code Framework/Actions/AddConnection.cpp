@@ -69,7 +69,7 @@ void  AddConnection::Execute()
 {
 
 	bool IsValidParameters = ReadActionParameters();
-	if (IsValidParameters)
+if (IsValidParameters)
 	{
 		// Calculating Parameters of Connection
 		GraphicsInfo GInfo;

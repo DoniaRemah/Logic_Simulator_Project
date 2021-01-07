@@ -20,7 +20,6 @@ bool AddSWITCH::ReadActionParameters()
 	pIn->GetPointClicked(Cx, Cy);
 
 	//Wait for User Input
-	pIn->GetPointClicked(Cx, Cy);
 	if (!pOut->IsDrawingArea(Cx, Cy)) {
 		pOut->PrintMsg("Invalid position. Operation was cancelled");
 		return false;

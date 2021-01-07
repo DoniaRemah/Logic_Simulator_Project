@@ -10,9 +10,8 @@
 //Main class that manages everything in the application.
 class ApplicationManager
 {
-
 	enum { MaxCompCount = 200 };	//Max no of Components	
-
+	bool DidSwitch;
 private:
 	int CompCount;		//Actual number of Components
 	Component* CompList[MaxCompCount];	//List of all Components (Array of pointers)
