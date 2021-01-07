@@ -332,17 +332,8 @@ void ApplicationManager::Save(ofstream & Outputfile)
 	{
 		if (!dynamic_cast<Connection*>(CompList[i])) //Counting Components (Minus Connections)
 		{
-			/*AND2* ptrAND=dynamic_cast<AND2*>(CompList[i]);
-			if (ptrAND == NULL)
-			{*/
-				CompList[i]->SetID(i);
-				CompList[i]->Save(Outputfile);
-			//}
-			//else {
-			//	ptrAND->SetID(i);
-			//	ptrAND->Save(Outputfile);
-			///*}*/
-			//Writing component(GATES, LEDS, AND SWITCHES) info to the text file
+				CompList[i]->SetID(i); //Setting a unique ID for each component
+				CompList[i]->Save(Outputfile);  //Writing component(GATES, LEDS, AND SWITCHES) info to the text file	
 		}
 		
 	}
@@ -356,7 +347,7 @@ void ApplicationManager::Save(ofstream & Outputfile)
 		}
 	}
 	Outputfile << "-1"; //Flag that the file ended
-	Outputfile.close(); //Closing thr file
+	Outputfile.close(); //Closing the file
 }
 Component* ApplicationManager::FindComponent(int ID)
 {
