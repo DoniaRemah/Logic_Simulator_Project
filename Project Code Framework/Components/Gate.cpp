@@ -45,7 +45,6 @@ void Gate::SetIsSelected(bool select) {
 bool Gate::GetIsSelected() {
 	return IsSelected;
 }
-}
 
 void Gate::UnConnectInputPin(int N)
 {
