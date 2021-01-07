@@ -13,4 +13,44 @@ Gate::Gate(int r_Inputs, int r_FanOut):m_OutputPin(r_FanOut)
 	//Associate all input pins to this gate
 	for(int i=0; i<m_Inputs; i++)
 		m_InputPins[i].setComponent(this);
+
+	//Associate Output pin to this gate
+	m_OutputPin.setComponent(this);
+
+	IsSelected = false; //Initially a component is not selected
+}
+
+InputPin* Gate::GetInputPin(int N)
+{
+	return &m_InputPins[N-1];
+}
+
+OutputPin* Gate::GetOutputPin()
+{
+	return &m_OutputPin;
+}
+
+
+
+int Gate::GetNoInputPins()
+{
+	return m_Inputs;
+}
+
+
+void Gate::SetIsSelected(bool select) {
+	IsSelected = select;
+}
+
+bool Gate::GetIsSelected() {
+	return IsSelected;
+}
+
+void Gate::UnConnectInputPin(int N)
+{
+	m_InputPins[N-1].unConnect();
+}
+void Gate::UnConnectOuputPin(Connection* Conn)
+{
+	m_OutputPin.unConnect(Conn);
 }

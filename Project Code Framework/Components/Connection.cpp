@@ -1,10 +1,13 @@
 #include "Connection.h"
 
-Connection::Connection(const GraphicsInfo &r_GfxInfo, OutputPin *pSrcPin,InputPin *pDstPin):Component(r_GfxInfo)	
+Connection::Connection(const GraphicsInfo &r_GfxInfo, OutputPin *pSrcPin,InputPin *pDstPin,Component* Src, Component* Dst):Component(r_GfxInfo)
 	
 {
 	SrcPin = pSrcPin;
 	DstPin = pDstPin;
+	SrcCmpnt = Src;
+	DstCmpnt = Dst;
+	IsSelected = false;
 }
 void Connection::setSourcePin(OutputPin *pSrcPin)
 {	SrcPin = pSrcPin;	}
@@ -28,7 +31,8 @@ void Connection::Operate()
 
 void Connection::Draw(Output* pOut)
 {
-	pOut->DrawConnection(m_GfxInfo);
+	pOut->DrawConnection(m_GfxInfo, IsSelected);
+	pOut->DrawString(m_GfxInfo.x1, m_GfxInfo.y1 - 20, GetLabel());
 }
 
 int Connection::GetOutPinStatus()	//returns status of outputpin if LED, return -1
@@ -45,4 +49,34 @@ int Connection::GetInputPinStatus(int n)	//returns status of Inputpin # n if SWI
 void Connection::setInputPinStatus(int n, STATUS s)
 {
 	SrcPin->setStatus(s);
+}
+
+int Connection::GetNoInputPins()
+{
+	return 0;
+}
+
+Component* Connection :: GetSourceComponent()
+{
+	return SrcCmpnt;
+}
+Component* Connection ::GetDstComponent()
+{
+	return DstCmpnt;
+}
+void Connection::SetDstPinNumber(int N)
+{
+	DstPinNumber = N;
+}
+int Connection::GetDstPinNumber() 
+{
+	return DstPinNumber;
+}
+
+void Connection::SetIsSelected(bool select) {
+	IsSelected = select;
+}
+
+bool Connection::GetIsSelected() {
+	return IsSelected;
 }

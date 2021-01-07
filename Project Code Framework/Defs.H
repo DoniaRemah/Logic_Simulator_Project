@@ -4,7 +4,7 @@
 //This header file contains some defenitions to be used all over the application
 
 //All possible actions
-enum ActionType 
+enum ActionType
 {
 	ADD_Buff,			//Add 1-input Buffer gate
 	ADD_INV,			//Add 1-input Inverter gate
@@ -23,13 +23,19 @@ enum ActionType
 
 	ADD_Label,			//Add Label to a Component, a Connection
 	EDIT_Label,			//Edit Label of a Component, a Connection
+	CUT,
+	COPY,
+	PASTE,
+
 
 	Create_TruthTable,	//Create Truth Table of the Circuit
-
+	PROB,
+	VALIDATE,
+	SIMULATE,
 	Change_Switch,		//Change Switch Status in Simulation Mode
 
-	SELECT,		//Select a Component, a Connection
-	DEL,		//Delete a Component, a Connection
+			//Select a Component, a Connection
+		//Delete a Component, a Connection
 	MOVE,		//Move a Component, a Connection
 
 	SAVE,		//Save the whole Circuit to a file
@@ -40,9 +46,10 @@ enum ActionType
 
 	DSN_MODE,	//Switch to Design mode
 	SIM_MODE,	//Switch to Simulatiom mode
-
+	Action_SELECT,
+	Action_DELETE,
 	EXIT,		//Exit the application
-
+	EMPTYAREA,
 	STATUS_BAR,		//A click on the status bar
 	DSN_TOOL,	//A click on an empty place in the design tool bar
 
@@ -66,14 +73,36 @@ enum DsgnMenuItem //The items of the design menu (you should add more items)
 {
 	//Note: Items are ordered here as they appear in menu
 	//If you want to change the menu items order, change the order here
-	ITM_AND2,		//AND gate item in menu
-	ITM_OR2,		//OR gate item in menu
-	
-	ITM_EXIT,		//Exit item
+	ITM_BUFFER,
+	ITM_NOT,
+	ITM_AND2,   //AND gate item in menu
+	ITM_AND3,
+	ITM_OR2,        //OR gate item in menu
+	ITM_NAND2,
+	ITM_NOR2,
+	ITM_NOR3,
+	ITM_XOR2,
+	ITM_XOR3,
+	ITM_XNOR2,
+	ITM_SWITCH,
+	ITM_BULB,
+	ITM_WIRE,
+	ITM_LABEL,
+	ITM_EDIT,
+	ITM_CUT,
+	ITM_COPY,
+	ITM_PASTE,
+	ITM_LOAD,
+	ITM_SAVE,
+	ITM_SELECT,
+	ITM_DELETE,
+	ITM_SWITCH_TO_SIM,
+	ITM_EXIT,
+
 	//TODO: Add more items names here
-	
+
 	ITM_DSN_CNT		//no. of design menu items ==> This should be the last line in this enum
-	
+
 };
 
 
@@ -81,12 +110,14 @@ enum SimMenuItem //The items of the simulation menu (you should add more items)
 {
 	//Note: Items are ordered here as they appear in menu
 	ITM_SIM,	//Simulate menu item
+	ITM_VALID,
 	ITM_TRUTH,	//Truth table menu item
-	
+	ITM_PROB,
+	ITM_SWDSGN,
 	//TODO:Add more items names here
-	
+
 	ITM_SIM_CNT		//no. of simulation menu items ==> This should be the last line in this enum
-	
+
 };
 
 //Maximum number of input pins that can be connected to any output pin
@@ -95,7 +126,8 @@ enum SimMenuItem //The items of the simulation menu (you should add more items)
 //assume fan out is 5 for now it can be read from the user or can be predefined as const
 enum FANOUT
 {
-	AND2_FANOUT = 5	//Default fan out of 2-input AND gate
+	AND2_FANOUT = 5
+	//Default fan out of 2-input AND gate
 };
 
 //A structure to contain drawing parameters for each component
@@ -103,7 +135,7 @@ enum FANOUT
 //this structure can be extended if desired
 struct GraphicsInfo
 {
-	int x1,y1, x2, y2;
+	int x1, y1, x2, y2;
 };
 
 #ifndef NULL

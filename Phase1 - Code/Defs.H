@@ -23,9 +23,15 @@ enum ActionType
 
 	ADD_Label,			//Add Label to a Component, a Connection
 	EDIT_Label,			//Edit Label of a Component, a Connection
+	CUT,
+	COPY,
+	PASTE,
+	
 
 	Create_TruthTable,	//Create Truth Table of the Circuit
-
+	PROB,
+	VALIDATE,
+	SIMULATE,
 	Change_Switch,		//Change Switch Status in Simulation Mode
 
 	SELECT,		//Select a Component, a Connection
@@ -40,7 +46,7 @@ enum ActionType
 
 	DSN_MODE,	//Switch to Design mode
 	SIM_MODE,	//Switch to Simulatiom mode
-
+	MULTI_SELECT,
 	EXIT,		//Exit the application
 
 	STATUS_BAR,		//A click on the status bar
@@ -66,10 +72,31 @@ enum DsgnMenuItem //The items of the design menu (you should add more items)
 {
 	//Note: Items are ordered here as they appear in menu
 	//If you want to change the menu items order, change the order here
-	ITM_AND2,		//AND gate item in menu
-	ITM_OR2,		//OR gate item in menu
+	ITM_BUFFER,
+	ITM_NOT,
+	ITM_AND2,   //AND gate item in menu
+	ITM_AND3,
+	ITM_OR2,        //OR gate item in menu
+	ITM_NAND2,
+	ITM_NOR2,
+	ITM_NOR3,
+	ITM_XOR2,
+	ITM_XOR3,
+	ITM_XNOR2,
+	ITM_SWITCH,
+	ITM_BULB,
+	ITM_WIRE,
+	ITM_LABEL,
+	ITM_EDIT,
+	ITM_CUT,
+	ITM_COPY,
+	ITM_PASTE,
+	ITM_LOAD,
+	ITM_SAVE,
+	ITM_MULTI_SELECT,
+	ITM_SWITCH_TO_SIM,
+	ITM_EXIT,
 	
-	ITM_EXIT,		//Exit item
 	//TODO: Add more items names here
 	
 	ITM_DSN_CNT		//no. of design menu items ==> This should be the last line in this enum
@@ -81,8 +108,10 @@ enum SimMenuItem //The items of the simulation menu (you should add more items)
 {
 	//Note: Items are ordered here as they appear in menu
 	ITM_SIM,	//Simulate menu item
+	ITM_VALID,
 	ITM_TRUTH,	//Truth table menu item
-	
+	ITM_PROB,
+	ITM_SWDSGN,
 	//TODO:Add more items names here
 	
 	ITM_SIM_CNT		//no. of simulation menu items ==> This should be the last line in this enum
