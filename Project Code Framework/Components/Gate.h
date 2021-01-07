@@ -32,7 +32,7 @@ public:
 	void SetIsSelected(bool select);
 	bool GetIsSelected();
 	virtual void SetID(int ID);
-	int GetID();
+	virtual int GetID();
 	void Save(ofstream& OutPut) = 0; //Pure function to be overridden by all gates
 
 	

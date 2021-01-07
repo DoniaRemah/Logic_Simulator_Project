@@ -98,3 +98,8 @@ bool SWITCH::CheckIfOutpin(int& x, int& y)
 	}
 	return false;
 }
+
+void SWITCH::UnConnectOuputPin(Connection* Conn)
+{
+	m_OutputPin.unConnect(Conn);
+}

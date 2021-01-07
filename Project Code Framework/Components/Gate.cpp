@@ -59,7 +59,7 @@ void Gate::SetID(int ID)
 {
 	Id = ID;
 }
-}
+
 
 void Gate::UnConnectInputPin(int N)
 {
