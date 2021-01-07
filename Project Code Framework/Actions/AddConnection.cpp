@@ -215,6 +215,7 @@ bool AddConnection::CheckValidDst(Component** CompList, int Comp_Count, bool& va
 						else
 						{
 							validInPin = true;
+							AvailablePinNumber = i;
 							break;
 						}
 					}
