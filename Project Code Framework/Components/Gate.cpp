@@ -16,6 +16,8 @@ Gate::Gate(int r_Inputs, int r_FanOut):m_OutputPin(r_FanOut)
 
 	//Associate Output pin to this gate
 	m_OutputPin.setComponent(this);
+
+	IsSelected = false; //Initially a component is not selected
 }
 
 InputPin* Gate::GetInputPin(int N)
@@ -33,6 +35,16 @@ OutputPin* Gate::GetOutputPin()
 int Gate::GetNoInputPins()
 {
 	return m_Inputs;
+}
+
+
+void Gate::SetIsSelected(bool select) {
+	IsSelected = select;
+}
+
+bool Gate::GetIsSelected() {
+	return IsSelected;
+}
 }
 
 void Gate::UnConnectInputPin(int N)

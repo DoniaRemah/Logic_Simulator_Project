@@ -33,7 +33,7 @@ void OR2::Operate()
 void OR2::Draw(Output* pOut)
 {
 	//Call output class and pass gate drawing info to it.
-	pOut->DrawOR2(m_GfxInfo);
+	pOut->DrawOR2(m_GfxInfo, IsSelected);
 	pOut->DrawString(m_GfxInfo.x1, m_GfxInfo.y1 - 20, GetLabel());
 }
 

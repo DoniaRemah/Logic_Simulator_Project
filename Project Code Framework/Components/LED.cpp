@@ -6,7 +6,7 @@ LED::LED(const GraphicsInfo& r_GfxInfo)
 	m_GfxInfo.y1 = r_GfxInfo.y1;
 	m_GfxInfo.x2 = r_GfxInfo.x2;
 	m_GfxInfo.y2 = r_GfxInfo.y2;
-
+	IsSelected = false;
 	// Associate Input pin with Led.
 	
 	m_InputPin.setComponent(this);
@@ -26,7 +26,7 @@ void LED::Operate()
 void LED::Draw(Output* pOut)
 {
 	//Call output class and pass gate drawing info to it.
-	pOut->DrawBULB(m_GfxInfo);
+	pOut->DrawBULB(m_GfxInfo, IsSelected);
 	pOut->DrawString(m_GfxInfo.x1, m_GfxInfo.y1 - 20, GetLabel());
 }
 
@@ -47,6 +47,14 @@ int  LED::GetOutPinStatus()
 void LED::setInputPinStatus(int n, STATUS s)
 {
 	m_InputPin.setStatus(s);
+}
+
+void LED::SetIsSelected(bool select) {
+	IsSelected = select;
+}
+
+bool LED::GetIsSelected() {
+	return IsSelected;
 }
 
 LED :: ~LED()

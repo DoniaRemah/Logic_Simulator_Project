@@ -43,7 +43,7 @@ void Delete::Execute()
 	{
 		mComp = pManager->GetComponent(Cx, Cy);
 		
-		pManager->RemoveComponent(mComp);
+		pApp->RemoveComponent(mComp);
 	}
 }
 

@@ -26,6 +26,7 @@ public:
 	Component();	
 	
 	
+	
 	//Destructor must be virtual
 	virtual ~Component();
 };

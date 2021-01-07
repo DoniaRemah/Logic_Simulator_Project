@@ -12,6 +12,7 @@ class LED :public Component
 {
 protected :
 	InputPin m_InputPin;
+	bool IsSelected;
 public:
 	LED(const GraphicsInfo& r_GfxInfo);
 	virtual void Operate();	//Calculates the output of LED 
@@ -21,6 +22,8 @@ public:
 	virtual void setInputPinStatus(int n, STATUS s);	//set status of Inputpin # n, to be used by connection class.
 	InputPin* GetInputPin();
 	virtual int GetNoInputPins();
+	void SetIsSelected(bool select);
+	bool GetIsSelected();
 	void UnConnectInputPin();
 	virtual ~LED();
 

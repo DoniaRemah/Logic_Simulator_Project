@@ -15,6 +15,7 @@
 #include "Actions\EDIT.h"
 #include "Actions\Label.h"
 #include"Actions/Delete.h"
+#include"Actions/Select.h"
 
 #include <iostream>
 #include "Actions/AddConnection.h"
@@ -22,7 +23,7 @@
 ApplicationManager::ApplicationManager()
 {
 	CompCount = 0;
-
+	DidSwitch = false;
 	for(int i=0; i<MaxCompCount; i++)
 		CompList[i] = NULL;
 
@@ -48,77 +49,140 @@ ActionType ApplicationManager::GetUserAction()
 
 void ApplicationManager::ExecuteAction(ActionType ActType)
 {
-	Action* pAct = NULL;
-	switch (ActType)
+	if (UI.AppMode == DESIGN)
 	{
+		
+		Action* pAct = NULL;
+		switch (ActType)
+		{
 		case ADD_AND_GATE_2:
-			pAct= new AddANDgate2(this);
+			pAct = new AddANDgate2(this);
+			DidSwitch = false;
 			break;
 		case ADD_Buff:
 			pAct = new AddBUFFgate(this);
+			DidSwitch = false;
 			break;                  //Add 1-input Buffer gate
 		case ADD_INV:
 			pAct = new Add_INV(this);
+			DidSwitch = false;
 			break;                    //Add 1-input Inverter gate
 		case ADD_OR_GATE_2:
 			pAct = new AddORgate2(this);
+			DidSwitch = false;
 			break;                    //Add 2-input OR gate
 		case ADD_NAND_GATE_2:
 			pAct = new AddNANDgate2(this);
+			DidSwitch = false;
 			break;                   //Add 2-input NAND gate
 		case ADD_NOR_GATE_2:
 			pAct = new AddNORgate2(this);
+			DidSwitch = false;
 			break;                   //Add 2-input NOR gate
 		case ADD_XOR_GATE_2:
 			pAct = new AddXORgate2(this);
+			DidSwitch = false;
 			break;                   //Add 2-input XOR gate
 		case ADD_XNOR_GATE_2:
 			pAct = new AddXNORgate2(this);
+			DidSwitch = false;
 			break;                  //Add 2-input XNOR gate
 		case ADD_AND_GATE_3:
 			pAct = new AddANDgate3(this);
+			DidSwitch = false;
 			break;                    //Add 3-input AND gate
 		case ADD_NOR_GATE_3:
 			pAct = new AddNORgate3(this);
+			DidSwitch = false;
 			break;                     //Add 3-input NOR gate
 		case ADD_XOR_GATE_3:
 			pAct = new AddXORgate3(this);
+			DidSwitch = false;
 			break;                     //Add 3-input XOR gate
-		case ADD_Switch: 
+			
+		case ADD_Switch:
 			pAct = new AddSWITCH(this);
+			DidSwitch = false;
 			break;			            //Add Switch
+			
 		case ADD_LED:
-			pAct = new Addled(this);    //Add LED
-			break;                      
+			pAct = new Addled(this);
+			DidSwitch = false;//Add LED
+			break;
 		case EDIT_Label:
-			pAct = new EDIT(this);//EDIT
+			pAct = new EDIT(this);
+			DidSwitch = false;
 			break;
 		case ADD_Label:
-			pAct = new Label(this);// New Label
-			break;                        
+			pAct = new Label(this);
+			DidSwitch = false;
+			break;                        //EDIT
+		case Action_SELECT:
+			pAct = new Select(this);
+			break;   
+                        
 
 		case ADD_CONNECTION:
 			pAct = new AddConnection(this);
+			DidSwitch = false;
 			break;
-
+		case SIM_MODE:
+			UI.AppMode = SIMULATION;
+			DidSwitch = true;
+			break;
 		case EXIT:
 			break;
-			///TODO: create ExitAction here
+		
 		case Action_DELETE:
+			DidSwitch = false;
 			pAct = new Delete(this);
-			
+			break;
+		}
+		if (pAct)
+		{
+			pAct->Execute();
+			delete pAct;
+			pAct = NULL;
+		}
 	}
-	if(pAct)
+	else
 	{
-		pAct->Execute();
-		delete pAct;
-		pAct = NULL;
+		Action* pAct = NULL;
+		switch (ActType)
+		{
+		case DSN_MODE:
+			UI.AppMode = DESIGN;
+			DidSwitch = true;
+			break;
+		case SIMULATE:
+
+			break;
+		}
+		
+		if (pAct)
+		{
+			pAct->Execute();
+			delete pAct;
+			pAct = NULL;
+		}
+		
 	}
+	
+	
 }
 ////////////////////////////////////////////////////////////////////
 
 void ApplicationManager::UpdateInterface()
 {
+	if (UI.AppMode == SIMULATION && DidSwitch == true)
+	{
+		OutputInterface->CreateSimulationToolBar();
+	}
+	else if (UI.AppMode == DESIGN && DidSwitch == true)
+	{
+		OutputInterface->CreateDesignToolBar();
+		OutputInterface->CreateDesignToolBar2();
+	}
 		OutputInterface->ClearDrawingArea();
 		for(int i=0; i<CompCount; i++)
 			if(CompList[i]!= NULL)
