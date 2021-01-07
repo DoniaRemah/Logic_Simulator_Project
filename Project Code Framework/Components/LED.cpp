@@ -105,3 +105,8 @@ bool LED::CheckIfInpin(int& x, int& y, int& inputnum)
 	}
 	return false;
 }
+
+void LED::UnConnectInputPin()
+{
+	m_InputPin.unConnect();
+}
