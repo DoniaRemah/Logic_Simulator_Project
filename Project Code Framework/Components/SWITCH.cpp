@@ -72,9 +72,17 @@ bool SWITCH::GetIsSelected() {
 }
 void SWITCH::Save(ofstream& Output)
 {
-	Output << "SWITCH" << "  " << Id << " " << GetLabel() << " "; //Printing switch info to text file
-	Output << m_GfxInfo.x1 << "  " << m_GfxInfo.y1;
-	Output << endl;
+	if (GetLabel() == "")
+	{
+		Output << "SWITCH" << "  " << Id << " " << "$" << " "; //Printing the gate's info based on the file format
+		Output << m_GfxInfo.x1 << "  " << m_GfxInfo.y1;
+		Output << endl;      //Id is an integer defined in Gate class 
+	}
+	else {
+		Output << "SWITCH" << "  " << Id << " " << GetLabel() << " ";
+		Output << m_GfxInfo.x1 << "  " << m_GfxInfo.y1;
+		Output << endl;
+	}
 }
 void SWITCH::SetID(int ID) {
 	Id = ID;

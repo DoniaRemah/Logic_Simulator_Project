@@ -53,8 +53,16 @@ void BUFF::setInputPinStatus(int n, STATUS s)
 
 void BUFF::Save(ofstream& Output)
 {
-	Output << "BUFF" << "  " << Id << " " << GetLabel() << " "; //Printing the gate's info based on the file format
-	Output << m_GfxInfo.x1 << "  " << m_GfxInfo.y1;
-	Output << endl;                                             //Id is an integer defined in Gate class 
+	if (GetLabel() == "")
+	{
+		Output << "BUFF" << "  " << Id << " " << "$" << " "; //Printing the gate's info based on the file format
+		Output << m_GfxInfo.x1 << "  " << m_GfxInfo.y1;
+		Output << endl;      //Id is an integer defined in Gate class 
+	}
+	else {
+		Output << "BUFF" << "  " << Id << " " << GetLabel() << " ";
+		Output << m_GfxInfo.x1 << "  " << m_GfxInfo.y1;
+		Output << endl;
+	}
 }
 

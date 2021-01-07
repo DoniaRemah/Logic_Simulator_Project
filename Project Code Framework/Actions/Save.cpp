@@ -13,9 +13,8 @@ bool Saving::ReadActionParameters()
 {
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
-	Outputfile.open("Save.txt");
-
-	pOut->ClearStatusBar();
+	Outputfile.open("Save.txt"); //Opening a text file to write to
+	pOut->PrintMsg("Circuit SAVED in Save.txt. Click for a new action. ");
 	return true;
 }
 
