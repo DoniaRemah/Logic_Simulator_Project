@@ -24,6 +24,7 @@ bool Select::ReadActionParameters() {
 	}
 	else
 	{
+		pOut->PrintMsg("Invalid position. Operation was cancelled");
 		return false;
 	}
 
