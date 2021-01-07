@@ -332,9 +332,16 @@ void ApplicationManager::Save(ofstream & Outputfile)
 	{
 		if (!dynamic_cast<Connection*>(CompList[i])) //Counting Components (Minus Connections)
 		{
-			CompList[i]->SetID(i);
-			CompList[i]->Save(Outputfile);
-			
+			/*AND2* ptrAND=dynamic_cast<AND2*>(CompList[i]);
+			if (ptrAND == NULL)
+			{*/
+				CompList[i]->SetID(i);
+				CompList[i]->Save(Outputfile);
+			//}
+			//else {
+			//	ptrAND->SetID(i);
+			//	ptrAND->Save(Outputfile);
+			///*}*/
 			//Writing component(GATES, LEDS, AND SWITCHES) info to the text file
 		}
 		

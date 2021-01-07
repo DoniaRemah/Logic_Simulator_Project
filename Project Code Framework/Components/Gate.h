@@ -31,9 +31,8 @@ public:
 	virtual int GetNoInputPins();
 	void SetIsSelected(bool select);
 	bool GetIsSelected();
-	virtual void SetID(int ID);
+    void SetID(int ID);
 	int GetID();
-	void Save(ofstream& OutPut) = 0; //Pure function to be overridden by all gates
 
 	
 };

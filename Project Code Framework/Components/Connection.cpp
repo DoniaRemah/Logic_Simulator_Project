@@ -85,7 +85,7 @@ void Connection::Save(ofstream & Outputfile)
 	int ID1 = SrcPin->GetCompID(); //OutputPin Class 
 	int ID2 = DstPin->GetCompID(); //InputPin Class (According to file format: destination Component 1st and source Component 2nd)
 	Outputfile << ID1 << " " << ID2 << " ";
-	Outputfile << DstPinNum << endl; //Which pin number is the connection linked to?
+	Outputfile << DstPinNumber << endl; //Which pin number is the connection linked to?
 
 }
 int Connection::GetID() 
