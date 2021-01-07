@@ -2,13 +2,15 @@
 #include"Action.h"
 #include"..\ApplicationManager.h"
 #include"..\Components\Connection.h"
-
+#include "..\Components\Gate.h"
+#include "..\Components\LED.h"
+#include "..\Components\SWITCH.h"
 class Delete : public Action 
 {
 private:
 	Component* mComp;
 	int Cx, Cy;
-	ApplicationManager* pApp;
+
 public:
 	Delete(ApplicationManager* pApp);
 	virtual bool ReadActionParameters();

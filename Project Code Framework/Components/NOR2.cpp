@@ -35,6 +35,7 @@ void NOR2::Draw(Output* pOut)
 {
 	//Call output class and pass gate drawing info to it.
 	pOut->DrawNOR2(m_GfxInfo);
+	pOut->DrawString(m_GfxInfo.x1, m_GfxInfo.y1 - 20, GetLabel());
 }
 
 //returns status of outputpin

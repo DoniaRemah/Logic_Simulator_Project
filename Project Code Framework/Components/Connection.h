@@ -7,7 +7,7 @@ class Connection :	public Component
 {
 	Component*	SrcCmpnt;	//Connection source component
 	Component*	DstCmpnt;	//Connection Destination component
-	//int		DstPin;		//The Input pin to which this connection is linked
+	int		DstPinNumber;		//The Input pin to which this connection is linked
 	OutputPin* SrcPin;	//The Source pin of this connection (an output pin of certain Component)
 	InputPin* DstPin;	//The Destination pin of this connection (an input pin of certain Component)
 public:
@@ -23,7 +23,10 @@ public:
 	virtual int GetNoInputPins();
 	virtual int GetOutPinStatus();	//returns status of outputpin if LED, return -1
 	virtual int GetInputPinStatus(int n);	//returns status of Inputpin # n if SWITCH, return -1
-	void DeleteComp(Output* pOut, GraphicsInfo delgfx);
+	Component* GetSourceComponent();
+	Component* GetDstComponent();
+	void SetDstPinNumber(int N);
+	int GetDstPinNumber();
 	virtual void setInputPinStatus(int n, STATUS s);	//set status of Inputpin # n, to be used by connection class.
 
 

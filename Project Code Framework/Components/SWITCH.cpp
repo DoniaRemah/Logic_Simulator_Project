@@ -25,6 +25,7 @@ void SWITCH::Draw(Output* pOut)
 {
 	//Call output class and pass gate drawing info to it.
 	pOut->DrawSWITCH(m_GfxInfo);
+	pOut->DrawString(m_GfxInfo.x1, m_GfxInfo.y1 - 20, GetLabel());
 }
 
 //returns status of outputpin
@@ -59,4 +60,10 @@ SWITCH :: ~SWITCH()
 int SWITCH::GetNoInputPins()
 {
 	return 0;
+}
+
+
+void SWITCH::UnConnectOuputPin(Connection* Conn)
+{
+	m_OutputPin.unConnect(Conn);
 }

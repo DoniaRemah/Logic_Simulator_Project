@@ -21,6 +21,7 @@ public:
 	virtual void setInputPinStatus(int n, STATUS s);	//set status of Inputpin # n, to be used by connection class.
 	InputPin* GetInputPin();
 	virtual int GetNoInputPins();
+	void UnConnectInputPin();
 	virtual ~LED();
 
 };

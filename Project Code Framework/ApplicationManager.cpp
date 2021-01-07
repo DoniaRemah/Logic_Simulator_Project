@@ -91,21 +91,11 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 			pAct = new Addled(this);    //Add LED
 			break;                      
 		case EDIT_Label:
-			pAct = new EDIT(this);
+			pAct = new EDIT(this);//EDIT
 			break;
 		case ADD_Label:
-			pAct = new Label(this);
-			break;                        //EDIT
-		//case ADD_CONNECTION:
-			//pAct = new AddANDgate2(this);
-			//break;
-               //TODO: Create AddConection Action here
-			
-	
-			pAct = new Addled(this);
-			break;    
-                    //Add LED
-
+			pAct = new Label(this);// New Label
+			break;                        
 
 		case ADD_CONNECTION:
 			pAct = new AddConnection(this);
@@ -129,9 +119,10 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 
 void ApplicationManager::UpdateInterface()
 {
+		OutputInterface->ClearDrawingArea();
 		for(int i=0; i<CompCount; i++)
+			if(CompList[i]!= NULL)
 			CompList[i]->Draw(OutputInterface);
-
 }
 
 ////////////////////////////////////////////////////////////////////
@@ -168,31 +159,91 @@ bool ApplicationManager::selectcomponent(int x, int y)
 	return false;
 }
 
-bool ApplicationManager::RemoveComponent(Component* pComp)
+void ApplicationManager::RemoveComponent(Component* pComp)
 {
+	int ConCount = 0;
+	Connection** ConnList = CheckConnection(ConCount);
+	// First Loop: Checks on Component.
 	for (int i = 0; i < CompCount;i++)
 	{
 		if (pComp == CompList[i])
 		{
+			// Checks on Connection associated with component.
+			for (int Q=0; Q<ConCount;Q++) // Loop with Number of Connections.
+			{
+				if ((ConnList[Q]->GetDstComponent() == pComp) || (ConnList[Q]->GetSourceComponent() == pComp))
+				{
+					Gate* mGate1 = dynamic_cast<Gate*>(ConnList[Q]->GetDstComponent());
+					Gate* mGate2 = dynamic_cast<Gate*>(ConnList[Q]->GetSourceComponent());
+					// Unconnecting Input Pin of Destination Component (Gate or Led)
+					if (mGate1 == NULL)
+					{
+						LED* mLed = dynamic_cast<LED*>((ConnList[Q]->GetDstComponent()));
+						mLed->UnConnectInputPin();
+					}
+					else
+					{
+						mGate1->UnConnectInputPin(ConnList[Q]->GetDstPinNumber());
+					}
+
+					// Unconnecting Output Pin of Source Component (Gate or Switch)
+					if (mGate2 == NULL)
+					{
+						SWITCH* mSwitch = dynamic_cast<SWITCH*>((ConnList[Q]->GetSourceComponent()));
+						mSwitch->UnConnectOuputPin(ConnList[Q]);
+					}
+					else
+					{
+						mGate2->UnConnectOuputPin(ConnList[Q]);
+					}
+
+					// Loop that Deletes Connections.
+					for (int j = 0; j < CompCount; j++)
+					{
+							
+							// Deleting Connection from Component List	
+							if (ConnList[Q]== CompList[j])
+							{
+
+								if (j == CompCount - 1)
+								{
+									CompList[j] = NULL; CompCount--;
+									cout << "Connection Deleted, Component count is: " << CompCount << endl;
+								}
+
+								else
+								{
+									CompList[j] = CompList[CompCount - 1];
+									CompList[CompCount - 1] = NULL;
+									CompCount--;
+									cout << "Connection Deleted, Component count is: " << CompCount << endl;
+								}
+							}
+							
+					}
+					
+
+				}
+			}
+				
+			// Deleting Component (Gate,Led,Switch)
 			if (i == CompCount - 1) 
 			{ 
 				CompList[i] = NULL; CompCount--; 
 				cout << "Component Deleted, Component count is: " << CompCount << endl;
-				return true;
 			}
 			
-			else 
+			else
 			{
-				CompList[i] == CompList[CompCount-1];
-				CompList[CompCount-1] == NULL;
+				CompList[i] = CompList[CompCount - 1];
+				CompList[CompCount-1] = NULL;
 				CompCount--;
 				cout << "Component Deleted, Component count is: " << CompCount << endl;
-				return true;
 			}
 		}
 		
 	}
-	return false;
+
 }
 
 
@@ -201,9 +252,13 @@ bool ApplicationManager::RemoveComponent(Component* pComp)
 ApplicationManager::~ApplicationManager()
 {
 	for (int i = 0; i < CompCount; i++)
+	{
 		delete CompList[i];
+	}
+		
 	delete OutputInterface;
 	delete InputInterface;
+
 
 }
 
@@ -211,4 +266,18 @@ Component** ApplicationManager::GetCompList(int& N)
 {
 	N = CompCount;
 	return CompList;
+}
+
+Connection** ApplicationManager::CheckConnection(int& ConC)
+{
+	for (int k = 0; k < CompCount; k++)
+	{
+		Connection* mConnection = dynamic_cast <Connection*> (CompList[k]);
+		if (mConnection != NULL)
+		{
+			ConnList[ConC] = mConnection;
+			ConC++;
+		}
+	}
+	return ConnList;
 }

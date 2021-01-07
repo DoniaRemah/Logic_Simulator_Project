@@ -27,6 +27,7 @@ void LED::Draw(Output* pOut)
 {
 	//Call output class and pass gate drawing info to it.
 	pOut->DrawBULB(m_GfxInfo);
+	pOut->DrawString(m_GfxInfo.x1, m_GfxInfo.y1 - 20, GetLabel());
 }
 
 
@@ -61,4 +62,9 @@ InputPin* LED ::GetInputPin()
 int LED::GetNoInputPins()
 {
 	return 1;
+}
+
+void LED::UnConnectInputPin()
+{
+	m_InputPin.unConnect();
 }

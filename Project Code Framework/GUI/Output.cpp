@@ -84,13 +84,7 @@ void Output::ClearDrawingArea() const
 	pWind->DrawRectangle(0, UI.ToolBarHeight, UI.width, UI.height - UI.StatusBarHeight);
 
 }
-void Output::Cleartextindrawingarea(int x,int y)const
-{
-	//Overwrite using bachground color to erase the message
-	pWind->SetPen(UI.BkGrndColor);
-	pWind->SetBrush(UI.BkGrndColor);
-	pWind->DrawRectangle(x, y,x+50,y+20);
-}
+
 void Output::DrawString(const int iX, const int iY, const string strText)const {
 	pWind->SetPen(BLACK, 1);
 	pWind->SetBrush(WHITE);
@@ -405,16 +399,12 @@ void Output::DrawBULB(GraphicsInfo r_GfxInfo, bool selected)const
 	 
 }
 
-void Output::DrawConnection(GraphicsInfo r_GfxInfo, bool selected, bool deleted) const
+void Output::DrawConnection(GraphicsInfo r_GfxInfo, bool selected) const
 {
 	if (selected == false)
 	{
 		pWind->SetPen(BLACK, 3);
 
-	}
-	else if (deleted)
-	{
-		pWind->SetPen(UI.BkGrndColor, 3);
 	}
 	else
 	{
@@ -438,12 +428,7 @@ bool Output::IsDrawingArea(int x, int y) {
 	if ((y-25) < 575 && (y+25) >150) return true;//575 means status bar top edge starts from it and 150 means bottom edge of two tools bar 
 	return false;
 }
-void Output::ClearPartArea(int x1, int y1, int x2, int y2) const 
-{
-	pWind->SetPen(UI.BkGrndColor);
-	pWind->SetBrush(UI.BkGrndColor);
-	pWind->DrawRectangle( x1,  y1,  x2,  y2);
-}
+
 
 Output::~Output()
 {

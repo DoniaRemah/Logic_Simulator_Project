@@ -21,10 +21,6 @@ bool Component :: InsideArea(int x, int y)
 Component::Component()
 {}
 
-void Component::DeleteComp(Output* pOut,GraphicsInfo delgfx)
-{
-	pOut->ClearPartArea(delgfx.x1, delgfx.y1, delgfx.x2, delgfx.y2);
-}
 
 Component::~Component()
 {}

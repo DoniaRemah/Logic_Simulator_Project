@@ -9,6 +9,7 @@
 
 #include "Component.h"
 #include "OutputPin.h"
+#include "Connection.h"
 class SWITCH :public Component
 {
 protected:
@@ -22,6 +23,7 @@ public:
 	virtual int GetNoInputPins(); 
 	virtual void setInputPinStatus(int n, STATUS s);	//set status of Inputpin # n, to be used by connection class.
 	OutputPin* GetOutputPin(); // Gets pointet to pin
+	void UnConnectOuputPin(Connection* Conn);
 	virtual ~SWITCH();
 };
 

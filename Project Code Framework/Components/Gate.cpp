@@ -34,3 +34,12 @@ int Gate::GetNoInputPins()
 {
 	return m_Inputs;
 }
+
+void Gate::UnConnectInputPin(int N)
+{
+	m_InputPins[N-1].unConnect();
+}
+void Gate::UnConnectOuputPin(Connection* Conn)
+{
+	m_OutputPin.unConnect(Conn);
+}

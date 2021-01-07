@@ -24,7 +24,7 @@ public:
 	string GetLabel();
 	void SetLabel(string NewLabel);
 	Component();	
-	void DeleteComp(Output* pOut, GraphicsInfo delgfx);
+	
 	
 	//Destructor must be virtual
 	virtual ~Component();

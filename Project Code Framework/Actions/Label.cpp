@@ -48,7 +48,6 @@ void Label::Execute()
 	{
 		GInfo=mComp->GetGfxInfo();
 		mComp->SetLabel(newlabel);
-		pOut->DrawString(GInfo.x1, GInfo.y1 - 20, newlabel);
 	}
 }
 
