@@ -37,7 +37,6 @@ OutputPin* Gate::GetOutputPin()
 
 
 
-
 int Gate::GetNoInputPins()
 {
 	return m_Inputs;
@@ -59,4 +58,14 @@ int Gate::GetID()
 void Gate::SetID(int ID)
 {
 	Id = ID;
+}
+}
+
+void Gate::UnConnectInputPin(int N)
+{
+	m_InputPins[N-1].unConnect();
+}
+void Gate::UnConnectOuputPin(Connection* Conn)
+{
+	m_OutputPin.unConnect(Conn);
 }

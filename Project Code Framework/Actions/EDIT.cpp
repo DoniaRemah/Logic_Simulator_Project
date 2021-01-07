@@ -56,8 +56,7 @@ void EDIT::Execute()
 	if (x)
 	{
 		GraphicsInfo GInfo = mComp->GetGfxInfo();//Gfx info to be used to construct the EDIT
-		pOut->Cleartextindrawingarea(GInfo.x1, (GInfo.y1 - 20));
-		pOut->DrawString(GInfo.x1, GInfo.y1 - 20, Editlabel);
+		mComp->SetLabel(Editlabel);
 	}
 }
 

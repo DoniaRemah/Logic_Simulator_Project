@@ -29,7 +29,7 @@ public:
 	virtual void SetID(int ID) = 0;
 	virtual int GetID() = 0;
 	Component();	
-	void DeleteComp(Output* pOut, GraphicsInfo delgfx);
+	
 	
 	
 	//Destructor must be virtual

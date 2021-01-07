@@ -32,6 +32,7 @@ void Connection::Operate()
 void Connection::Draw(Output* pOut)
 {
 	pOut->DrawConnection(m_GfxInfo, IsSelected);
+	pOut->DrawString(m_GfxInfo.x1, m_GfxInfo.y1 - 20, GetLabel());
 }
 
 int Connection::GetOutPinStatus()	//returns status of outputpin if LED, return -1
@@ -55,9 +56,21 @@ int Connection::GetNoInputPins()
 	return 0;
 }
 
-void Connection::DeleteComp(Output * pOut, GraphicsInfo delgfx)
+Component* Connection :: GetSourceComponent()
 {
-	pOut->DrawConnection(delgfx,false,true);
+	return SrcCmpnt;
+}
+Component* Connection ::GetDstComponent()
+{
+	return DstCmpnt;
+}
+void Connection::SetDstPinNumber(int N)
+{
+	DstPinNumber = N;
+}
+int Connection::GetDstPinNumber() 
+{
+	return DstPinNumber;
 }
 
 void Connection::SetIsSelected(bool select) {

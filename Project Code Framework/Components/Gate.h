@@ -12,6 +12,7 @@
 #include "InputPin.h"
 #include "OutputPin.h"
 #include "Component.h"
+#include "Connection.h"
 
 class Gate:public Component
 {
@@ -25,7 +26,8 @@ public:
 	Gate(int r_Inputs, int r_FanOut);
 	InputPin* GetInputPin(int N);
 	OutputPin* GetOutputPin();
-	
+	void UnConnectInputPin(int N);
+	void UnConnectOuputPin(Connection* Conn);
 	virtual int GetNoInputPins();
 	void SetIsSelected(bool select);
 	bool GetIsSelected();

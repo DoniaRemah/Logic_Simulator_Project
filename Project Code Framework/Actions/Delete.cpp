@@ -1,4 +1,6 @@
 #include"Delete.h"
+
+
 void Delete::Undo() 
 {
 
@@ -30,6 +32,7 @@ bool Delete::ReadActionParameters()
 	}
 	else 
 	{
+		pOut->PrintMsg("Invalid position. Operation was cancelled");
 		return false;
 	}
 	
@@ -39,19 +42,9 @@ void Delete::Execute()
 	if (ReadActionParameters())
 	{
 		mComp = pManager->GetComponent(Cx, Cy);
-		Connection* mConnection = dynamic_cast<Connection*>(mComp);
-		if (mConnection == NULL)
-		{
-			mComp->DeleteComp(pManager->GetOutput(), mComp->GetGfxInfo()); //Function in Component 
-		}
-		else
-		{
-			//mConnection->DeleteComp(pManager->GetOutput(), mComp->GetGfxInfo());
-		}
 		
-		pApp->RemoveComponent(mComp);
+		pManager->RemoveComponent(mComp);
 	}
-	
 }
 
 Delete::Delete(ApplicationManager* pApp) : Action(pApp)

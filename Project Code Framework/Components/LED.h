@@ -30,6 +30,7 @@ public:
 	int GetID();
 	bool CheckIfOutpin(int& x, int& y);
 	bool CheckIfInpin(int& x, int& y, int& inputnum);
+	void UnConnectInputPin();
 	virtual ~LED();
 
 };

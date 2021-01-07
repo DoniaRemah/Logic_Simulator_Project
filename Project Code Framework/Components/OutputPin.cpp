@@ -38,16 +38,16 @@ void OutputPin::unConnect(Connection * d_Conn)
 	{
 		if (m_Connections[i] == d_Conn)
 		{
-			if (i < m_FanOut-1)
+			if (i == m_FanOut-1)
 			{
-				m_Connections[i] = m_Connections[i + 1];
-				m_Connections[i + 1] = NULL;
-				pComp = NULL;
+				m_Connections[i] = NULL;
+				m_Conn--;
 			}
 			else
 			{
-				m_Connections[i] = NULL;
-				pComp = NULL;
+				m_Connections[i] = m_Connections[m_FanOut - 1];
+				m_Connections[m_FanOut - 1] = NULL;
+				m_Conn--;
 			}
 			
 		}

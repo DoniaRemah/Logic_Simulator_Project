@@ -6,7 +6,9 @@
 #include "GUI\Input.h"
 #include "Actions\Action.h"
 #include "Components\Component.h"
-
+#include "Components/Connection.h"
+#include "Components/LED.h"
+#include "Components/SWITCH.h"
 //Main class that manages everything in the application.
 class ApplicationManager
 {
@@ -18,7 +20,7 @@ private:
 
 	Output* OutputInterface; //pointer to the Output Clase Interface
 	Input* InputInterface; //pointer to the Input Clase Interface
-
+	Connection* ConnList[MaxCompCount]; // List of Connections
 
 public:
 
@@ -37,10 +39,10 @@ public:
 	//Gets a pointer to Input / Output Object
 	Output* GetOutput();
 	Input* GetInput();
-
+	Connection** CheckConnection(int& ConC); // Function that makes list of Connections and their number.
 	//Adds a new component to the list of components
 	void AddComponent(Component* pComp);
-	bool RemoveComponent(Component* pComp);
+	void RemoveComponent(Component* pComp);
 	Component* GetComponent(int x, int y);
 	bool selectcomponent(int x, int y);
 	//To save in a text file

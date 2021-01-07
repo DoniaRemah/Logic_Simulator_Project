@@ -31,7 +31,7 @@ bool AddConnection::ReadActionParameters()
 		validSource = CheckValidSrc(CompList,Comp_Count, validOutPin,SrcPin);
 		if (validSource == false)
 		{
-			pOut->PrintMsg("INVALID AREA. Operation Cancelled.");
+			pOut->PrintMsg("INVALID AREA,Can Not be a SOURCE Component. Operation Cancelled.");
 			return false;
 		}
 		else if (validOutPin == false)
@@ -49,12 +49,12 @@ bool AddConnection::ReadActionParameters()
 		validDst = CheckValidDst(CompList, Comp_Count, validInPin, DstPin);
 		if (validDst == 0)
 		{
-			pOut->PrintMsg("INVALID AREA. Operation Cancelled.");
+			pOut->PrintMsg("INVALID AREA, Can Not be a DESTINATION Component. Operation Cancelled.");
 			return false;
 		}
 		else if (validInPin == false)
 		{
-			pOut->PrintMsg("INVALID: PIN/S ALREADY CONNECTED. Operation Cancelled.");
+			pOut->PrintMsg("INVALID: INPUT PIN(S) ALREADY CONNECTED. Operation Cancelled.");
 			return false;
 		}
 		else
@@ -112,17 +112,22 @@ if (IsValidParameters)
 		Connection* pA = new Connection(GInfo, NULL, NULL,m_SrcComp,m_DstComp);
 
 		// Linking output pin of src component with src pin of connection.
-
-		SrcPin->ConnectTo(pA);
-		pA->setSourcePin(SrcPin);
+		if (SrcPin != NULL)
+		{
+			SrcPin->ConnectTo(pA);
+			pA->setSourcePin(SrcPin);
+		}
+		
 
 
 		// Linking Input pin of Dst component with dst component of connection.
-
-		pA->setDestPin(DstPin);
-		DstPin->connect();
-
-
+		if (DstPin != NULL)
+		{
+			pA->setDestPin(DstPin);
+			DstPin->connect();
+			pA->SetDstPinNumber(AvailablePinNumber);
+		}
+		
 		// Adding Connection to Component List.
 		pManager->AddComponent(pA);
 	}
@@ -138,24 +143,35 @@ bool AddConnection::CheckValidSrc(Component** CompList,int Comp_Count, bool &val
 	{
 		if (CompList[i]->InsideArea(x1, y1) == true)
 		{
-			validcomp = true;
 			bool CanConnect;
 			m_SrcComp = CompList[i];
 			Gate* SrcGate = dynamic_cast<Gate*>(m_SrcComp);
 			if (SrcGate == NULL)
 			{
 				SWITCH* SrcSwitch = dynamic_cast<SWITCH*>(m_SrcComp);
-				SrcPin = SrcSwitch->GetOutputPin();
-				CanConnect = SrcPin->CanConnect();
+				if (SrcSwitch ==NULL)
+				{
+					validcomp = false;
+				}
+				else
+				{
+					SrcPin = SrcSwitch->GetOutputPin();
+					CanConnect = SrcPin->CanConnect();
+					validcomp = true;
+				}
 			}
 			else
 			{
 				SrcPin = SrcGate->GetOutputPin();
 				CanConnect = SrcPin->CanConnect();
+				validcomp = true;
 			}
-			if (CanConnect)
+			if (validcomp == true)
 			{
-				validOutPin = true;
+				if (CanConnect)
+				{
+					validOutPin = true;
+				}		
 			}
 			else
 			{
@@ -175,29 +191,40 @@ bool AddConnection::CheckValidDst(Component** CompList, int Comp_Count, bool& va
 	{
 		if (CompList[i]->InsideArea(x2, y2) == true)
 		{
-			validDst = 1;
 			m_DstComp = CompList[i];
 			bool isConnected;
 			Gate* DstGate = dynamic_cast<Gate*>(m_DstComp);
 			if (DstGate == NULL)
 			{
 				LED* DstLed = dynamic_cast<LED*>(m_DstComp);
-				DstPin = DstLed->GetInputPin();
-				isConnected = DstPin->IsConnected();
-				if (isConnected)
+				if (DstLed == NULL)
 				{
-					validInPin = false;
+					validDst = false;
 				}
 				else
 				{
-					validInPin = true;
-					break;
+					validDst = true;
+					DstPin = DstLed->GetInputPin();
+					if (DstPin != NULL)
+					{
+						isConnected = DstPin->IsConnected();
+						if (isConnected)
+						{
+							validInPin = false;
+						}
+						else
+						{
+							validInPin = true;
+							break;
+						}
+					}
 				}
 			}
 			else
 			{
+				validDst = 1;
 				for (int i = 1; i <= DstGate->GetNoInputPins() ; i++)
-				{
+				{				
 					DstPin = DstGate->GetInputPin(i);
 					isConnected = DstPin->IsConnected();
 
@@ -216,7 +243,6 @@ bool AddConnection::CheckValidDst(Component** CompList, int Comp_Count, bool& va
 			}
 
 			
-
 			break;
 		}
 

@@ -9,6 +9,7 @@
 
 #include "Component.h"
 #include "OutputPin.h"
+#include "Connection.h"
 class SWITCH :public Component
 {
 protected:
@@ -30,6 +31,7 @@ public:
 	int GetID();
 	virtual void Save(ofstream&);
 	bool CheckIfOutpin(int& x, int& y);
+	void UnConnectOuputPin(Connection* Conn);
 	virtual ~SWITCH();
 };
 
