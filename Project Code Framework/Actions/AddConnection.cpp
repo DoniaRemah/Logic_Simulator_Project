@@ -215,7 +215,7 @@ bool AddConnection::CheckValidDst(Component** CompList, int Comp_Count, bool& va
 						else
 						{
 							validInPin = true;
-							AvailablePinNumber = i;
+							AvailablePinNumber = 1;
 							break;
 						}
 					}
@@ -224,6 +224,7 @@ bool AddConnection::CheckValidDst(Component** CompList, int Comp_Count, bool& va
 			else
 			{
 				validDst = 1;
+			
 				for (int k = 1; k <= DstGate->GetNoInputPins() ; k++)
 				{				
 					DstPin = DstGate->GetInputPin(k);
