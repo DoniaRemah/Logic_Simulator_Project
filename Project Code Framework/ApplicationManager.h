@@ -43,6 +43,9 @@ public:
 	bool RemoveComponent(Component* pComp);
 	Component* GetComponent(int x, int y);
 	bool selectcomponent(int x, int y);
+	//To save in a text file
+	void Save(ofstream& Output);
+	Component* FindComponent(int ID);
 	//destructor
 	~ApplicationManager();
 };

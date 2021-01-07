@@ -15,6 +15,7 @@ public:
 	bool IsConnected();
 	void connect();
 	void unConnect();
+	int GetCompID();
 };
 
 #endif

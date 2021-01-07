@@ -78,3 +78,8 @@ bool OutputPin::IsConnected()
 		return false;
 	}
 }
+
+int OutputPin::GetCompID() 
+{
+	return pComp->GetID();
+}

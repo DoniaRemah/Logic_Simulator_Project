@@ -3,6 +3,7 @@
 
 #include "..\Defs.h"
 #include "..\GUI\Output.h"
+#include<fstream> //For save and load
 
 //Base class for classes Gate, Switch, and LED.
 class Component
@@ -11,6 +12,7 @@ private:
 	string m_Label;
 protected:
 	GraphicsInfo m_GfxInfo;	//The parameters required to draw a component
+	int count;
 public:
 	Component(const GraphicsInfo &r_GfxInfo);
 	virtual void Operate() = 0;	//Calculates the output according to the inputs
@@ -23,6 +25,9 @@ public:
 	virtual int GetNoInputPins()=0;
 	string GetLabel();
 	void SetLabel(string NewLabel);
+	virtual void Save(ofstream&) = 0; //Save function (will be overridden in every component)
+	virtual void SetID(int ID) = 0;
+	virtual int GetID() = 0;
 	Component();	
 	void DeleteComp(Output* pOut, GraphicsInfo delgfx);
 	

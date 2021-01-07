@@ -7,7 +7,7 @@ class Connection :	public Component
 {
 	Component*	SrcCmpnt;	//Connection source component
 	Component*	DstCmpnt;	//Connection Destination component
-	//int		DstPin;		//The Input pin to which this connection is linked
+	int	DstPinNum;		//The Input pin to which this connection is linked
 	OutputPin* SrcPin;	//The Source pin of this connection (an output pin of certain Component)
 	InputPin* DstPin;	//The Destination pin of this connection (an input pin of certain Component)
 	bool IsSelected;
@@ -28,6 +28,11 @@ public:
 	virtual void setInputPinStatus(int n, STATUS s);	//set status of Inputpin # n, to be used by connection class.
 	void SetIsSelected(bool select);
 	bool GetIsSelected();
+	void Save(ofstream& Outputfile);
+	virtual int GetID();
+	virtual void SetID(int ID);
+	
+	
 
 
 };

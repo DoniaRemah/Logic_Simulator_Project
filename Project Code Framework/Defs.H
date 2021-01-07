@@ -137,6 +137,23 @@ struct GraphicsInfo
 {
 	int x1, y1, x2, y2;
 };
+enum ComponentType
+{
+	t_AND2,
+	t_AND3,
+	t_BUFF,
+	t_NAND2,
+	t_NOR2,
+	t_NOR3,
+	t_INV,
+	t_OR2,
+	t_SWITCH,
+	t_XNOR2,
+	t_XOR2,
+	t_XOR3,
+	t_LED
+};
+
 
 #ifndef NULL
 #define NULL 0

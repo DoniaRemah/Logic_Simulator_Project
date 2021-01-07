@@ -1,4 +1,5 @@
 #include "InputPin.h"
+#include"Connection.h"
 
 InputPin::InputPin():connected(false)
 {
@@ -29,4 +30,7 @@ void InputPin::unConnect()
 {
 	connected = false;
 	pComp = NULL;
+}
+int InputPin::GetCompID() {
+	return pComp->GetID();
 }

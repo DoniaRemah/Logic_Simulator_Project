@@ -20,6 +20,8 @@ private:
 	int m_FanOut;	//Maximum No. of connections connected to that output pin (depends on the component)
 	int m_Conn;		//Actual No. of connections connected to that output pin
 	Component* pComp; //Component at which this pin is associated
+
+	int CompID; //ID for saving to files
 public:
 	OutputPin(int r_FanOut);	
 	bool ConnectTo(Connection *r_Conn);	//connect to a new connection
@@ -28,6 +30,7 @@ public:
 	void unConnect(Connection * d_Conn);
 	bool CanConnect();
 	bool IsConnected();
+	int GetCompID();
 };
 
 #endif

@@ -7,6 +7,7 @@ SWITCH::SWITCH(const GraphicsInfo& r_GfxInfo, int r_FanOut): m_OutputPin(r_FanOu
 	m_GfxInfo.x2 = r_GfxInfo.x2;
 	m_GfxInfo.y2 = r_GfxInfo.y2;
 	IsSelected = false;
+	Id = 0;
 
 	// Associate Output Pin with Swicth
 	m_OutputPin.setComponent(this);
@@ -67,4 +68,32 @@ void SWITCH::SetIsSelected(bool select) {
 
 bool SWITCH::GetIsSelected() {
 	return IsSelected;
+}
+void SWITCH::Save(ofstream& Output)
+{
+	Output << "SWITCH" << "  " << Id << " " << GetLabel() << " "; //Printing switch info to text file
+	Output << m_GfxInfo.x1 << "  " << m_GfxInfo.y1;
+	Output << endl;
+}
+void SWITCH::SetID(int ID) {
+	Id = ID;
+}
+int SWITCH::GetID() {
+	return Id;
+}
+bool SWITCH::CheckIfOutpin(int& x, int& y)
+{
+	int xOut = m_GfxInfo.x1 + UI.AND2_Width - 5;
+	int yOut = m_GfxInfo.y1 + 23;
+	int diffx = x - xOut;
+	if (diffx < 0) diffx = -diffx;
+	int diffy = y - yOut;
+	if (diffx < 0) diffy = -diffy;
+	if (diffx < 5 && diffy < 5)
+	{
+		x = xOut;
+		y = yOut;
+		return true;
+	}
+	return false;
 }

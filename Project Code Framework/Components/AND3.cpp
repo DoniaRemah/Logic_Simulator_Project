@@ -56,3 +56,10 @@ void AND3::setInputPinStatus(int n, STATUS s)
 	m_InputPins[n - 1].setStatus(s);
 }
 
+void AND3::Save(ofstream & Output)
+{
+	Output << "AND3" << "  " << Id << " " << GetLabel() << " "; //Printing the gate's info based on the file format
+	Output << m_GfxInfo.x1 << "  " << m_GfxInfo.y1;
+	Output << endl;                                             //Id is an integer defined in Gate class 
+}
+

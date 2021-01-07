@@ -20,6 +20,7 @@ protected:
 	OutputPin m_OutputPin;	//The Gate output pin
 	int m_Inputs;		//No. of input pins of that Gate.
 	bool IsSelected;
+	int Id;
 public:
 	Gate(int r_Inputs, int r_FanOut);
 	InputPin* GetInputPin(int N);
@@ -28,6 +29,10 @@ public:
 	virtual int GetNoInputPins();
 	void SetIsSelected(bool select);
 	bool GetIsSelected();
+	virtual void SetID(int ID);
+	int GetID();
+	void Save(ofstream& OutPut) = 0; //Pure function to be overridden by all gates
+
 	
 };
 

@@ -16,8 +16,10 @@
 #include "Actions\Label.h"
 #include"Actions/Delete.h"
 #include"Actions/Select.h"
+#include"Actions/Save.h"
 
 #include <iostream>
+#include<fstream>
 #include "Actions/AddConnection.h"
 
 ApplicationManager::ApplicationManager()
@@ -119,18 +121,12 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 			break;                        //EDIT
 		case Action_SELECT:
 			pAct = new Select(this);
+			DidSwitch = false;
 			break;
-		//case ADD_CONNECTION:
-			//pAct = new AddANDgate2(this);
-			//break;
-               //TODO: Create AddConection Action here
-			
-	
-			pAct = new Addled(this);
-			break;    
-                    //Add LED
-
-
+		case SAVE: //Saving to a text file
+			pAct = new Saving(this); 
+			DidSwitch = false;
+			break; 
 		case ADD_CONNECTION:
 			pAct = new AddConnection(this);
 			DidSwitch = false;
@@ -141,12 +137,11 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 			break;
 		case EXIT:
 			break;
-		
-			///TODO: create ExitAction here
 		case Action_DELETE:
 			DidSwitch = false;
 			pAct = new Delete(this);
 			break;
+		
 		}
 		if (pAct)
 		{
@@ -257,6 +252,49 @@ bool ApplicationManager::RemoveComponent(Component* pComp)
 		
 	}
 	return false;
+}
+void ApplicationManager::Save(ofstream & Outputfile)
+{
+	int count = 0;
+	for (int i = 0; i < CompCount; i++)
+	{
+		if (!dynamic_cast<Connection*>(CompList[i])) //Counting Components (Minus Connections)
+		{
+			count++;
+		}
+	}
+	Outputfile << count << endl; //Writing the number of components to the text file
+	for (int i = 0; i < CompCount; i++)
+	{
+		if (!dynamic_cast<Connection*>(CompList[i])) //Counting Components (Minus Connections)
+		{
+			CompList[i]->SetID(i);
+			CompList[i]->Save(Outputfile);
+			
+			//Writing component(GATES, LEDS, AND SWITCHES) info to the text file
+		}
+		
+	}
+	 // Connections
+	Outputfile << "Connections:" << endl;
+	for (int i = 0; i < CompCount; i++)
+	{
+		if (dynamic_cast<Connection*>(CompList[i]))
+		{
+			CompList[i]->Save(Outputfile); //Writing CONNECTION info to the text file
+		}
+	}
+	Outputfile << "-1"; //Flag that the file ended
+	Outputfile.close(); //Closing thr file
+}
+Component* ApplicationManager::FindComponent(int ID)
+{
+	for (int i = 0; i < CompCount; i++)
+	{
+		if (CompList[i]->GetID() == ID)          //Finding a component from its ID
+			return CompList[i];
+	}
+	return NULL;
 }
 
 

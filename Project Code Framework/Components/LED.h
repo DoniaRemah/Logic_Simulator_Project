@@ -13,6 +13,7 @@ class LED :public Component
 protected :
 	InputPin m_InputPin;
 	bool IsSelected;
+	int Id;
 public:
 	LED(const GraphicsInfo& r_GfxInfo);
 	virtual void Operate();	//Calculates the output of LED 
@@ -24,6 +25,11 @@ public:
 	virtual int GetNoInputPins();
 	void SetIsSelected(bool select);
 	bool GetIsSelected();
+	virtual void Save(ofstream& Output); //Function for save 
+	void SetID(int ID);
+	int GetID();
+	bool CheckIfOutpin(int& x, int& y);
+	bool CheckIfInpin(int& x, int& y, int& inputnum);
 	virtual ~LED();
 
 };

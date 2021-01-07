@@ -14,6 +14,7 @@ class SWITCH :public Component
 protected:
 	OutputPin m_OutputPin;
 	bool IsSelected;
+	int Id;
 public:
 	SWITCH(const GraphicsInfo& r_GfxInfo, int r_FanOut);
 	virtual void Operate();	//Calculates output of switch
@@ -25,6 +26,10 @@ public:
 	bool GetIsSelected();
 	virtual void setInputPinStatus(int n, STATUS s);	//set status of Inputpin # n, to be used by connection class.
 	OutputPin* GetOutputPin(); // Gets pointet to pin
+	void SetID(int ID);
+	int GetID();
+	virtual void Save(ofstream&);
+	bool CheckIfOutpin(int& x, int& y);
 	virtual ~SWITCH();
 };
 
