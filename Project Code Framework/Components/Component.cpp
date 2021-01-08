@@ -1,7 +1,9 @@
 #include "Component.h"
+#include<fstream>
 Component::Component(const GraphicsInfo &r_GfxInfo)
 {
 	m_GfxInfo = r_GfxInfo;	
+	countNextComp = 0;
 }
 
 bool Component :: InsideArea(int x, int y)
@@ -38,4 +40,14 @@ string Component::GetLabel()
 void Component::SetLabel(string NewLabel)
 {
 	m_Label = NewLabel;
+}
+void Component::SetNextComp(Component* ptrComp) 
+{
+	nextComp.push_back(ptrComp); //Vector function that adds a component from the back
+	countNextComp++;
+}
+Component* Component::GetNextComp(int count)
+{
+	if (count + 1 > countNextComp) return NULL;
+	return nextComp.at(count);
 }

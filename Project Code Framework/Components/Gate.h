@@ -34,8 +34,9 @@ public:
 	virtual void SetID(int ID);
 	virtual int GetID();
 	void Save(ofstream& OutPut) = 0; //Pure function to be overridden by all gates
-
-	
+	virtual InputPin* GetInPin(int n) = 0;
+	virtual OutputPin* GetOutPin() = 0;
+	void Gate::Load(ifstream& Inputfile);
 };
 
 #endif

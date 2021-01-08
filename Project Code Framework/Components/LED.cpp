@@ -12,7 +12,11 @@ LED::LED(const GraphicsInfo& r_GfxInfo)
 	
 	m_InputPin.setComponent(this);
 }
-
+LED::LED(int r_FanOut)
+{
+	m_InputPin.setComponent(this);
+	IsSelected = false;
+}
 
 void LED::Operate()
 {
@@ -118,3 +122,30 @@ void LED::UnConnectInputPin()
 {
 	m_InputPin.unConnect();
 }
+void LED::GetinputPinCoordinates(int inputnum, int& x, int& y)
+{
+	if (inputnum == 1)
+	{
+		x = m_GfxInfo.x1;
+		y = m_GfxInfo.y1 + 24;
+	}
+}
+void LED::Load(ifstream& Inputfile)
+{
+	int ID;
+	string label;
+	int Cx;
+	int Cy;
+	Inputfile >> ID;
+	Inputfile >> label;
+	Inputfile >> Cx;
+	Inputfile >> Cy;
+	m_GfxInfo.x1 = Cx - UI.AND2_Height / 2;
+	m_GfxInfo.x2 = Cx + UI.AND2_Height / 2;
+	m_GfxInfo.y1 = Cy - UI.AND2_Width / 2;
+	m_GfxInfo.y2 = Cy + UI.AND2_Width / 2;
+	SetLabel(label);
+	Id = ID;
+}
+InputPin* LED::GetInPin(int n) { return &m_InputPin; }
+OutputPin*LED:: GetOutPin() { return NULL; }

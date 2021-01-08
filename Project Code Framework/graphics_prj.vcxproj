@@ -143,6 +143,7 @@
     <ClCompile Include="Actions\Delete.cpp" />
     <ClCompile Include="Actions\EDIT.cpp" />
     <ClCompile Include="Actions\Label.cpp" />
+    <ClCompile Include="Actions\Load.cpp" />
     <ClCompile Include="Actions\Save.cpp" />
     <ClCompile Include="Actions\Select.cpp" />
     <ClCompile Include="Actions\Simulate.cpp" />
@@ -224,6 +225,7 @@
     <ClInclude Include="Actions\Delete.h" />
     <ClInclude Include="Actions\EDIT.h" />
     <ClInclude Include="Actions\Label.h" />
+    <ClInclude Include="Actions\Load.h" />
     <ClInclude Include="Actions\Save.h" />
     <ClInclude Include="Actions\Select.h" />
     <ClInclude Include="Actions\Simulate.h" />

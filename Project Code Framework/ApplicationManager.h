@@ -22,9 +22,6 @@ private:
 	Input* InputInterface; //pointer to the Input Clase Interface
 	Connection* ConnList[MaxCompCount]; // List of Connections
 
-public:
-
-
 public:	
 	ApplicationManager(); //constructor
 
@@ -48,6 +45,9 @@ public:
 	//To save in a text file
 	void Save(ofstream& Output);
 	Component* FindComponent(int ID);
+	//To load from a text file
+	void Load(ifstream& Input);
+	void DeleteEverything();
 	//destructor
 	~ApplicationManager();
 };

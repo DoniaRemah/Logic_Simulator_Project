@@ -17,6 +17,7 @@
 #include"Actions/Delete.h"
 #include"Actions/Select.h"
 #include"Actions/Save.h"
+#include"Actions/Load.h"
 
 #include <iostream>
 #include<fstream>
@@ -127,9 +128,10 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 			pAct = new Saving(this); 
 			DidSwitch = false;
 			break; 
-			  
-                        
-
+		case LOAD:
+			pAct = new Loading(this); //Loading from a text file
+			DidSwitch = false;
+			break;
 		case ADD_CONNECTION:
 			pAct = new AddConnection(this);
 			DidSwitch = false;
@@ -302,7 +304,7 @@ void ApplicationManager::RemoveComponent(Component* pComp)
 			if (i == CompCount - 1) 
 			{ 
 				CompList[i] = NULL; CompCount--; 
-				cout << "Component Deleted, Component count is: " << CompCount << endl;
+				
 			}
 			
 			else
@@ -310,7 +312,7 @@ void ApplicationManager::RemoveComponent(Component* pComp)
 				CompList[i] = CompList[CompCount - 1];
 				CompList[CompCount-1] = NULL;
 				CompCount--;
-				cout << "Component Deleted, Component count is: " << CompCount << endl;
+				
 			}
 		}
 		
@@ -349,6 +351,94 @@ void ApplicationManager::Save(ofstream & Outputfile)
 	Outputfile << "-1"; //Flag that the file ended
 	Outputfile.close(); //Closing the file
 }
+
+void ApplicationManager::Load(ifstream& Inputfile) //Reading a circuit from a text file
+{
+	DeleteEverything();
+	CompCount = 0;
+	int count = 0;
+	Inputfile >> count; //Count of all components (EXCEPT CONNECTIONS)
+	for (int i = 0; i < count; i++)
+	{
+		string type; //Component type
+		Inputfile >> type;
+		Component* pc; //Component pointer to construct the component in the drawing area
+		if (type == "AND2")
+			pc = new AND2(AND2_FANOUT);
+		else if (type == "LED")
+			pc = new LED(AND2_FANOUT);
+		else if (type == "SWITCH")
+			pc = new SWITCH(AND2_FANOUT);
+		else if (type == "AND3")
+			pc = new AND3(AND2_FANOUT);
+		else if (type == "BUFF")
+			pc = new BUFF(AND2_FANOUT);
+		else if (type == "NOT")
+			pc = new INV(AND2_FANOUT);
+		else if (type == "NAND2")
+			pc = new NAND2(AND2_FANOUT);
+		else if (type == "OR2")
+			pc = new OR2(AND2_FANOUT);
+		else if (type == "NOR2")
+			pc = new NOR2(AND2_FANOUT);
+		else if (type == "NOR3")
+			pc = new NOR3(AND2_FANOUT);
+		else if (type == "XNOR2")
+			pc = new XNOR2(AND2_FANOUT);
+		else if (type == "XOR2")
+			pc = new XOR2(AND2_FANOUT);
+		else 
+			pc = new XOR3(AND2_FANOUT);
+
+		pc->Load(Inputfile);
+		AddComponent(pc); //Adding the component to the component 
+	}
+	//Reading the rest of the circuit data (in order of the file format)
+		string Text;
+		Inputfile >> Text;
+		int SourceID;
+		int DestID;
+		int pinNum;
+		Inputfile >> SourceID;
+		Inputfile >> DestID;
+		Inputfile >> pinNum;
+
+		while (SourceID != -1) //Meaning the end of the text file(-1)
+		{
+			GraphicsInfo gfxConnection;
+
+			Component* pSource =FindComponent(SourceID);
+
+			GraphicsInfo gfxSource = pSource->GetGfxInfo(); //Coordinates of Source Component
+			 //Estimation of the starting point of the connection
+			gfxConnection.x1 = gfxSource.x1 + UI.AND2_Width - 3;
+			gfxConnection.y1 = gfxSource.y1 + 25;
+
+			Component* pDst = FindComponent(DestID);
+
+			int xDst;
+			int yDest;
+			pDst->GetinputPinCoordinates(pinNum, xDst, yDest); //Getting coordinates of input pins of the destination component
+			//End point of connection
+			gfxConnection.x2 = xDst;
+			gfxConnection.y2 = yDest;
+
+
+			OutputPin* pinSource = pSource->GetOutPin();
+			InputPin* pinDest = pDst->GetInPin(pinNum);
+			Connection* pConn = new Connection(gfxConnection, pinSource, pinDest,pSource,pDst);
+			pinDest->SetConnection(pConn);
+			pinDest->SetConnectionStat(true);
+			pinSource->ConnectTo(pConn);
+			pSource->SetNextComp(pConn);
+			pConn->SetNextComp(pDst);
+			AddComponent(pConn);
+			Inputfile >> SourceID;
+			Inputfile >> DestID;
+			Inputfile >> pinNum;
+		}
+	}
+
 Component* ApplicationManager::FindComponent(int ID)
 {
 	for (int i = 0; i < CompCount; i++)
@@ -393,4 +483,10 @@ Connection** ApplicationManager::CheckConnection(int& ConC)
 		}
 	}
 	return ConnList;
+}
+void ApplicationManager::DeleteEverything()
+{
+	for (int i = 0; i < CompCount; i++)
+		delete CompList[i];
+
 }

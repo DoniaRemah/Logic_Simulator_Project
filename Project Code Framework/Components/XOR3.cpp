@@ -6,7 +6,10 @@ XOR3::XOR3(const GraphicsInfo& r_GfxInfo, int r_FanOut) :Gate(3, r_FanOut)
 	m_GfxInfo.x2 = r_GfxInfo.x2;
 	m_GfxInfo.y2 = r_GfxInfo.y2;
 }
+XOR3::XOR3( int r_FanOut) :Gate(3, r_FanOut)
+{
 
+}
 
 void XOR3::Operate()
 {
@@ -69,4 +72,23 @@ void XOR3::Save(ofstream& Output)
 		Output << endl;
 	}
 }
-
+void XOR3::GetinputPinCoordinates(int pinNum, int& x, int& y) //Divided into 4 parts 
+{
+	if (pinNum == 1)
+	{
+		x = m_GfxInfo.x1;
+		y = m_GfxInfo.y1 + 12;
+	}
+	if (pinNum == 2)
+	{
+		x = m_GfxInfo.x1;
+		y = m_GfxInfo.y1 + 24;
+	}
+	if (pinNum == 3)
+	{
+		x = m_GfxInfo.x1;
+		y = m_GfxInfo.y1 + 36;
+	}
+}
+ InputPin* XOR3::GetInPin(int n) { return m_InputPins + n - 1; }
+ OutputPin* XOR3::GetOutPin() { return &m_OutputPin; }

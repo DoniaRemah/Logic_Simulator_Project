@@ -7,7 +7,10 @@ NAND2::NAND2(const GraphicsInfo& r_GfxInfo, int r_FanOut) :Gate(2, r_FanOut)
 	m_GfxInfo.x2 = r_GfxInfo.x2;
 	m_GfxInfo.y2 = r_GfxInfo.y2;
 }
+NAND2::NAND2(int r_FanOut) :Gate(2, r_FanOut)
+{
 
+}
 
 void NAND2::Operate()
 {
@@ -69,3 +72,18 @@ void NAND2::Save(ofstream& Output)
 		Output << endl;
 	}
 }
+void NAND2::GetinputPinCoordinates(int pinNum, int& x, int& y)
+{
+	if (pinNum == 1)
+	{
+		x = m_GfxInfo.x1;
+		y = m_GfxInfo.y1 + 16;
+	}
+	if (pinNum == 2)
+	{
+		x = m_GfxInfo.x1;
+		y = m_GfxInfo.y1 + 32;
+	}
+}
+ InputPin* NAND2::GetInPin(int n) { return m_InputPins + n - 1; }
+ OutputPin* NAND2::GetOutPin() { return &m_OutputPin; }

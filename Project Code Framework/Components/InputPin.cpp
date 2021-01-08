@@ -34,3 +34,15 @@ void InputPin::unConnect()
 int InputPin::GetCompID() {
 	return pComp->GetID();
 }
+void InputPin::SetConnectionStat(bool x)
+{
+	connected = x;
+}
+bool InputPin::GetConnectionStat()
+{
+	return connected;
+}
+void InputPin::SetConnection(Connection* ptrIn)
+{
+	pIn = ptrIn;
+}

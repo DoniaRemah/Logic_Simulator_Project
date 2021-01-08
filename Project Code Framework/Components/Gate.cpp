@@ -69,3 +69,20 @@ void Gate::UnConnectOuputPin(Connection* Conn)
 {
 	m_OutputPin.unConnect(Conn);
 }
+void Gate::Load(ifstream& Inputfile)
+{
+	int ID;
+	string label;
+	int Cx;
+	int Cy;
+	Inputfile >> ID;
+	Inputfile >> label;
+	Inputfile >> Cx;
+	Inputfile >> Cy;
+	m_GfxInfo.x1 = Cx - UI.AND2_Height / 2;
+	m_GfxInfo.x2 = Cx + UI.AND2_Height / 2;
+	m_GfxInfo.y1 = Cy - UI.AND2_Width / 2;
+	m_GfxInfo.y2 = Cy + UI.AND2_Width / 2;
+	SetLabel(label);
+	Id = ID;
+}

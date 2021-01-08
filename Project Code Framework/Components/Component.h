@@ -3,7 +3,10 @@
 
 #include "..\Defs.h"
 #include "..\GUI\Output.h"
+#include"InputPin.h"
+#include"OutputPin.h"
 #include<fstream> //For save and load
+#include<vector>
 
 //Base class for classes Gate, Switch, and LED.
 class Component
@@ -13,6 +16,8 @@ private:
 protected:
 	GraphicsInfo m_GfxInfo;	//The parameters required to draw a component
 	int count;
+	vector<Component*>nextComp;
+	int countNextComp;
 public:
 	Component(const GraphicsInfo &r_GfxInfo);
 	virtual void Operate() = 0;	//Calculates the output according to the inputs
@@ -29,8 +34,12 @@ public:
 	virtual void SetID(int ID) = 0;
 	virtual int GetID() = 0;
 	Component();	
-	
-	
+	virtual void GetinputPinCoordinates(int inputnum, int& x, int& y) = 0;
+	virtual InputPin* GetInPin(int n) = 0;
+	virtual OutputPin* GetOutPin() = 0;
+	virtual void Load(ifstream& input) = 0;
+	void SetNextComp(Component*);
+	Component* GetNextComp(int count);
 	
 	//Destructor must be virtual
 	virtual ~Component();
