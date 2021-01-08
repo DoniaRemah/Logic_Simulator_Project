@@ -35,8 +35,8 @@ public:
 	void DrawAND3(GraphicsInfo r_GfxInfo, bool selected = false)const;
 	void DrawNOR3(GraphicsInfo r_GfxInfo, bool selected = false)const;
 	void DrawXOR3(GraphicsInfo r_GfxInfo, bool selected = false)const;
-	void DrawSWITCH(GraphicsInfo r_GfxInfo, bool selected = false)const;
-	void DrawBULB(GraphicsInfo r_GfxInfo, bool selected = false)const;
+	void DrawSWITCH(GraphicsInfo r_GfxInfo, bool selected = false,bool On = false)const;
+	void DrawBULB(GraphicsInfo r_GfxInfo, bool selected = false, bool On=false)const;
 
 	// Draws Connection
 	void DrawConnection(GraphicsInfo r_GfxInfo, bool selected = false) const;

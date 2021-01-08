@@ -7,7 +7,7 @@
 #include "Actions\Action.h"
 #include "Components\Component.h"
 #include "Components/Connection.h"
-
+#include "Components/SWITCH.h"
 //Main class that manages everything in the application.
 class ApplicationManager
 {
@@ -17,7 +17,7 @@ class ApplicationManager
 private:
 	int CompCount;		//Actual number of Components
 	Component* CompList[MaxCompCount];	//List of all Components (Array of pointers)
-
+	SWITCH* mSwitch;
 	Output* OutputInterface; //pointer to the Output Clase Interface
 	Input* InputInterface; //pointer to the Input Clase Interface
 	Connection* ConnList[MaxCompCount]; // List of Connections
@@ -29,7 +29,7 @@ public:
 	ApplicationManager(); //constructor
 
 	//Reads the required action from the user and returns the corresponding action type
-	ActionType GetUserAction();
+	ActionType GetUserAction(int* x = 0, int* y = 0);
 	
 	//Creates an action and executes it
 	void ExecuteAction(ActionType);
@@ -62,6 +62,12 @@ public:
 	void CopyComponent(Component* Copy_Comp); // Adds Coppied Component o Clipbard.
 
 	void PasteComponent(GraphicsInfo GInfo); // Draws Component and adds it to CompList.
+
+	bool CheckSwitch(int x, int y);
+
+	void ChangeSwitchF();
+
+	void SimulateCircuit();
 
 	~ApplicationManager(); //destructor
 };

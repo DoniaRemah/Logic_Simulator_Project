@@ -109,13 +109,12 @@ if (IsValidParameters)
 		}
 
 		// Creating Connection Pointer
-		Connection* pA = new Connection(GInfo, NULL, NULL,m_SrcComp,m_DstComp);
+		Connection* pA = new Connection(GInfo, SrcPin, DstPin,m_SrcComp,m_DstComp);
 
 		// Linking output pin of src component with src pin of connection.
 		if (SrcPin != NULL)
 		{
 			SrcPin->ConnectTo(pA);
-			pA->setSourcePin(SrcPin);
 		}
 		
 
@@ -123,7 +122,6 @@ if (IsValidParameters)
 		// Linking Input pin of Dst component with dst component of connection.
 		if (DstPin != NULL)
 		{
-			pA->setDestPin(DstPin);
 			DstPin->connect();
 			pA->SetDstPinNumber(AvailablePinNumber);
 		}

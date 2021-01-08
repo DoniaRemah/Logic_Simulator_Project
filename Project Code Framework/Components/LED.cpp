@@ -16,9 +16,7 @@ LED::LED(const GraphicsInfo& r_GfxInfo)
 
 void LED::Operate()
 {
-	int inpstatus = GetInputPinStatus(1);
-
-
+	
 }
 
 
@@ -27,7 +25,15 @@ void LED::Operate()
 void LED::Draw(Output* pOut)
 {
 	//Call output class and pass gate drawing info to it.
-	pOut->DrawBULB(m_GfxInfo, IsSelected);
+	if (GetInputPinStatus(1) == LOW)
+	{
+		pOut->DrawBULB(m_GfxInfo, IsSelected);
+	}
+	else
+	{
+		pOut->DrawBULB(m_GfxInfo, IsSelected,true);
+	}
+
 	pOut->DrawString(m_GfxInfo.x1, m_GfxInfo.y1 - 20, GetLabel());
 }
 

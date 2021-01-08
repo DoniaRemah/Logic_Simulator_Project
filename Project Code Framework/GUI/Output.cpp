@@ -374,26 +374,28 @@ void Output::DrawXOR3(GraphicsInfo r_GfxInfo, bool selected)const
 
 }
 //SWITCH
-void Output::DrawSWITCH(GraphicsInfo r_GfxInfo, bool selected)const
+void Output::DrawSWITCH(GraphicsInfo r_GfxInfo, bool selected, bool On)const
 {
 	string GateImage;
 	if (selected == 1)	//use image in the highlighted case
 		GateImage = "Images\\Menu\\H_SWITCH_OFF.jpg";
-	else
+	else if (On == false)
 		GateImage = "Images\\Menu\\SWITCH_OFF.jpg";
-
-
+	else if (On == true)
+		GateImage = "images\\Menu\\SWITCH_ON.jpg";
 	pWind->DrawImage(GateImage, r_GfxInfo.x1, r_GfxInfo.y1, UI.SWITCH_Width, UI.SWITCH_Height);
 
 }
 //BULB
-void Output::DrawBULB(GraphicsInfo r_GfxInfo, bool selected)const
+void Output::DrawBULB(GraphicsInfo r_GfxInfo, bool selected, bool On)const
 {
 	string GateImage;
 	if (selected)	//use image in the highlighted case
 		GateImage = "Images\\Menu\\H_BULB_OFF.jpg";
-	else
+	else if (On == false)
 		GateImage = "Images\\Menu\\BULB_OFF.jpg";
+	else if (On == true)
+		GateImage = "images\\Menu\\BULB_ON.jpg";
 
 
 	pWind->DrawImage(GateImage, r_GfxInfo.x1, r_GfxInfo.y1, UI.BULB_Width, UI.BULB_Height);

@@ -43,10 +43,16 @@ string Input::GetSrting(Output* pOut, string msg,string message2)
 	return message2;
 }
 //This function reads the position where the user clicks to determine the desired action.
-ActionType Input::GetUserAction() const
+ActionType Input::GetUserAction(int* r_x, int* r_y) const
 {
 	int x, y;
 	pWind->WaitMouseClick(x, y);	//Get the coordinates of the user click
+	if (r_x != NULL && r_y != NULL)
+	{
+		*r_x = x;
+		*r_y = y;
+	}
+
 	if (UI.AppMode == DESIGN)	//application is in design mode
 	{
 		//[1] If user clicks on the Toolbar1(GATES)
@@ -141,19 +147,23 @@ ActionType Input::GetUserAction() const
 		}
 
 		//[2] User clicks on the drawing area
-		if (y >= UI.ToolBarHeight && y< UI.height-UI.StatusBarHeight)
-		{
-			return EMPTYAREA;
-		}
+		
 		if (y <= UI.height && y > (UI.height - UI.StatusBarHeight))
 		{
 			return STATUS_BAR;
 		}
 		//[3] User clicks on the status bar
-
+		if (y >= UI.ToolBarHeight && y < UI.height - UI.StatusBarHeight)
+		{
+			return EMPTYAREA;
+		}
 	}
 	else	//Application is in Simulation mode
 	{
+		if (y >= UI.ToolBarHeight && y < UI.height - UI.StatusBarHeight)
+		{
+			return Change_Switch;
+		}
 		int ClickedItemOrder = x / UI.ToolItemWidth3;	//This should be changed after creating the compelete simulation bar 
 		switch (ClickedItemOrder)
 		{
@@ -163,6 +173,7 @@ ActionType Input::GetUserAction() const
 		case ITM_VALID: return VALIDATE;
 		case ITM_SIM: return  SIMULATE;
 		}
+		
 	}
 
 }

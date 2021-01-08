@@ -69,3 +69,9 @@ void Gate::UnConnectOuputPin(Connection* Conn)
 {
 	m_OutputPin.unConnect(Conn);
 }
+
+void Gate::Save(ofstream& OutPut)
+{
+
+}
+

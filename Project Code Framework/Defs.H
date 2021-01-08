@@ -49,8 +49,8 @@ enum ActionType
 	Action_SELECT,
 	Action_DELETE,
 	EXIT,		//Exit the application
+	STATUS_BAR,//A click on the status bar
 	EMPTYAREA,
-	STATUS_BAR,		//A click on the status bar
 	DSN_TOOL,	//A click on an empty place in the design tool bar
 
 };

@@ -25,6 +25,7 @@
 #include "Actions/Paste.h"
 #include "Components/LED.h"
 #include "Components/SWITCH.h"
+#include "Actions/ChangeSwitch.h"
 ApplicationManager::ApplicationManager()
 {
 	ClipBoard = NULL;
@@ -36,7 +37,7 @@ ApplicationManager::ApplicationManager()
 		ConnList[i] = NULL;
 	}
 		
-
+	mSwitch = NULL;
 	//Creates the Input / Output Objects & Initialize the GUI
 	OutputInterface = new Output();
 	InputInterface = OutputInterface->CreateInput();
@@ -50,10 +51,10 @@ void ApplicationManager::AddComponent(Component* pComp)
 }
 ////////////////////////////////////////////////////////////////////
 
-ActionType ApplicationManager::GetUserAction()
+ActionType ApplicationManager::GetUserAction(int * x,int *y)
 {
 	//Call input to get what action is reuired from the user
-	return InputInterface->GetUserAction(); 	
+	return InputInterface->GetUserAction(x,y); 	
 }
 ////////////////////////////////////////////////////////////////////
 
@@ -178,11 +179,48 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 			UI.AppMode = DESIGN;
 			DidSwitch = true;
 			break;
-		case SIMULATE:
+		case SIMULATE: 
+			OutputInterface->PrintMsg("SIMULATING CIRCUIT.");
+			bool InSim = true; // Boolean to be able to Select and Unselect Icon Simulate.
+			SimulateCircuit(); // Display Output of Circuit Upon Clicking on Simulate.
+			UpdateInterface();
+			do // Stay in While Loop Untill Switch to Design Mode or Clicking Simulate Icon. 
+			{
+				Action* pAct = NULL;
+				int x=0, y=0;
+				ActType = GetUserAction(&x,&y);
+				switch (ActType)
+				{
 
+				case DSN_MODE: // USer Wants to switch to design Mode.
+					UI.AppMode = DESIGN;
+					InSim = false;
+					DidSwitch = true;
+					break;
+				case SIMULATE: // User Clicked on Simulate.(Break out of Loop)
+					InSim = false;
+					break;
+				case Change_Switch: // User Changing Switch Output
+					if (CheckSwitch(x, y))
+					{
+						pAct = new ChangeSwitch(this);
+					}
+					DidSwitch = false;
+					break;
+				}
+				if (pAct)
+				{
+					pAct->Execute();
+					SimulateCircuit();
+					delete pAct;
+					pAct = NULL;
+					UpdateInterface();
+				}
+				
+			} while (InSim == true );
+			OutputInterface->ClearStatusBar();
 			break;
-		}
-		
+		}	
 		if (pAct)
 		{
 			pAct->Execute();
@@ -244,7 +282,7 @@ bool ApplicationManager::selectcomponent(int x, int y)
 			return true;
 		}
 	}
-	return false;
+	return false; 
 }
 
 void ApplicationManager::RemoveComponent(Component* pComp)
@@ -595,3 +633,60 @@ void ApplicationManager :: UnConnectInputPin(Component* Comp)
 	}
 }
 
+
+bool ApplicationManager::CheckSwitch(int x,int y)
+{
+	Component* mComp = GetComponent(x, y);
+	mSwitch = dynamic_cast<SWITCH*> (mComp);
+	if (mSwitch != NULL)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+void ApplicationManager:: ChangeSwitchF()
+{
+	if (mSwitch != NULL)
+	{
+		mSwitch->Operate();
+	}
+}
+
+void ApplicationManager::SimulateCircuit()
+{
+	// Getting List of Components
+	int ConCount = 0;
+	Connection** myCOnn = CheckConnection(ConCount);
+	for (int i = 0; i < ConCount; i++) // A Loop that Operates Connections and Gates 
+	{ 
+		Component* myDstGate = myCOnn[i]->GetDstComponent();
+		Component* mySrcGate = myCOnn[i]->GetSourceComponent();
+		LED* mled = dynamic_cast <LED*>(myDstGate);
+		if (mled == NULL)
+		{
+			SWITCH* Switch = dynamic_cast <SWITCH*> (mySrcGate);
+			if (Switch == NULL)
+			{
+				mySrcGate->Operate(); // First Operate the Source Gate of Component: Calculate Output Pin Status (If not Led or Switch)
+			}
+		}
+		myCOnn[i]->Operate(); // Then Operate the Connection (Sets input pin status of Dst Gate)
+		myDstGate->Operate(); // Then Operate the Destinarion Gate.
+	}
+	//for (int i = 0; i < ConCount; i++) // A Loop that Operates Led.
+	//{
+	//	LED* myLed = dynamic_cast<LED*>(CompList[i]);
+	//	if (myLed != NULL)
+	//	{
+	//		Component* myDstGate = myCOnn[i]->GetDstComponent();
+	//		if (myLed == myDstGate)
+	//		{
+	//			myCOnn[i]->Operate(); // Set Input Pin of Led 
+	//		}
+	//	}
+	//}
+}
