@@ -58,8 +58,16 @@ void NOR2::setInputPinStatus(int n, STATUS s)
 }
 void NOR2::Save(ofstream& Output)
 {
-	Output << "NOR2" << "  " << Id << " " << GetLabel() << " "; //Printing the gate's info based on the file format
-	Output << m_GfxInfo.x1 << "  " << m_GfxInfo.y1;
-	Output << endl;                                             //Id is an integer defined in Gate class 
+	if (GetLabel() == "")
+	{
+		Output << "NOR2" << "  " << Id << " " << "$" << " "; //Printing the gate's info based on the file format
+		Output << m_GfxInfo.x1 << "  " << m_GfxInfo.y1;
+		Output << endl;      //Id is an integer defined in Gate class 
+	}
+	else {
+		Output << "NOR2" << "  " << Id << " " << GetLabel() << " ";
+		Output << m_GfxInfo.x1 << "  " << m_GfxInfo.y1;
+		Output << endl;
+	}
 }
 

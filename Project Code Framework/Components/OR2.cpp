@@ -58,7 +58,15 @@ void OR2::setInputPinStatus(int n, STATUS s)
 
 void OR2::Save(ofstream& Output)
 {
-	Output << "OR2" << "  " << Id << " " << GetLabel() << " "; //Printing the gate's info based on the file format
-	Output << m_GfxInfo.x1 << "  " << m_GfxInfo.y1;
-	Output << endl;                                             //Id is an integer defined in Gate class 
+	if (GetLabel() == "")
+	{
+		Output << "OR2" << "  " << Id << " " << "$" << " "; //Printing the gate's info based on the file format
+		Output << m_GfxInfo.x1 << "  " << m_GfxInfo.y1;
+		Output << endl;      //Id is an integer defined in Gate class 
+	}
+	else {
+		Output << "OR2" << "  " << Id << " " << GetLabel() << " ";
+		Output << m_GfxInfo.x1 << "  " << m_GfxInfo.y1;
+		Output << endl;
+	}
 }

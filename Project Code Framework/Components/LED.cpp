@@ -74,9 +74,17 @@ int LED::GetNoInputPins()
 }
 void LED::Save(ofstream& Output)
 {
-	Output << "LED" << "  " << Id << " " << GetLabel() << " "; //Printing info of LED (Like what happenned in gates)
-	Output << m_GfxInfo.x1 << "  " << m_GfxInfo.y1;
-	Output << endl;
+	if (GetLabel() == "")
+	{
+		Output << "LED" << "  " << Id << " " << "$" << " "; //Printing the gate's info based on the file format
+		Output << m_GfxInfo.x1 << "  " << m_GfxInfo.y1;
+		Output << endl;      //Id is an integer defined in Gate class 
+	}
+	else {
+		Output << "LED" << "  " << Id << " " << GetLabel() << " ";
+		Output << m_GfxInfo.x1 << "  " << m_GfxInfo.y1;
+		Output << endl;
+	}
 }
 void LED::SetID(int ID) {
 	Id = ID;

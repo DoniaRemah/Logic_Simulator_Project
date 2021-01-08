@@ -57,8 +57,15 @@ void NAND2::setInputPinStatus(int n, STATUS s)
 }
 void NAND2::Save(ofstream& Output)
 {
-	Output << "NAND2" << "  " << Id << " " << GetLabel() << " "; //Printing the gate's info based on the file format
-	Output << m_GfxInfo.x1 << "  " << m_GfxInfo.y1;
-	Output << endl;                                             //Id is an integer defined in Gate class 
+	if (GetLabel() == "")
+	{
+		Output << "NAND2" << "  " << Id << " " << "$" << " "; //Printing the gate's info based on the file format
+		Output << m_GfxInfo.x1 << "  " << m_GfxInfo.y1;
+		Output << endl;      //Id is an integer defined in Gate class 
+	}
+	else {
+		Output << "NAND2" << "  " << Id << " " << GetLabel() << " ";
+		Output << m_GfxInfo.x1 << "  " << m_GfxInfo.y1;
+		Output << endl;
+	}
 }
-
