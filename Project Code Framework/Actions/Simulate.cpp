@@ -6,9 +6,15 @@
 //
 //}
 //
+//bool Simulate::ReadActionParameters()
+//{
 //
+//}
 //
+//void Simulate::Execute()
+//{
 //
+//}
 //
 //void Simulate::Undo()
 //{}
