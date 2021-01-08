@@ -122,7 +122,7 @@ ActionType Input::GetUserAction() const
 			}
 			else if (x>630 && x<670)
 			{
-				cout << "Clicked on Delete";
+				cout << "Clicked on Delete" << endl;
 				return Action_DELETE;	
 			}
 			else if (x >730 && x < 830)

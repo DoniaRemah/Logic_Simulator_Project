@@ -34,7 +34,10 @@ string Component::GetLabel()
 {
 	return m_Label;
 }
-
+void Component::SetGfxInfo(const GraphicsInfo& gfx)
+{
+	m_GfxInfo = gfx;
+}
 void Component::SetLabel(string NewLabel)
 {
 	m_Label = NewLabel;

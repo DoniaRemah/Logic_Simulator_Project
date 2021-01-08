@@ -24,7 +24,7 @@ bool AddNORgate3::ReadActionParameters()
 		pOut->PrintMsg("Invalid position. Operation was cancelled");
 		return false;
 	}
-		if (pManager->selectcomponent(Cx, Cy))
+	if (pManager->selectcomponent(Cx, Cy))
 	{
 		pOut->PrintMsg("Invalid position. Operation was cancelled");
 		return false;

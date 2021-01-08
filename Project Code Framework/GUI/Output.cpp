@@ -422,14 +422,33 @@ void Output::DrawConnection(GraphicsInfo r_GfxInfo, bool selected) const
 		if (r_GfxInfo.x1 < r_GfxInfo.x2)
 		{
 			x3 = r_GfxInfo.x1 + ((r_GfxInfo.x2 - r_GfxInfo.x1) / 2);
+			pWind->DrawLine(x3, r_GfxInfo.y1, x3, r_GfxInfo.y2);
+			pWind->DrawLine(x3, r_GfxInfo.y2, r_GfxInfo.x2, r_GfxInfo.y2);
 		}
 		else
 		{
 			x3 = r_GfxInfo.x1 + 10;
+			if (r_GfxInfo.y1 < r_GfxInfo.y2)
+			{
+				pWind->DrawLine(x3, r_GfxInfo.y1, x3, r_GfxInfo.y2 - 20);
+				pWind->DrawLine(x3, r_GfxInfo.y2 - 20, r_GfxInfo.x2 - 10, r_GfxInfo.y2 - 20);
+				pWind->DrawLine(r_GfxInfo.x2 - 10, r_GfxInfo.y2 - 20, r_GfxInfo.x2 - 10, r_GfxInfo.y2);
+				pWind->DrawLine(r_GfxInfo.x2 - 10, r_GfxInfo.y2, r_GfxInfo.x2, r_GfxInfo.y2);
+			}
+			else
+			{
+				pWind->DrawLine(x3, r_GfxInfo.y1, x3, r_GfxInfo.y2 + 40);
+				pWind->DrawLine(x3, r_GfxInfo.y2+40, r_GfxInfo.x2 - 10, r_GfxInfo.y2 +40);
+				pWind->DrawLine(r_GfxInfo.x2 - 10, r_GfxInfo.y2 + 40, r_GfxInfo.x2 - 10, r_GfxInfo.y2);
+				pWind->DrawLine(r_GfxInfo.x2 - 10, r_GfxInfo.y2, r_GfxInfo.x2, r_GfxInfo.y2);
+			}
+
+
 		}
+
 		pWind->DrawLine(r_GfxInfo.x1, r_GfxInfo.y1, x3, r_GfxInfo.y1);
-		pWind->DrawLine(x3, r_GfxInfo.y1, x3, r_GfxInfo.y2);
-		pWind->DrawLine(x3, r_GfxInfo.y2, r_GfxInfo.x2, r_GfxInfo.y2);
+		
+		
 	}
 }
 bool Output::IsDrawingArea(int x, int y) {

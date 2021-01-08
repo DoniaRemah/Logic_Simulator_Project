@@ -29,12 +29,12 @@ bool AddConnection::ReadActionParameters()
 
 		pIn->GetPointClicked(x1, y1);
 		validSource = CheckValidSrc(CompList,Comp_Count, validOutPin,SrcPin);
-		if (validSource == false)
+		if (validSource == false) 
 		{
 			pOut->PrintMsg("INVALID AREA,Can Not be a SOURCE Component. Operation Cancelled.");
 			return false;
 		}
-		else if (validOutPin == false)
+		else if (validOutPin == false) // if Output Pin Invalid
 		{
 			pOut->PrintMsg("INVALID OUTPUT PIN. Operation Cancelled.");
 			return false;
@@ -52,7 +52,7 @@ bool AddConnection::ReadActionParameters()
 			pOut->PrintMsg("INVALID AREA, Can Not be a DESTINATION Component. Operation Cancelled.");
 			return false;
 		}
-		else if (validInPin == false)
+		else if (validInPin == false) // If input Pin Invalid
 		{
 			pOut->PrintMsg("INVALID: INPUT PIN(S) ALREADY CONNECTED. Operation Cancelled.");
 			return false;
@@ -76,7 +76,7 @@ if (IsValidParameters)
 		GInfo.x1 = m_SrcComp->GetGfxInfo().x2;
 		GInfo.x2 = m_DstComp->GetGfxInfo().x1;
 		GInfo.y1 = m_SrcComp->GetGfxInfo().y1 + (m_SrcComp->GetGfxInfo().y2 - m_SrcComp->GetGfxInfo().y1) / 2;
-		
+
 		if (m_DstComp->GetNoInputPins() == 2) // If Number of Pins is 2
 		{
 			if (AvailablePinNumber == 1) 
@@ -148,27 +148,27 @@ bool AddConnection::CheckValidSrc(Component** CompList,int Comp_Count, bool &val
 			Gate* SrcGate = dynamic_cast<Gate*>(m_SrcComp);
 			if (SrcGate == NULL)
 			{
-				SWITCH* SrcSwitch = dynamic_cast<SWITCH*>(m_SrcComp);
+				SWITCH* SrcSwitch = dynamic_cast<SWITCH*>(m_SrcComp); // If Not Gate then it is Switch
 				if (SrcSwitch ==NULL)
 				{
-					validcomp = false;
+					validcomp = false; // If not Switch then Invalid Source.
 				}
 				else
 				{
-					SrcPin = SrcSwitch->GetOutputPin();
-					CanConnect = SrcPin->CanConnect();
+					SrcPin = SrcSwitch->GetOutputPin(); // Pointer to Output pin
+					CanConnect = SrcPin->CanConnect(); // Checking if Fanout is not Exceeded.
 					validcomp = true;
 				}
 			}
 			else
 			{
-				SrcPin = SrcGate->GetOutputPin();
+				SrcPin = SrcGate->GetOutputPin(); 
 				CanConnect = SrcPin->CanConnect();
 				validcomp = true;
 			}
 			if (validcomp == true)
 			{
-				if (CanConnect)
+				if (CanConnect) 
 				{
 					validOutPin = true;
 				}		
@@ -196,18 +196,18 @@ bool AddConnection::CheckValidDst(Component** CompList, int Comp_Count, bool& va
 			Gate* DstGate = dynamic_cast<Gate*>(m_DstComp);
 			if (DstGate == NULL)
 			{
-				LED* DstLed = dynamic_cast<LED*>(m_DstComp);
+				LED* DstLed = dynamic_cast<LED*>(m_DstComp); // If not Gate then it is a Led.
 				if (DstLed == NULL)
 				{
-					validDst = false;
+					validDst = false; // If not a Led, then it's an invalid Destination.
 				}
 				else
 				{
 					validDst = true;
-					DstPin = DstLed->GetInputPin();
+					DstPin = DstLed->GetInputPin(); // Pointer to Input pin of Destination Component
 					if (DstPin != NULL)
 					{
-						isConnected = DstPin->IsConnected();
+						isConnected = DstPin->IsConnected(); // Checking if Input pin is Already Connected.
 						if (isConnected)
 						{
 							validInPin = false;
@@ -224,7 +224,7 @@ bool AddConnection::CheckValidDst(Component** CompList, int Comp_Count, bool& va
 			else
 			{
 				validDst = 1;
-			
+				// For Loop that checks if there is an available input pin in gate.
 				for (int k = 1; k <= DstGate->GetNoInputPins() ; k++)
 				{				
 					DstPin = DstGate->GetInputPin(k);
