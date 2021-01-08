@@ -678,16 +678,4 @@ void ApplicationManager::SimulateCircuit()
 		myCOnn[i]->Operate(); // Then Operate the Connection (Sets input pin status of Dst Gate)
 		myDstGate->Operate(); // Then Operate the Destinarion Gate.
 	}
-	//for (int i = 0; i < ConCount; i++) // A Loop that Operates Led.
-	//{
-	//	LED* myLed = dynamic_cast<LED*>(CompList[i]);
-	//	if (myLed != NULL)
-	//	{
-	//		Component* myDstGate = myCOnn[i]->GetDstComponent();
-	//		if (myLed == myDstGate)
-	//		{
-	//			myCOnn[i]->Operate(); // Set Input Pin of Led 
-	//		}
-	//	}
-	//}
 }
