@@ -461,6 +461,7 @@ void ApplicationManager::CopyComponent(Component* Copy_Comp)
 	ClipBoard = Copy_Comp;
 	GraphicsInfo gfx;
 	gfx.x1 = 0; gfx.x2 = 0; gfx.y1 = 0; gfx.y2 = 0;
+	// Determnining Type of Component to Create new Instance of it.
 	AND2* and2g = dynamic_cast <AND2*>(ClipBoard);
 	if (and2g != NULL)
 	{
