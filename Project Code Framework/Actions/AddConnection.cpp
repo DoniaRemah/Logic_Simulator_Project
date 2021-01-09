@@ -57,6 +57,11 @@ bool AddConnection::ReadActionParameters()
 			pOut->PrintMsg("INVALID: INPUT PIN(S) ALREADY CONNECTED. Operation Cancelled.");
 			return false;
 		}
+		else if (m_SrcComp == m_DstComp)
+		{
+			pOut->PrintMsg("INVALID. SOURCE AND DESTINATION COMPONENTS CAN'T BE THE SAME. OPERATION CANCELLED.");
+			return false;
+		}
 		else
 		{
 			pOut->ClearStatusBar();

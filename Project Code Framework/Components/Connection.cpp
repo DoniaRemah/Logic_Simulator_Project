@@ -121,6 +121,8 @@ bool Connection ::InsideArea(int x, int y)
 		return true;
 	else if (x > m_GfxInfo.x1 && x < m_GfxInfo.x2 && (y > Broken.y1 - 1.5 && y < Broken.y1 + 1.5))
 		return true;
+	else if (x == Broken.x1 && (y > m_GfxInfo.y1 && y < m_GfxInfo.y2))
+		return true;
 	else
 		return false;
 }

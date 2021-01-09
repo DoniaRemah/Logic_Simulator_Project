@@ -1,6 +1,5 @@
 //#include "Input.h"
 #include "Output.h"
-#include <iostream>
 Input::Input(window* pW)
 {
 	pWind = pW; //point to the passed window
@@ -128,7 +127,6 @@ ActionType Input::GetUserAction(int* r_x, int* r_y) const
 			}
 			else if (x>630 && x<670)
 			{
-				cout << "Clicked on Delete" << endl;
 				return Action_DELETE;	
 			}
 			else if (x >730 && x < 830)
