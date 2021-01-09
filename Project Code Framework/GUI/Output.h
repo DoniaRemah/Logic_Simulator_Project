@@ -39,7 +39,7 @@ public:
 	void DrawBULB(GraphicsInfo r_GfxInfo, bool selected = false, bool On=false)const;
 
 	// Draws Connection
-	void DrawConnection(GraphicsInfo r_GfxInfo, bool selected = false) const;
+	void DrawConnection(GraphicsInfo r_GfxInfo, GraphicsInfo Broken,bool selected = false) const;
 	bool IsDrawingArea(int x, int y);
 	
 

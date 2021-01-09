@@ -1,8 +1,9 @@
 #include "Connection.h"
 
-Connection::Connection(const GraphicsInfo &r_GfxInfo, OutputPin *pSrcPin,InputPin *pDstPin,Component* Src, Component* Dst):Component(r_GfxInfo)
+Connection::Connection(const GraphicsInfo &r_GfxInfo, GraphicsInfo& broken,OutputPin *pSrcPin,InputPin *pDstPin,Component* Src, Component* Dst):Component(r_GfxInfo)
 	
 {
+	Broken = broken;
 	SrcPin = pSrcPin;
 	DstPin = pDstPin;
 	SrcCmpnt = Src;
@@ -31,7 +32,7 @@ void Connection::Operate()
 
 void Connection::Draw(Output* pOut)
 {
-	pOut->DrawConnection(m_GfxInfo, IsSelected);
+	pOut->DrawConnection(m_GfxInfo,Broken,IsSelected);
 	pOut->DrawString(m_GfxInfo.x1, m_GfxInfo.y1 - 20, GetLabel());
 }
 
@@ -96,4 +97,30 @@ int Connection::GetID()
 void Connection::SetID(int ID)
 {
 
+}
+
+bool Connection ::InsideArea(int x, int y)
+{
+	if (x > m_GfxInfo.x1 && x < Broken.x1 && (y > m_GfxInfo.y1 - 1.5 && y < m_GfxInfo.y1 + 1.5))
+		return true;
+	else if (x > Broken.x1 && x < m_GfxInfo.x2 && (y > m_GfxInfo.y2 - 1.5 && y < m_GfxInfo.y2 + 1.5))
+		return true;
+	else if (x == Broken.x1 && (y < m_GfxInfo.y1 && y>m_GfxInfo.y2))
+		return true;
+	else if (x == Broken.x1 && (y < m_GfxInfo.y1 && y > Broken.y1))
+		return true;
+	else if (x<Broken.x1 && x> Broken.x2 && (y > Broken.y1 - 1.5 && y < Broken.y1 + 1.5))
+		return true;
+	else if (x == Broken.x2 && (y < Broken.y1 && y > m_GfxInfo.y2))
+		return true;
+	else if (x == Broken.x1 && (y > m_GfxInfo.y1 && y < Broken.y1))
+		return true;
+	else if (x > Broken.x2 && x < m_GfxInfo.x2 && (y > Broken.y1 - 1.5 && y < Broken.y1 + 1.5))
+		return true;
+	else if (x == Broken.x2 && (y > Broken.y1 && y < m_GfxInfo.y2))
+		return true;
+	else if (x > m_GfxInfo.x1 && x < m_GfxInfo.x2 && (y > Broken.y1 - 1.5 && y < Broken.y1 + 1.5))
+		return true;
+	else
+		return false;
 }

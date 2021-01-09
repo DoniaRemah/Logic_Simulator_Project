@@ -5,11 +5,12 @@
 
 class ChangeSwitch : public Action
 {
-	int Cx; int Cy;
+	int m_x; int m_y;
 
 public:
 
-	ChangeSwitch(ApplicationManager* pApp);
+	ChangeSwitch(ApplicationManager* pApp, int x, int y);
+
 	virtual bool ReadActionParameters();
 
 	virtual void Execute();
@@ -17,6 +18,6 @@ public:
 	virtual void Undo();
 
 	virtual void Redo();
-	void SetParameters(int x);
+
 	~ChangeSwitch();
 };

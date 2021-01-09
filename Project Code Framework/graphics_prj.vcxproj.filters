@@ -224,9 +224,6 @@
     <ClCompile Include="Actions\Delete.cpp">
       <Filter>Actions</Filter>
     </ClCompile>
-    <ClCompile Include="Actions\Simulate.cpp">
-      <Filter>Actions</Filter>
-    </ClCompile>
     <ClCompile Include="Actions\Select.cpp">
       <Filter>Actions</Filter>
     </ClCompile>
@@ -243,6 +240,9 @@
       <Filter>Actions</Filter>
     </ClCompile>
     <ClCompile Include="Actions\ChangeSwitch.cpp">
+      <Filter>Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions\SimulateCirc.cpp">
       <Filter>Actions</Filter>
     </ClCompile>
   </ItemGroup>
@@ -431,9 +431,6 @@
     <ClInclude Include="Actions\Delete.h">
       <Filter>Actions</Filter>
     </ClInclude>
-    <ClInclude Include="Actions\Simulate.h">
-      <Filter>Actions</Filter>
-    </ClInclude>
     <ClInclude Include="Actions\Select.h">
       <Filter>Actions</Filter>
     </ClInclude>
@@ -450,6 +447,9 @@
       <Filter>Actions</Filter>
     </ClInclude>
     <ClInclude Include="Actions\ChangeSwitch.h">
+      <Filter>Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\SimulateCirc.h">
       <Filter>Actions</Filter>
     </ClInclude>
   </ItemGroup>

@@ -59,7 +59,8 @@ bool AddConnection::ReadActionParameters()
 		}
 		else
 		{
-			pOut->PrintMsg("Connection Added. Click on Next Action");
+			pOut->ClearStatusBar();
+			return true;
 		}
 		
 }
@@ -108,8 +109,28 @@ if (IsValidParameters)
 			}
 		}
 
+		// Determining Broken Lines Dimensions
+		GraphicsInfo Broken;
+		if (GInfo.x1 < GInfo.x2)
+		{
+			Broken.x1 = GInfo.x1 + ((GInfo.x2 - GInfo.x1) / 2);
+		}
+		else
+		{
+			Broken.x1 = GInfo.x1 + 10;
+			Broken.x2 = GInfo.x2 - 10;
+			if (GInfo.y1 < GInfo.y2)
+			{
+				Broken.y1 = GInfo.y2 - 20;
+			}
+			else
+			{
+				Broken.y1 = GInfo.y2 + 40;
+			}
+		}
+
 		// Creating Connection Pointer
-		Connection* pA = new Connection(GInfo, SrcPin, DstPin,m_SrcComp,m_DstComp);
+		Connection* pA = new Connection(GInfo,Broken, SrcPin, DstPin,m_SrcComp,m_DstComp);
 
 		// Linking output pin of src component with src pin of connection.
 		if (SrcPin != NULL)

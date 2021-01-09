@@ -26,6 +26,8 @@
 #include "Components/LED.h"
 #include "Components/SWITCH.h"
 #include "Actions/ChangeSwitch.h"
+#include "Actions/SimulateCirc.h"
+
 ApplicationManager::ApplicationManager()
 {
 	ClipBoard = NULL;
@@ -51,10 +53,10 @@ void ApplicationManager::AddComponent(Component* pComp)
 }
 ////////////////////////////////////////////////////////////////////
 
-ActionType ApplicationManager::GetUserAction(int * x,int *y)
+ActionType ApplicationManager::GetUserAction(int* x, int* y)
 {
 	//Call input to get what action is reuired from the user
-	return InputInterface->GetUserAction(x,y); 	
+	return InputInterface->GetUserAction(x, y);
 }
 ////////////////////////////////////////////////////////////////////
 
@@ -180,40 +182,42 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 			DidSwitch = true;
 			break;
 		case SIMULATE: 
-			OutputInterface->PrintMsg("SIMULATING CIRCUIT.");
+			OutputInterface->PrintMsg("Simulating Circuit...");
 			bool InSim = true; // Boolean to be able to Select and Unselect Icon Simulate.
-			SimulateCircuit(); // Display Output of Circuit Upon Clicking on Simulate.
-			UpdateInterface();
 			do // Stay in While Loop Untill Switch to Design Mode or Clicking Simulate Icon. 
 			{
-				Action* pAct = NULL;
-				int x=0, y=0;
-				ActType = GetUserAction(&x,&y);
+				pAct = new Simulate(this);	
+				if (pAct)
+				{
+					pAct->Execute();
+					delete pAct;
+					pAct = NULL;
+					UpdateInterface();
+				}
+				int x=0,y=0;
+				ActType = GetUserAction(&x ,& y);
+				Action* pAct2 = NULL; // Getting Action While Simulating.
 				switch (ActType)
 				{
-
-				case DSN_MODE: // USer Wants to switch to design Mode.
+				case Change_Switch: // User Changing Switch Output
+					pAct2 = new ChangeSwitch(this,x,y);
+					DidSwitch = false;
+					break;
+				case DSN_MODE: // USer Wants to switch to design Mode (Break out of Loop).
 					UI.AppMode = DESIGN;
 					InSim = false;
 					DidSwitch = true;
 					break;
 				case SIMULATE: // User Clicked on Simulate.(Break out of Loop)
 					InSim = false;
-					break;
-				case Change_Switch: // User Changing Switch Output
-					if (CheckSwitch(x, y))
-					{
-						pAct = new ChangeSwitch(this);
-					}
 					DidSwitch = false;
 					break;
 				}
-				if (pAct)
+				if (pAct2)
 				{
-					pAct->Execute();
-					SimulateCircuit();
-					delete pAct;
-					pAct = NULL;
+					pAct2->Execute();
+					delete pAct2;
+					pAct2 = NULL;
 					UpdateInterface();
 				}
 				
@@ -277,9 +281,20 @@ bool ApplicationManager::selectcomponent(int x, int y)
 {
 	for (int i = 0; i < CompCount; i++)
 	{
-		if (CompList[i]->InsideArea(x, y))
+		Connection* mConn = dynamic_cast <Connection*>(CompList[i]);
+		if (mConn == NULL)
 		{
-			return true;
+			if (CompList[i]->InsideArea(x, y))
+			{
+				return true;
+			}
+		}
+		else
+		{
+			if (mConn->InsideArea(x, y))
+			{
+				return true;
+			}
 		}
 	}
 	return false; 
@@ -297,7 +312,7 @@ void ApplicationManager::RemoveComponent(Component* pComp)
 			// Checks On Connection associated with component.
 			for (int Q=0; Q<ConCount;Q++) // Loop with Number of Connections.
 			{
-				if ((ConnList[Q]->GetDstComponent() == pComp) || (ConnList[Q]->GetSourceComponent() == pComp))
+				if ((ConnList[Q]->GetDstComponent() == pComp) || (ConnList[Q]->GetSourceComponent() == pComp) || ConnList[Q] == pComp)
 				{
 					Gate* mGate1 = dynamic_cast<Gate*>(ConnList[Q]->GetDstComponent());
 					Gate* mGate2 = dynamic_cast<Gate*>(ConnList[Q]->GetSourceComponent());
@@ -322,13 +337,14 @@ void ApplicationManager::RemoveComponent(Component* pComp)
 					{
 						mGate2->UnConnectOuputPin(ConnList[Q]);
 					}
+					if (ConnList[Q] != pComp)
+					{	
+						// Loop that Deletes Connections.
+						for (int j = 0; j < CompCount; j++)
+						{
 
-					// Loop that Deletes Connections.
-					for (int j = 0; j < CompCount; j++)
-					{
-							
 							// Deleting Connection from Component List	
-							if (ConnList[Q]== CompList[j])
+							if (ConnList[Q] == CompList[j])
 							{
 
 								if (j == CompCount - 1)
@@ -345,13 +361,12 @@ void ApplicationManager::RemoveComponent(Component* pComp)
 									cout << "Connection Deleted, Component count is: " << CompCount << endl;
 								}
 							}
-							
-					}
-					
 
+						}
+
+					}
 				}
 			}
-				
 			// Deleting Component (Gate,Led,Switch)
 			if (i == CompCount - 1) 
 			{ 

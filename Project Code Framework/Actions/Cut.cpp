@@ -2,7 +2,7 @@
 #include "..\ApplicationManager.h"
 CutComp::CutComp(ApplicationManager* pApp) :Action(pApp)
 {
-	mComp == NULL;
+	mComp = NULL;
 	Cx = 0; Cy = 0;
 }
 
