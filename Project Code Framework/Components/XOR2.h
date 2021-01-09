@@ -1,6 +1,4 @@
-#ifndef _XOR2_H
-#define _XOR2_H
-
+#pragma once
 /*
   Class XOR2
   -----------
@@ -25,5 +23,4 @@ public:
 	virtual void GetinputPinCoordinates(int pinNum, int& x, int& y);
 	virtual InputPin* GetInPin(int n);
 	virtual OutputPin* GetOutPin();
-
-#endif
+};

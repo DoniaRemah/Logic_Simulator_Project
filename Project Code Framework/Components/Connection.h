@@ -35,8 +35,8 @@ public:
 	void Save(ofstream& Outputfile);
 	virtual int GetID();
 	virtual void SetID(int ID);
-	virtual InputPin* GetInPin(int n) { return getDestPin(); }
-	virtual OutputPin* GetOutPin() { return getSourcePin(); }
+	virtual InputPin* GetInPin(int n);
+	virtual OutputPin* GetOutPin();
 	void Load(ifstream& Inputfile);
 	
 
