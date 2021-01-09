@@ -1,4 +1,5 @@
 #include "AND3.h"
+#include<fstream>
 
 AND3::AND3(const GraphicsInfo& r_GfxInfo, int r_FanOut) :Gate(3, r_FanOut)
 {
@@ -7,7 +8,9 @@ AND3::AND3(const GraphicsInfo& r_GfxInfo, int r_FanOut) :Gate(3, r_FanOut)
 	m_GfxInfo.x2 = r_GfxInfo.x2;
 	m_GfxInfo.y2 = r_GfxInfo.y2;
 }
-
+AND3::AND3(int r_FanOut) :Gate(3, r_FanOut)
+{
+}
 
 void AND3::Operate()
 {
@@ -71,3 +74,24 @@ void AND3::Save(ofstream & Output)
 		Output << endl;
 	}
 }
+
+void AND3::GetinputPinCoordinates(int pinNum, int& x, int& y) //Divided into 4 parts 
+{
+	if (pinNum == 1)
+	{
+		x = m_GfxInfo.x1;
+		y = m_GfxInfo.y1 + 12;
+	}
+	if (pinNum == 2)
+	{
+		x = m_GfxInfo.x1;
+		y = m_GfxInfo.y1 + 24;
+	}
+	if (pinNum == 3)
+	{
+		x = m_GfxInfo.x1;
+		y = m_GfxInfo.y1 + 36;
+	}
+}
+InputPin* AND3:: GetInPin(int n) { return m_InputPins + n - 1; }
+OutputPin* AND3::GetOutPin() { return &m_OutputPin; }

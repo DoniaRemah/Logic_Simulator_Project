@@ -8,6 +8,7 @@
 */
 #include "Component.h"
 #include "InputPin.h"
+#include"OutputPin.h"
 class LED :public Component
 {
 protected :
@@ -16,6 +17,7 @@ protected :
 	int Id;
 public:
 	LED(const GraphicsInfo& r_GfxInfo);
+	LED(int r_FanOut);
 	virtual void Operate();	//Calculates the output of LED 
 	virtual void Draw(Output* pOut);	//Draws LED
 	virtual int GetInputPinStatus(int n);	//returns status of Inputpin # n if SWITCH, return -1
@@ -31,8 +33,11 @@ public:
 	bool CheckIfOutpin(int& x, int& y);
 	bool CheckIfInpin(int& x, int& y, int& inputnum);
 	void UnConnectInputPin();
+	virtual void GetinputPinCoordinates(int pinNum, int& x, int& y);
+	virtual InputPin* GetInPin(int n);
+	virtual OutputPin* GetOutPin();
 	virtual ~LED();
-
+	void LED::Load(ifstream& Inputfile);
 };
 
 #endif

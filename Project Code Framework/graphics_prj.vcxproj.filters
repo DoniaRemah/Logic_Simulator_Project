@@ -230,6 +230,9 @@
     <ClCompile Include="Actions\Save.cpp">
       <Filter>Actions</Filter>
     </ClCompile>
+
+    <ClCompile Include="Actions\Load.cpp">
+
     <ClCompile Include="Actions\Cut.cpp">
       <Filter>Actions</Filter>
     </ClCompile>
@@ -243,6 +246,7 @@
       <Filter>Actions</Filter>
     </ClCompile>
     <ClCompile Include="Actions\SimulateCirc.cpp">
+
       <Filter>Actions</Filter>
     </ClCompile>
   </ItemGroup>
@@ -437,6 +441,9 @@
     <ClInclude Include="Actions\Save.h">
       <Filter>Actions</Filter>
     </ClInclude>
+
+    <ClInclude Include="Actions\Load.h">
+
     <ClInclude Include="Actions\Cut.h">
       <Filter>Actions</Filter>
     </ClInclude>
@@ -450,6 +457,7 @@
       <Filter>Actions</Filter>
     </ClInclude>
     <ClInclude Include="Actions\SimulateCirc.h">
+
       <Filter>Actions</Filter>
     </ClInclude>
   </ItemGroup>

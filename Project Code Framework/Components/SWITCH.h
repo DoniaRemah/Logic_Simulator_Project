@@ -10,6 +10,7 @@
 #include "Component.h"
 #include "OutputPin.h"
 #include "Connection.h"
+#include"InputPin.h"
 class SWITCH :public Component
 {
 protected:
@@ -18,6 +19,7 @@ protected:
 	int Id;
 public:
 	SWITCH(const GraphicsInfo& r_GfxInfo, int r_FanOut);
+	SWITCH(int r_FanOut);
 	virtual void Operate();	//Calculates output of switch
 	virtual void Draw(Output* pOut);	//Draws SWITCH
 	virtual int GetOutPinStatus();	//returns status of outputpin if LED, return -1
@@ -32,7 +34,11 @@ public:
 	virtual void Save(ofstream&);
 	bool CheckIfOutpin(int& x, int& y);
 	void UnConnectOuputPin(Connection* Conn);
+	virtual void GetinputPinCoordinates(int pinNum, int& x, int& y);
+	virtual InputPin* GetInPin(int n);
+	virtual OutputPin* GetOutPin();
 	virtual ~SWITCH();
+	void Load(ifstream& Inputfile);
 };
 
 #endif

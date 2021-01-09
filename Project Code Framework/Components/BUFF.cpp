@@ -1,4 +1,5 @@
 #include "BUFF.h"
+#include<fstream>
 
 BUFF::BUFF(const GraphicsInfo& r_GfxInfo, int r_FanOut) :Gate(1, r_FanOut)
 {
@@ -7,7 +8,9 @@ BUFF::BUFF(const GraphicsInfo& r_GfxInfo, int r_FanOut) :Gate(1, r_FanOut)
 	m_GfxInfo.x2 = r_GfxInfo.x2;
 	m_GfxInfo.y2 = r_GfxInfo.y2;
 }
-
+BUFF::BUFF(int r_FanOut) :Gate(1, r_FanOut)
+{
+}
 
 void BUFF::Operate()
 {
@@ -64,4 +67,13 @@ void BUFF::Save(ofstream& Output)
 		Output << endl;
 	}
 }
-
+void BUFF::GetinputPinCoordinates(int pinNum, int& x, int& y)
+{
+	if (pinNum == 1)
+	{
+		x = m_GfxInfo.x1;
+		y = m_GfxInfo.y1 + 24;
+	}
+}
+ InputPin* BUFF::GetInPin(int n) { return m_InputPins + n - 1; }
+ OutputPin* BUFF::GetOutPin() { return &m_OutputPin; }
