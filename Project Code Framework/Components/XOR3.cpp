@@ -13,13 +13,11 @@ XOR3::XOR3( int r_FanOut) :Gate(3, r_FanOut)
 
 void XOR3::Operate()
 {
-	//caclulate the output status as the ANDing of the two input pins
-
 	int inpstatus1 = GetInputPinStatus(1);
 	int inpstatus2 = GetInputPinStatus(2);
 	int inpstatus3 = GetInputPinStatus(3);
 
-	if (inpstatus1 + inpstatus2 + inpstatus3 == 1 || inpstatus1 + inpstatus2 + inpstatus3 == 3)
+	if ((inpstatus1 + inpstatus2 + inpstatus3) == 1 || (inpstatus1 + inpstatus2 + inpstatus3) == 3)
 	{
 		m_OutputPin.setStatus(HIGH);
 	}

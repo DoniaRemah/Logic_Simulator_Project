@@ -3,6 +3,7 @@
 
 Add_INV::Add_INV(ApplicationManager* pApp) :Action(pApp)
 {
+	Cx = 0; Cy = 0;
 }
 
 Add_INV::~Add_INV(void)

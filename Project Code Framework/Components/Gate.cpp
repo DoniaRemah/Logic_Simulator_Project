@@ -69,6 +69,7 @@ void Gate::UnConnectOuputPin(Connection* Conn)
 {
 	m_OutputPin.unConnect(Conn);
 }
+
 void Gate::Load(ifstream& Inputfile)
 {
 	int ID;
@@ -86,3 +87,10 @@ void Gate::Load(ifstream& Inputfile)
 	SetLabel(label);
 	Id = ID;
 }
+
+
+void Gate::Save(ofstream& OutPut)
+{
+
+}
+

@@ -29,12 +29,12 @@ bool AddConnection::ReadActionParameters()
 
 		pIn->GetPointClicked(x1, y1);
 		validSource = CheckValidSrc(CompList,Comp_Count, validOutPin,SrcPin);
-		if (validSource == false)
+		if (validSource == false) 
 		{
 			pOut->PrintMsg("INVALID AREA,Can Not be a SOURCE Component. Operation Cancelled.");
 			return false;
 		}
-		else if (validOutPin == false)
+		else if (validOutPin == false) // if Output Pin Invalid
 		{
 			pOut->PrintMsg("INVALID OUTPUT PIN. Operation Cancelled.");
 			return false;
@@ -52,14 +52,20 @@ bool AddConnection::ReadActionParameters()
 			pOut->PrintMsg("INVALID AREA, Can Not be a DESTINATION Component. Operation Cancelled.");
 			return false;
 		}
-		else if (validInPin == false)
+		else if (validInPin == false) // If input Pin Invalid
 		{
 			pOut->PrintMsg("INVALID: INPUT PIN(S) ALREADY CONNECTED. Operation Cancelled.");
 			return false;
 		}
+		else if (m_SrcComp == m_DstComp)
+		{
+			pOut->PrintMsg("INVALID. SOURCE AND DESTINATION COMPONENTS CAN'T BE THE SAME. OPERATION CANCELLED.");
+			return false;
+		}
 		else
 		{
-			pOut->PrintMsg("Connection Added. Click on Next Action");
+			pOut->ClearStatusBar();
+			return true;
 		}
 		
 }
@@ -76,7 +82,7 @@ if (IsValidParameters)
 		GInfo.x1 = m_SrcComp->GetGfxInfo().x2;
 		GInfo.x2 = m_DstComp->GetGfxInfo().x1;
 		GInfo.y1 = m_SrcComp->GetGfxInfo().y1 + (m_SrcComp->GetGfxInfo().y2 - m_SrcComp->GetGfxInfo().y1) / 2;
-		
+
 		if (m_DstComp->GetNoInputPins() == 2) // If Number of Pins is 2
 		{
 			if (AvailablePinNumber == 1) 
@@ -108,14 +114,33 @@ if (IsValidParameters)
 			}
 		}
 
+		// Determining Broken Lines Dimensions
+		GraphicsInfo Broken;
+		if (GInfo.x1 < GInfo.x2)
+		{
+			Broken.x1 = GInfo.x1 + ((GInfo.x2 - GInfo.x1) / 2);
+		}
+		else
+		{
+			Broken.x1 = GInfo.x1 + 10;
+			Broken.x2 = GInfo.x2 - 10;
+			if (GInfo.y1 < GInfo.y2)
+			{
+				Broken.y1 = GInfo.y2 - 20;
+			}
+			else
+			{
+				Broken.y1 = GInfo.y2 + 40;
+			}
+		}
+
 		// Creating Connection Pointer
-		Connection* pA = new Connection(GInfo, NULL, NULL,m_SrcComp,m_DstComp);
+		Connection* pA = new Connection(GInfo,Broken, SrcPin, DstPin,m_SrcComp,m_DstComp);
 
 		// Linking output pin of src component with src pin of connection.
 		if (SrcPin != NULL)
 		{
 			SrcPin->ConnectTo(pA);
-			pA->setSourcePin(SrcPin);
 		}
 		
 
@@ -123,7 +148,6 @@ if (IsValidParameters)
 		// Linking Input pin of Dst component with dst component of connection.
 		if (DstPin != NULL)
 		{
-			pA->setDestPin(DstPin);
 			DstPin->connect();
 			pA->SetDstPinNumber(AvailablePinNumber);
 		}
@@ -148,27 +172,27 @@ bool AddConnection::CheckValidSrc(Component** CompList,int Comp_Count, bool &val
 			Gate* SrcGate = dynamic_cast<Gate*>(m_SrcComp);
 			if (SrcGate == NULL)
 			{
-				SWITCH* SrcSwitch = dynamic_cast<SWITCH*>(m_SrcComp);
+				SWITCH* SrcSwitch = dynamic_cast<SWITCH*>(m_SrcComp); // If Not Gate then it is Switch
 				if (SrcSwitch ==NULL)
 				{
-					validcomp = false;
+					validcomp = false; // If not Switch then Invalid Source.
 				}
 				else
 				{
-					SrcPin = SrcSwitch->GetOutputPin();
-					CanConnect = SrcPin->CanConnect();
+					SrcPin = SrcSwitch->GetOutputPin(); // Pointer to Output pin
+					CanConnect = SrcPin->CanConnect(); // Checking if Fanout is not Exceeded.
 					validcomp = true;
 				}
 			}
 			else
 			{
-				SrcPin = SrcGate->GetOutputPin();
+				SrcPin = SrcGate->GetOutputPin(); 
 				CanConnect = SrcPin->CanConnect();
 				validcomp = true;
 			}
 			if (validcomp == true)
 			{
-				if (CanConnect)
+				if (CanConnect) 
 				{
 					validOutPin = true;
 				}		
@@ -196,18 +220,18 @@ bool AddConnection::CheckValidDst(Component** CompList, int Comp_Count, bool& va
 			Gate* DstGate = dynamic_cast<Gate*>(m_DstComp);
 			if (DstGate == NULL)
 			{
-				LED* DstLed = dynamic_cast<LED*>(m_DstComp);
+				LED* DstLed = dynamic_cast<LED*>(m_DstComp); // If not Gate then it is a Led.
 				if (DstLed == NULL)
 				{
-					validDst = false;
+					validDst = false; // If not a Led, then it's an invalid Destination.
 				}
 				else
 				{
 					validDst = true;
-					DstPin = DstLed->GetInputPin();
+					DstPin = DstLed->GetInputPin(); // Pointer to Input pin of Destination Component
 					if (DstPin != NULL)
 					{
-						isConnected = DstPin->IsConnected();
+						isConnected = DstPin->IsConnected(); // Checking if Input pin is Already Connected.
 						if (isConnected)
 						{
 							validInPin = false;
@@ -224,7 +248,7 @@ bool AddConnection::CheckValidDst(Component** CompList, int Comp_Count, bool& va
 			else
 			{
 				validDst = 1;
-			
+				// For Loop that checks if there is an available input pin in gate.
 				for (int k = 1; k <= DstGate->GetNoInputPins() ; k++)
 				{				
 					DstPin = DstGate->GetInputPin(k);

@@ -21,17 +21,28 @@ SWITCH::SWITCH(int r_FanOut) : m_OutputPin(r_FanOut)
 
 void SWITCH::Operate()
 {
+	if (m_OutputPin.getStatus() == LOW)
+	{
 
-
+		m_OutputPin.setStatus(HIGH);
+	}
+	else
+	{
+		m_OutputPin.setStatus(LOW);
+	}
 }
 
-
-// Function Draw
-// Draws 2-input AND gate
 void SWITCH::Draw(Output* pOut)
 {
 	//Call output class and pass gate drawing info to it.
-	pOut->DrawSWITCH(m_GfxInfo, IsSelected);
+	if (m_OutputPin.getStatus() == LOW)
+	{
+		pOut->DrawSWITCH(m_GfxInfo, IsSelected);
+	}
+	else
+	{
+		pOut->DrawSWITCH(m_GfxInfo, IsSelected,true);
+	}
 	pOut->DrawString(m_GfxInfo.x1, m_GfxInfo.y1 - 20, GetLabel());
 }
 

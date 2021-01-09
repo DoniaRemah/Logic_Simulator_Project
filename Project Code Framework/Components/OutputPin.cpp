@@ -42,12 +42,14 @@ void OutputPin::unConnect(Connection * d_Conn)
 			{
 				m_Connections[i] = NULL;
 				m_Conn--;
+				break;
 			}
 			else
 			{
-				m_Connections[i] = m_Connections[m_FanOut - 1];
-				m_Connections[m_FanOut - 1] = NULL;
+				m_Connections[i] = m_Connections[m_Conn-1];
+				m_Connections[m_Conn - 1] = NULL;
 				m_Conn--;
+				break;
 			}
 			
 		}

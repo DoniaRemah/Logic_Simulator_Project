@@ -37,6 +37,9 @@ public:
 	virtual InputPin* GetInPin(int n) = 0;
 	virtual OutputPin* GetOutPin() = 0;
 	void Gate::Load(ifstream& Inputfile);
+	virtual void Save(ofstream& OutPut); 
+
+
 };
 
 #endif
