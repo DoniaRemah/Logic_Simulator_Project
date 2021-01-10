@@ -26,7 +26,6 @@
 #include "Components/SWITCH.h"
 #include "Actions/ChangeSwitch.h"
 #include "Actions/SimulateCirc.h"
-
 ApplicationManager::ApplicationManager()
 {
 	ClipBoard = NULL;
