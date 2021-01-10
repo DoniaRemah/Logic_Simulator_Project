@@ -19,7 +19,6 @@
 #include"Actions/Save.h"
 #include"Actions/Load.h"
 #include "Actions/Cut.h"
-#include <iostream>
 #include<fstream>
 #include "Actions/AddConnection.h"
 #include "Actions/CopyComp.h"
@@ -48,7 +47,6 @@ ApplicationManager::ApplicationManager()
 void ApplicationManager::AddComponent(Component* pComp)
 {
 	CompList[CompCount++] = pComp;	
-	cout << "New Component Added: " << CompCount << endl;
 
 }
 ////////////////////////////////////////////////////////////////////
@@ -352,7 +350,6 @@ void ApplicationManager::RemoveComponent(Component* pComp)
 								if (j == CompCount - 1)
 								{
 									CompList[j] = NULL; CompCount--;
-									cout << "Connection Deleted, Component count is: " << CompCount << endl;
 								}
 
 								else
@@ -360,7 +357,6 @@ void ApplicationManager::RemoveComponent(Component* pComp)
 									CompList[j] = CompList[CompCount - 1];
 									CompList[CompCount - 1] = NULL;
 									CompCount--;
-									cout << "Connection Deleted, Component count is: " << CompCount << endl;
 								}
 							}
 
@@ -373,7 +369,6 @@ void ApplicationManager::RemoveComponent(Component* pComp)
 			if (i == CompCount - 1) 
 			{ 
 				CompList[i] = NULL; CompCount--; 
-				cout << "Component Deleted, Component count is: " << CompCount << endl;
 			}
 			
 			else
@@ -381,7 +376,6 @@ void ApplicationManager::RemoveComponent(Component* pComp)
 				CompList[i] = CompList[CompCount - 1];
 				CompList[CompCount-1] = NULL;
 				CompCount--;
-				cout << "Component Deleted, Component count is: " << CompCount << endl;
 			}
 		}
 		
