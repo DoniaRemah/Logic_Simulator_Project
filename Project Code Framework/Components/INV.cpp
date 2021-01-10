@@ -8,7 +8,10 @@ INV::INV(const GraphicsInfo& r_GfxInfo, int r_FanOut) :Gate(1, r_FanOut)
 	m_GfxInfo.x2 = r_GfxInfo.x2;
 	m_GfxInfo.y2 = r_GfxInfo.y2;
 }
+INV::INV(int r_FanOut) :Gate(1, r_FanOut)
+{
 
+}
 
 void INV::Operate()
 {
@@ -64,4 +67,13 @@ void INV::Save(ofstream& Output)
 		Output << endl;
 	}
 }
-
+void INV::GetinputPinCoordinates(int pinNum, int& x, int& y)
+{
+	if (pinNum == 1)
+	{
+		x = m_GfxInfo.x1;
+		y = m_GfxInfo.y1 + 24;
+	}
+}
+ InputPin* INV::GetInPin(int n) { return m_InputPins + n - 1; }
+ OutputPin* INV::GetOutPin() { return &m_OutputPin; }

@@ -30,12 +30,15 @@ public:
 	void SetDstPinNumber(int N);
 	int GetDstPinNumber();
 	virtual void setInputPinStatus(int n, STATUS s);	//set status of Inputpin # n, to be used by connection class.
+	virtual void GetinputPinCoordinates(int pinNum, int& x, int& y); //Getting the coordinates of pin #n (needed in load)
 	void SetIsSelected(bool select);
 	bool GetIsSelected();
 	void Save(ofstream& Outputfile);
 	virtual int GetID();
 	virtual void SetID(int ID);
-	
+	virtual InputPin* GetInPin(int n);
+	virtual OutputPin* GetOutPin();
+	void Load(ifstream& Inputfile);
 	
 
 

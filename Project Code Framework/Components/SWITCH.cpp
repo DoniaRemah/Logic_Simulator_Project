@@ -12,6 +12,11 @@ SWITCH::SWITCH(const GraphicsInfo& r_GfxInfo, int r_FanOut): m_OutputPin(r_FanOu
 	// Associate Output Pin with Swicth
 	m_OutputPin.setComponent(this);
 }
+SWITCH::SWITCH(int r_FanOut) : m_OutputPin(r_FanOut)
+{
+	IsSelected = false;
+	m_OutputPin.setComponent(this);
+}
 
 
 void SWITCH::Operate()
@@ -122,3 +127,25 @@ void SWITCH::UnConnectOuputPin(Connection* Conn)
 {
 	m_OutputPin.unConnect(Conn);
 }
+void SWITCH::GetinputPinCoordinates(int inputnum, int& x, int& y) //ZERO input pins
+{
+}
+void SWITCH::Load(ifstream& Inputfile)
+{
+	int ID;
+	string label;
+	int Cx;
+	int Cy;
+	Inputfile >> ID;
+	Inputfile >> label;
+	Inputfile >> Cx;
+	Inputfile >> Cy;
+	m_GfxInfo.x1 = Cx - UI.AND2_Height / 2;
+	m_GfxInfo.x2 = Cx + UI.AND2_Height / 2;
+	m_GfxInfo.y1 = Cy - UI.AND2_Width / 2;
+	m_GfxInfo.y2 = Cy + UI.AND2_Width / 2;
+	SetLabel(label);
+	Id = ID;
+}
+ InputPin* SWITCH::GetInPin(int n) { return NULL; }
+ OutputPin* SWITCH::GetOutPin() { return &m_OutputPin; }

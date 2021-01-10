@@ -13,6 +13,7 @@ class INV :public Gate
 {
 public:
 	INV(const GraphicsInfo& r_GfxInfo, int r_FanOut);
+	INV(int r_FanOut);
 	virtual void Operate();	//Calculates the output of the NOT gate
 	virtual void Draw(Output* pOut);	//Draws 1-input gate
 
@@ -21,7 +22,9 @@ public:
 
 	virtual void setInputPinStatus(int n, STATUS s);	//set status of Inputpin # n, to be used by connection class.
 	virtual void Save(ofstream&);
-
+	virtual void GetinputPinCoordinates(int pinNum, int& x, int& y);
+	virtual InputPin* GetInPin(int n);
+	virtual OutputPin* GetOutPin();
 
 };
 

@@ -73,6 +73,10 @@ int Connection::GetDstPinNumber()
 {
 	return DstPinNumber;
 }
+void Connection::GetinputPinCoordinates(int pinNum, int& x, int& y)
+{
+
+}
 
 void Connection::SetIsSelected(bool select) {
 	IsSelected = select;
@@ -98,6 +102,14 @@ void Connection::SetID(int ID)
 {
 
 }
+
+void Connection::Load(ifstream& Inputfile)
+{
+
+}
+InputPin* Connection::GetInPin(int n) { return getDestPin(); }
+ OutputPin* Connection::GetOutPin() { return getSourcePin(); }
+
 
 bool Connection ::InsideArea(int x, int y)
 {
