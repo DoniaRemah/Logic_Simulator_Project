@@ -147,9 +147,11 @@
     <ClCompile Include="Actions\EDIT.cpp" />
     <ClCompile Include="Actions\Label.cpp" />
     <ClCompile Include="Actions\Paste.cpp" />
+    <ClCompile Include="Actions\Prob.cpp" />
     <ClCompile Include="Actions\Save.cpp" />
     <ClCompile Include="Actions\Select.cpp" />
     <ClCompile Include="Actions\SimulateCirc.cpp" />
+    <ClCompile Include="Actions\ValidateCircuit.cpp" />
     <ClCompile Include="CMUgraphicsLib\auxil.cpp" />
     <ClCompile Include="CMUgraphicsLib\CMUgraphics.cpp" />
     <ClCompile Include="CMUgraphicsLib\image.cpp" />
@@ -232,9 +234,11 @@
     <ClInclude Include="Actions\EDIT.h" />
     <ClInclude Include="Actions\Label.h" />
     <ClInclude Include="Actions\Paste.h" />
+    <ClInclude Include="Actions\Prob.h" />
     <ClInclude Include="Actions\Save.h" />
     <ClInclude Include="Actions\Select.h" />
     <ClInclude Include="Actions\SimulateCirc.h" />
+    <ClInclude Include="Actions\ValidateCircuit.h" />
     <ClInclude Include="CMUgraphicsLib\auxil.h" />
     <ClInclude Include="CMUgraphicsLib\CMUgraphics.h" />
     <ClInclude Include="CMUgraphicsLib\colors.h" />

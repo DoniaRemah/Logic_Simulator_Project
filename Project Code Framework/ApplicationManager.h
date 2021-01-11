@@ -21,10 +21,8 @@ private:
 	Output* OutputInterface; //pointer to the Output Clase Interface
 	Input* InputInterface; //pointer to the Input Clase Interface
 	Connection* ConnList[MaxCompCount]; // List of Connections
-
+	bool ValidCircuit;
 public:
-
-
 public:	
 	ApplicationManager(); //constructor
 
@@ -63,12 +61,15 @@ public:
 
 	void PasteComponent(GraphicsInfo GInfo); // Draws Component and adds it to CompList.
 
-	bool CheckSwitch(int x, int y);
+	bool CheckSwitch(int x, int y); // Checks if Point Clicked is a switch.
 
-	void ChangeSwitchF();
+	void ChangeSwitchF(); // Changes State of Switch
 
-	void SimulateCircuit();
+	void SimulateCircuit(); // Simulates
 
+	bool ValidateCircuit();
+
+	bool ProbingCircuit(int x, int y, bool& Status);
 	~ApplicationManager(); //destructor
 };
 

@@ -28,7 +28,6 @@ void ChangeSwitch::Execute()
 	{
 		pManager->ChangeSwitchF();
 	}
-
 }
 
 void ChangeSwitch::Undo()

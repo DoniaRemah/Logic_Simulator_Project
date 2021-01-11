@@ -26,12 +26,14 @@
 #include "Components/SWITCH.h"
 #include "Actions/ChangeSwitch.h"
 #include "Actions/SimulateCirc.h"
-
+#include "Actions/ValidateCircuit.h"
+#include "Actions/Prob.h"
 ApplicationManager::ApplicationManager()
 {
 	ClipBoard = NULL;
 	CompCount = 0;
 	DidSwitch = false;
+	ValidCircuit = false;
 	for (int i = 0; i < MaxCompCount; i++)
 	{
 		CompList[i] = NULL;
@@ -178,50 +180,85 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		case DSN_MODE:
 			UI.AppMode = DESIGN;
 			DidSwitch = true;
-			break;
-		case SIMULATE: 
-			OutputInterface->PrintMsg("Simulating Circuit...");
-			bool InSim = true; // Boolean to be able to Select and Unselect Icon Simulate.
-			do // Stay in While Loop Untill Switch to Design Mode or Clicking Simulate Icon. 
-			{
-				pAct = new Simulate(this);	
-				if (pAct)
-				{
-					pAct->Execute();
-					delete pAct;
-					pAct = NULL;
-					UpdateInterface();
-				}
-				int x=0,y=0;
-				ActType = GetUserAction(&x ,& y);
-				Action* pAct2 = NULL; // Getting Action While Simulating.
-				switch (ActType)
-				{
-				case Change_Switch: // User Changing Switch Output
-					pAct2 = new ChangeSwitch(this,x,y);
-					DidSwitch = false;
-					break;
-				case DSN_MODE: // USer Wants to switch to design Mode (Break out of Loop).
-					UI.AppMode = DESIGN;
-					InSim = false;
-					DidSwitch = true;
-					break;
-				case SIMULATE: // User Clicked on Simulate.(Break out of Loop)
-					InSim = false;
-					DidSwitch = false;
-					break;
-				}
-				if (pAct2)
-				{
-					pAct2->Execute();
-					delete pAct2;
-					pAct2 = NULL;
-					UpdateInterface();
-				}
-				
-			} while (InSim == true );
+			ValidCircuit = false;
 			OutputInterface->ClearStatusBar();
 			break;
+		case VALIDATE:
+			DidSwitch = false;
+			pAct = new Validate(this);
+			break;
+		case Create_TruthTable:
+			DidSwitch = false;
+			OutputInterface->PrintMsg("Invalid Click. Please Click Somewhere else.");
+			break;
+		case PROB:
+			DidSwitch = false;
+			pAct = new Probing(this);
+			break; 
+		case SIMULATE: 
+			if (ValidCircuit)
+			{
+				OutputInterface->PrintMsg("Simulating Circuit...");
+				bool InSim = true; // Boolean to be able to Select and Unselect Icon Simulate.
+				do // Stay in While Loop Untill Switch to Design Mode or Clicking Simulate Icon. 
+				{
+					pAct = new Simulate(this);
+					if (pAct)
+					{
+						pAct->Execute();
+						delete pAct;
+						pAct = NULL;
+						UpdateInterface();
+					}
+					int x = 0, y = 0;
+					ActType = GetUserAction(&x, &y);
+					Action* pAct2 = NULL; // Getting Action While Simulating.
+					switch (ActType)
+					{
+					case Change_Switch: // User Changing Switch Output
+						pAct2 = new ChangeSwitch(this, x, y);
+						DidSwitch = false;
+						break;
+					case DSN_MODE: // USer Wants to switch to design Mode (Break out of Loop).
+						UI.AppMode = DESIGN;
+						InSim = false;
+						ValidCircuit = false;
+						DidSwitch = true;
+						OutputInterface->ClearStatusBar();
+						break;
+					case SIMULATE: // User Clicked on Simulate.(Break out of Loop)
+						InSim = false;
+						DidSwitch = false;
+						break;
+					case PROB:
+						DidSwitch = false;
+						pAct2 = new Probing(this);
+						break;
+					case Create_TruthTable:
+						DidSwitch = false;
+						OutputInterface->PrintMsg("Invalid Click. Simulating Circuit...");
+						break;
+					case VALIDATE:
+						DidSwitch = false;
+						OutputInterface->PrintMsg("Invalid Click. Simulating Circuit...");
+						break;
+					}
+					if (pAct2)
+					{
+						pAct2->Execute();
+						delete pAct2;
+						pAct2 = NULL;
+						UpdateInterface();
+					}
+
+				} while (InSim == true);
+				OutputInterface->ClearStatusBar();
+				break;
+			}
+			else
+			{
+				OutputInterface->PrintMsg("If you DID NOT VALIDATE circuit, Please do. Otherwise, CIRCUIT IS INVALID.");
+			}			
 		}	
 		if (pAct)
 		{
@@ -268,10 +305,22 @@ Component*ApplicationManager::GetComponent(int x, int y)
 {
 	for (int i = 0; i < CompCount; i++)
 	{
-		if (CompList[i]->InsideArea(x,y))
+		Connection* mConn = dynamic_cast <Connection*>(CompList[i]);
+		if (mConn == NULL)
 		{
-			return CompList[i];
+			if (CompList[i]->InsideArea(x, y))
+			{
+				return CompList[i];
+			}
 		}
+		else
+		{
+			if (mConn->InsideArea(x, y))
+			{
+				return CompList[i];
+			}
+		}
+
 	}
 	return NULL;
 }
@@ -687,4 +736,156 @@ void ApplicationManager::SimulateCircuit()
 		myCOnn[i]->Operate(); // Then Operate the Connection (Sets input pin status of Dst Gate)
 		myDstGate->Operate(); // Then Operate the Destinarion Gate.
 	}
+}
+
+bool ApplicationManager::ValidateCircuit()
+{
+	bool ValidInputPin = false;
+	bool ValidOutputPin = false;
+	for (int i = 0; i < CompCount; i++)
+	{
+		Gate* mGate = dynamic_cast <Gate*> (CompList[i]);
+		if (mGate == NULL)
+		{
+			SWITCH* mSwitch = dynamic_cast <SWITCH*> (CompList[i]);
+			if (mSwitch == NULL)
+			{
+				LED* mLed = dynamic_cast <LED*> (CompList[i]);
+				if (mLed != NULL)
+				{
+					InputPin* mInpPin = mLed->GetInputPin();
+					ValidInputPin = mInpPin->IsConnected();
+					if (!ValidInputPin) // Break out of loop of Components.
+					{
+						break;
+					}
+				}			
+			}
+			else if (mSwitch !=NULL)
+			{
+				OutputPin* mOutputPin = mSwitch->GetOutputPin();
+				ValidOutputPin = mOutputPin->IsConnected();
+				if (!ValidOutputPin) // Break Out of Loop of Components.
+				{
+					break;
+				}
+			}
+		}
+		else 
+		{
+			for (int j = 1; j <= mGate->GetNoInputPins(); j++)
+			{
+				InputPin* mInpPin = mGate->GetInputPin(j);
+				ValidInputPin = mInpPin->IsConnected();
+				if (!ValidInputPin) // Break out of loop of input pins.
+				{
+					break;
+				}
+			}
+			if (!ValidInputPin) // Break Out of Loop of Components.
+			{
+				break;
+			}
+			OutputPin* mOutputPin = mGate->GetOutputPin();
+			ValidOutputPin= mOutputPin->IsConnected();
+			if (!ValidOutputPin) // Break Out of Loop of Components.
+			{
+				break; 
+			}
+		}
+
+
+	}
+	if (ValidInputPin && ValidOutputPin)
+	{
+		ValidCircuit = true;
+		return true;
+	}
+	else
+	{
+		ValidCircuit = false;
+		return false;
+	}
+}
+
+bool ApplicationManager::ProbingCircuit(int x, int y, bool &Status)
+{
+	bool ValidClick = false;
+	Component* mComp = GetComponent(x, y);
+	if (mComp != NULL)
+	{
+		Connection* mConn = dynamic_cast <Connection*> (mComp);
+		if (mConn == NULL)
+		{
+			// Checking if User CLicked on Input Pin.
+			GraphicsInfo gfx = mComp->GetGfxInfo();
+			int InputpinNum = mComp->GetNoInputPins();
+			if (InputpinNum == 3)
+			{
+				if ((x == gfx.x1 + 1 || x == gfx.x1 - 1) && (y == ((gfx.y1 + gfx.y2) / 3) + 1.5 || y == ((gfx.y1 + gfx.y2) / 3) - 1.5))
+				{
+					Status = mComp->GetInputPinStatus(1);
+					ValidClick = true;
+				}
+
+				else if ((x == gfx.x1 + 1 || x == gfx.x1 - 1) && (y == ((gfx.y1 + gfx.y2) / 2) + 1.5 || y == ((gfx.y1 + gfx.y2) / 2) - 1.5))
+				{
+					Status = mComp->GetInputPinStatus(2);
+					ValidClick = true;
+				}
+				else if ((x == gfx.x1 + 1 || x == gfx.x1 - 1) && (y == (((gfx.y1 + gfx.y2) * 3) / 4) + 1.5 || y == (((gfx.y1 + gfx.y2) * 3) / 4) - 1.5))
+				{
+					Status = mComp->GetInputPinStatus(3);
+					ValidClick = true;
+				}
+			}
+			else if (InputpinNum == 2)
+			{
+				if ((x == gfx.x1 + 1 || x == gfx.x1 - 1) && (y == ((gfx.y1 + gfx.y2) / 3) + 1.5 || y == ((gfx.y1 + gfx.y2) / 3) - 1.5))
+				{
+					Status = mComp->GetInputPinStatus(1);
+					ValidClick = true;
+				}
+
+				else if ((x == gfx.x1 + 1 || x == gfx.x1 - 1) && (y == ((gfx.y1 + gfx.y2) / 2) + 1.5 || y == ((gfx.y1 + gfx.y2) / 2) - 1.5))
+				{
+					Status = mComp->GetInputPinStatus(2);
+					ValidClick = true;
+				}
+			}
+			else if (InputpinNum == 1)
+			{
+				if ((x == gfx.x1 + 1 || x == gfx.x1 - 1) && (y == ((gfx.y1 + gfx.y2) / 3) + 1.5 || y == ((gfx.y1 + gfx.y2) / 3) - 1.5))
+				{
+					Status = mComp->GetInputPinStatus(1);
+					ValidClick = true;
+				}
+			}
+			// Checking if User Clicked on OutputPin.
+			if ((x == gfx.x2 + 1 || x == gfx.x2 - 1) && (y == ((gfx.y1 + gfx.y2) / 2) + 1.5 || y == ((gfx.y1 + gfx.y2) / 2) - 1.5))
+			{
+				Status = mComp->GetOutPinStatus();
+				ValidClick = true;
+			}
+		}
+		else
+		{
+			Status = mConn->GetOutPinStatus();
+			ValidClick = true;
+		}
+		if (ValidClick == true)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+
+	}
+	else
+	{
+		return false;
+	}
+	
 }
